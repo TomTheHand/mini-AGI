@@ -255400,3 +255400,4582 @@ prompt: '<user>\nhow do you decide which experts to use?\n</user>\n<bot>\n'
 A small term pushes routing to spread across the experts on the card rather than piling onto a few, so that one expert does not absorb every
 [adapted]  repeated 8-grams 1%
 A small term pushes routing to spread across the experts on the card rather than piling onto a few, so that one expert does not absorb every
+
+
+##############################################################################
+# session started 2026-10-09 20:03  at step -1, 0.0M of 809M characters read (0.00%), 64 experts
+##############################################################################
+
+==============================================================================
+step 237   0.5M of 809M characters (0.06%)   10 min   65 experts
+context 2,051 characters of 4,096   reading 1,622 char/s   writing 9.2 char/s
+grad norm 7.43 against a clip of 1   clipping
+train loss 3.5904   lr 3.00e-04   evidence t +0.00 over 0.0 (effect +0.0000)   rate x1.000
+held-out loss 3.1164 +/-0.0440 nats   4.4960 bits/char   perplexity 22.56   gap -0.4740
+  arithmetic 4.156   chat 3.157   chess 2.735   code 3.154   reasoning 2.917   stories 2.842   wikipedia 2.854
+repeats 84% of 8-grams, greedy with no guard
+==============================================================================
+
+--- stories ---
+prompt: 'Once upon a time, there was a little boy named Tom. One day he '
+[raw]  repeated 8-grams 79%
+ in it in in in in it it it it it it it it it it it it it it it it it it it it it it it it it it it it it i it it i i i i i i i i i i i i i 
+[adapted]  repeated 8-grams 5%
+itoransedithe alonis cheratin oped.
+1athe insorale ithed anoris thenacoris thed anitore alis.
+1e thonaris ced thenalis ored.
+1athe inoras
+
+--- code ---
+prompt: 'def merge_sorted(a, b):\n    '
+[raw]  repeated 8-grams 77%
+ in in in in in in it in it it it it it it it it it it it it it it it it it it it it i i i i i i i i i                                      
+[adapted]  repeated 8-grams 4%
+inathesorinale thed.
+
+1. inathes orinathe coris aned.
+
+1. ithenaros ithed anoresithe alinore thasind corethalin sed.
+
+1orat ines hedit
+
+--- arithmetic ---
+prompt: 'add 4917 + 388 = '
+[raw]  repeated 8-grams 81%
+ 1. 1. 1. 1. 1. 1. 1. 1. 2 1. 1. 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2   2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2
+[adapted]  repeated 8-grams 0%
+2.10. R4+ B5. N6. 20-1+ R4. B5. e4+0. 2-1. R6+ N4. B50. 2+1. R40-O. N6+ 2. B40. R5+ 1.-0= 2. N4+ R6. B5. 10-O+ 2.0= R4. N6+ 1.0-O. 2+ B4
+
+--- chat ---
+prompt: '<user>\nWhat are you?\n</user>\n<bot>\n'
+[raw]  repeated 8-grams 80%
+ at at at at at in in in in in in in in in in in it it it it it it it it it it it it it it it it it it i i i i i i i i i i i i i i i i i i i
+[adapted]  repeated 8-grams 0%
+1. inesathe orind chesatinore alithe sonarithe conad iserathe inorale this.
+
+1e anithe orasind thecoralin thes arinoped thesinaro chetin
+
+--- chat_hermes ---
+prompt: '<user>\nA train travels 60 km in 45 minutes. What is its speed in km/h?\n</user>\n<bot>\n'
+[raw]  repeated 8-grams 93%
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+[adapted]  repeated 8-grams 1%
+:1. atenisorale thedinacor thesinal pored ithenas corithe anside orathenis corathe ind.
+
+1e athesinoral thedins arethonica pes thedinarol
+
+--- reasoning ---
+prompt: '<user>\nWrite a Python function that returns the largest number in a list.\n</user>\n<bot>\n<think>\n'
+[raw]  repeated 8-grams 88%
+ in in in in in in in it in it it it it it it it it it it it it it it it it it it it it it it it it it it it it it it it it it it it it it i
+[adapted]  repeated 8-grams 2%
+1e anithe orasind thecoralin thes adinore thesinalor chedit anseropithe ansicore thalind ores athenicorat ised phenatis ored.
+
+1 anithe o
+
+--- wikipedia ---
+prompt: '== History ==\nThe [[Roman Empire]] was '
+[raw]  repeated 8-grams 87%
+ t t t t t t t t t t t t t t t it it it it it it it it it it it it it it it                                                                 
+[adapted]  repeated 8-grams 0%
+thenid corathes ind alethinors ched atinore asithe conalis thed.
+
+1, anithe orasinthe coralins thed arinome thesinalor ched ithenas orithe
+
+--- chess ---
+prompt: '<g>1700 1-0 1. e4 e5 2. '
+[raw]  repeated 8-grams 91%   0 legal moves, then 2
+1. 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 24 24 24 24 24 24 24 24 24 24 24 24 24 24 24 24 24 24 24 24 24 24 24 24 24 24 24 24 24 24 24 24
+[adapted]  repeated 8-grams 0%   0 legal moves, then R6+
+R6+ B4. N70. 1+ 2. R40-. B6 e5. 10+ 2. R4.+ N60. B4-1. 20+ R4. e5. N6+ 10. 2-O. R4+ B5. 10. 2+ N4.-0= R6. e4+ 1. 20. B4+ N5.-0. R4+ 2.10=
+
+--- self-knowledge ---
+prompt: '<user>\nhow do you decide which experts to use?\n</user>\n<bot>\n'
+[raw]  repeated 8-grams 77%
+ in in in in in in in it it in it it it it it it it it it it it it it it it i i i i i i i i i i i i i i i i i i i i                         
+[adapted]  repeated 8-grams 9%
+1. anithe orasine thed alinores thaconide athes inorale this.
+1e anorithe ad.
+1e insorathe incorat ised anorethis alenorithe ad.
+1e ins
+
+==============================================================================
+step 508   1.0M of 809M characters (0.13%)   20 min   65 experts
+context 2,057 characters of 4,096   reading 1,877 char/s   writing 12.1 char/s
+grad norm 4.39 against a clip of 1   clipping
+train loss 2.9665   lr 3.00e-04
+held-out loss 2.8959 +/-0.0264 nats   4.1779 bits/char   perplexity 18.10   gap -0.0706
+  arithmetic 2.845   chat 2.973   chess 2.224   code 3.028   reasoning 3.091   stories 3.105   wikipedia 3.005
+repeats 97% of 8-grams, greedy with no guard
+==============================================================================
+
+--- stories ---
+prompt: 'Once upon a time, there was a little boy named Tom. One day he '
+[raw]  repeated 8-grams 99%
+                                                                                                                                            
+[adapted]  repeated 8-grams 15%
+inturself.ind alorthend isertalf indervals inther(x. indelstar incof.els inderthal(x. inderthals inderthalf incorsel(x. indertals inderthalf
+
+--- code ---
+prompt: 'def merge_sorted(a, b):\n    '
+[raw]  repeated 8-grams 99%
+                                                                                                                                            
+[adapted]  repeated 8-grams 4%
+inthersalf.inderthalon iserthalf inderstalon if.erthals indervalonthe is_cortalf inders inthel(x. indertals incorvalf inderthels ind.artelf 
+
+--- arithmetic ---
+prompt: 'add 4917 + 388 = '
+[raw]  repeated 8-grams 94%
+1 1 1 14 14 14 14 14 14 14 14 14 14 14 14 14 14 14 14 14 14 14 14 14 14 14 14 14 14 14 14 14 14 14 14 14 14 14 14 14 14 14 14 14 14 14 14 14
+[adapted]  repeated 8-grams 2%
+24.6157324. Bxd4618 Nc325. 1476+ Bxd4. 123586. Nc47123 Bxd4. 15628. Nc437125 Bxd4. 168237. Bxe45126 Nc4. Bxd3127. Nxg4568 123. Bxd47. 152683
+
+--- chat ---
+prompt: '<user>\nWhat are you?\n</user>\n<bot>\n'
+[raw]  repeated 8-grams 99%
+                                                                                                                                            
+[adapted]  repeated 8-grams 23%
+ indertals inderthalf inservalonthe is_valf inderthals indertalon iservalf inderthals inderthalon isertalf indervals inther(x. indelortan is
+
+--- chat_hermes ---
+prompt: '<user>\nA train travels 60 km in 45 minutes. What is its speed in km/h?\n</user>\n<bot>\n'
+[raw]  repeated 8-grams 99%
+                                                                                                                                            
+[adapted]  repeated 8-grams 32%
+ intalers inderthalon isertalf indervals intherd incof.selarth indervals intherd incof.selarth indervals inther(x. indelortan iself. inderth
+
+--- reasoning ---
+prompt: '<user>\nWrite a Python function that returns the largest number in a list.\n</user>\n<bot>\n<think>\n'
+[raw]  repeated 8-grams 99%
+                                                                                                                                            
+[adapted]  repeated 8-grams 19%
+ indertals indervalonthe is_valf inderthals inderthalon isertalf indervals inther(x. indelortan iservalf inderthals inderthof incorseland if
+
+--- wikipedia ---
+prompt: '== History ==\nThe [[Roman Empire]] was '
+[raw]  repeated 8-grams 99%
+                                                                                                                                            
+[adapted]  repeated 8-grams 1%
+intelf.d incorthels inderalf inthers ind.alorte ind, serthalin f.sertalind = inters_valond if.erthals inderthalon isertalf indervals inther(
+
+--- chess ---
+prompt: '<g>1700 1-0 1. e4 e5 2. '
+[raw]  repeated 8-grams 83%   0 legal moves, then 1
+1 1 1 1 1 1 1 1 1 1 1 14 14 14 14 1 1 1 1 1 1 1 14 14 14 14 14 14 14 14 14 14 14 14 14 14 14 14 14 14 14 14 4 4 4 4 4 4 4 4 4 4 4 4 4 4 4 4 
+[adapted]  repeated 8-grams 1%   0 legal moves, then Nc4361872.
+Nc4361872. Bxd4513 Nc4. Bxd2617. Nc435 Bxd421. Rc687. 13425 Bxd4. 162378. Nxc45126 Bxd4. 13725. Nxe46813 Bxd4.25 176. Bxc4238. 156+ Nxd427. 
+
+--- self-knowledge ---
+prompt: '<user>\nhow do you decide which experts to use?\n</user>\n<bot>\n'
+[raw]  repeated 8-grams 99%
+                                                                                                                                            
+[adapted]  repeated 8-grams 55%
+ indertalf indersthalon iserthalf inderthals inderthalon iserthalf inderstalon if.erthals inderthalon iserthalf inderstalon if.erthals inder
+
+
+##############################################################################
+# session started 2026-10-09 20:32  at step 508, 1.0M of 809M characters read (0.13%), 65 experts
+##############################################################################
+
+==============================================================================
+step 564   1.2M of 809M characters (0.14%)   5 min   65 experts
+context 2,057 characters of 4,096   reading 1,891 char/s   writing 11.5 char/s
+grad norm 3.06 against a clip of 1   clipping
+train loss 2.5262   lr 3.00e-04   evidence t +0.00 over 0.0 (effect +0.0000)   rate x1.000
+held-out loss 2.7789 +/-0.0534 nats   4.0091 bits/char   perplexity 16.10   gap +0.2526
+  arithmetic 2.809   chat 2.845   chess 2.063   code 2.608   reasoning 3.115   stories 3.065   wikipedia 2.947
+repeats 97% of 8-grams, greedy with no guard
+==============================================================================
+
+--- stories ---
+prompt: 'Once upon a time, there was a little boy named Tom. One day he '
+[raw]  repeated 8-grams 99%
+                                                                                                                                            
+[adapted]  repeated 8-grams 1%
+tings
+ f.condelatrs  f.
+ condelatis f.
+ pongeratis condelf.  tingseracond f.
+ tiselang coredint f.
+ selacond tiseralf.  congestind f.
+ alont
+
+--- code ---
+prompt: 'def merge_sorted(a, b):\n    '
+[raw]  repeated 8-grams 99%
+                                                                                                                                            
+[adapted]  repeated 8-grams 2%
+f.contiselard f.
+ tengstiond calf.
+ = terondisthalf.  congeratis
+ f.delong ctiserand f.
+ tongelacors  f.
+ tindelacong f.
+ tiserand complf.
+ 
+
+--- arithmetic ---
+prompt: 'add 4917 + 388 = '
+[raw]  repeated 8-grams 88%
+= = = = 2 2 2 2 2 2                                                                                                                         
+[adapted]  repeated 8-grams 0%
+2.
+addesulfongct  = 1.
+sulenditorack f.
+ ")
+ = sundelf. tings
+ acorelf. dinthacompes  f.
+ tindelacorst f.
+ = dengstioralf.  condesting f.
+ a
+
+--- chat ---
+prompt: '<user>\nWhat are you?\n</user>\n<bot>\n'
+[raw]  repeated 8-grams 99%
+                                                                                                                                            
+[adapted]  repeated 8-grams 3%
+ f.stindelacon  f.
+ teralondist f.
+ congelatis  f.
+ dentracomplf.  stinderacong f.
+ tiseland coresting f.
+ alondertis cong f.
+ alertindes co
+
+--- chat_hermes ---
+prompt: '<user>\nA train travels 60 km in 45 minutes. What is its speed in km/h?\n</user>\n<bot>\n'
+[raw]  repeated 8-grams 99%
+                                                                                                                                            
+[adapted]  repeated 8-grams 5%
+ f.contelas  rendiompat f.
+ condelasting  f.
+ =20
+ condelatis f.
+ rendatomplf.  congstinderalf.  =
+ tindestorack f.
+ pondelatis  f.
+ congera
+
+--- reasoning ---
+prompt: '<user>\nWrite a Python function that returns the largest number in a list.\n</user>\n<bot>\n<think>\n'
+[raw]  repeated 8-grams 99%
+                                                                                                                                            
+[adapted]  repeated 8-grams 4%
+ fondelatis  congerathelf.  dingstompack f.
+ tendis ralong f.
+ tes, condelating f.
+ strelond campong f.
+ tiseland coresting f.
+ alondertis c
+
+--- wikipedia ---
+prompt: '== History ==\nThe [[Roman Empire]] was '
+[raw]  repeated 8-grams 99%
+                                                                                                                                            
+[adapted]  repeated 8-grams 1%
+f.
+ condelatis f.
+ = rendatomplf.
+  congsteralf.  dentiompack
+  f.stendioralf.  ctengs
+ diontralf.  condesting f.
+ alondertis congelf.
+  ati
+
+--- chess ---
+prompt: '<g>1700 1-0 1. e4 e5 2. '
+[raw]  repeated 8-grams 93%   0 legal moves, then =
+= = = = = =                                                                                                                                 
+[adapted]  repeated 8-grams 0%   0 legal moves, then =
+=
+additoulfres
+ = 2.dengctiond  f.
+ actesulond f.
+ ractingself.  dentorack
+ f.stindelompact  f.
+ rendistong alf.
+ condesting  f.
+ alerondist
+
+--- self-knowledge ---
+prompt: '<user>\nhow do you decide which experts to use?\n</user>\n<bot>\n'
+[raw]  repeated 8-grams 99%
+                                                                                                                                            
+[adapted]  repeated 8-grams 2%
+ f.ding alorestind f.
+ congelatis f.
+ derantomplf.  condesting alf.
+ restind compalf.
+  tengstiorack f.
+ dengstiond alf.
+ conteras f.
+ delon
+
+==============================================================================
+step 564   1.2M of 809M characters (0.14%)   10 min   65 experts
+context 2,057 characters of 4,096   writing 12.5 char/s
+grad norm 3.06 against a clip of 1   clipping
+train loss 2.5262   lr 3.00e-04
+held-out loss 2.8311 +/-0.0300 nats   4.0844 bits/char   perplexity 16.96   gap +0.3049
+  arithmetic 2.809   chat 2.870   chess 2.067   code 2.881   reasoning 3.121   stories 3.083   wikipedia 2.987
+repeats 97% of 8-grams, greedy with no guard
+==============================================================================
+
+--- stories ---
+prompt: 'Once upon a time, there was a little boy named Tom. One day he '
+[raw]  repeated 8-grams 99%
+                                                                                                                                            
+[adapted]  repeated 8-grams 1%
+tings
+ f.condelatrs  f.
+ condelatis f.
+ pongeratis condelf.  tingseracond f.
+ tiselang coredint f.
+ selacond tiseralf.  congestind f.
+ alont
+
+--- code ---
+prompt: 'def merge_sorted(a, b):\n    '
+[raw]  repeated 8-grams 99%
+                                                                                                                                            
+[adapted]  repeated 8-grams 2%
+f.contiselard f.
+ tengstiond calf.
+ = terondisthalf.  congeratis
+ f.delong ctiserand f.
+ tongelacors  f.
+ tindelacong f.
+ tiserand complf.
+ 
+
+--- arithmetic ---
+prompt: 'add 4917 + 388 = '
+[raw]  repeated 8-grams 88%
+= = = = 2 2 2 2 2 2                                                                                                                         
+[adapted]  repeated 8-grams 0%
+2.
+addesulfongct  = 1.
+sulenditorack f.
+ ")
+ = sundelf. tings
+ acorelf. dinthacompes  f.
+ tindelacorst f.
+ = dengstioralf.  condesting f.
+ a
+
+--- chat ---
+prompt: '<user>\nWhat are you?\n</user>\n<bot>\n'
+[raw]  repeated 8-grams 99%
+                                                                                                                                            
+[adapted]  repeated 8-grams 3%
+ f.stindelacon  f.
+ teralondist f.
+ congelatis  f.
+ dentracomplf.  stinderacong f.
+ tiseland coresting f.
+ alondertis cong f.
+ alertindes co
+
+--- chat_hermes ---
+prompt: '<user>\nA train travels 60 km in 45 minutes. What is its speed in km/h?\n</user>\n<bot>\n'
+[raw]  repeated 8-grams 99%
+                                                                                                                                            
+[adapted]  repeated 8-grams 5%
+ f.contelas  rendiompat f.
+ condelasting  f.
+ =20
+ condelatis f.
+ rendatomplf.  congstinderalf.  =
+ tindestorack f.
+ pondelatis  f.
+ congera
+
+--- reasoning ---
+prompt: '<user>\nWrite a Python function that returns the largest number in a list.\n</user>\n<bot>\n<think>\n'
+[raw]  repeated 8-grams 99%
+                                                                                                                                            
+[adapted]  repeated 8-grams 4%
+ fondelatis  congerathelf.  dingstompack f.
+ tendis ralong f.
+ tes, condelating f.
+ strelond campong f.
+ tiseland coresting f.
+ alondertis c
+
+--- wikipedia ---
+prompt: '== History ==\nThe [[Roman Empire]] was '
+[raw]  repeated 8-grams 99%
+                                                                                                                                            
+[adapted]  repeated 8-grams 1%
+f.
+ condelatis f.
+ = rendatomplf.
+  congsteralf.  dentiompack
+  f.stendioralf.  ctengs
+ diontralf.  condesting f.
+ alondertis congelf.
+  ati
+
+--- chess ---
+prompt: '<g>1700 1-0 1. e4 e5 2. '
+[raw]  repeated 8-grams 93%   0 legal moves, then =
+= = = = = =                                                                                                                                 
+[adapted]  repeated 8-grams 0%   0 legal moves, then =
+=
+additoulfres
+ = 2.dengctiond  f.
+ actesulond f.
+ ractingself.  dentorack
+ f.stindelompact  f.
+ rendistong alf.
+ condesting  f.
+ alerondist
+
+--- self-knowledge ---
+prompt: '<user>\nhow do you decide which experts to use?\n</user>\n<bot>\n'
+[raw]  repeated 8-grams 99%
+                                                                                                                                            
+[adapted]  repeated 8-grams 2%
+ f.ding alorestind f.
+ congelatis f.
+ derantomplf.  condesting alf.
+ restind compalf.
+  tengstiorack f.
+ dengstiond alf.
+ conteras f.
+ delon
+
+
+##############################################################################
+# session started 2026-10-09 20:45  at step 508, 1.0M of 809M characters read (0.13%), 65 experts
+##############################################################################
+
+==============================================================================
+step 559   1.1M of 809M characters (0.14%)   5 min   65 experts
+context 2,057 characters of 4,096   reading 1,739 char/s   writing 11.8 char/s
+grad norm 3.03 against a clip of 1   clipping
+train loss 2.5391   lr 3.00e-04   evidence t +0.00 over 0.0 (effect +0.0000)   rate x1.000
+held-out loss 2.7371 +/-0.0486 nats   3.9489 bits/char   perplexity 15.44   gap +0.1981
+  arithmetic 2.839   chat 2.796   chess 2.053   code 2.620   reasoning 3.021   stories 2.954   wikipedia 2.877
+repeats 97% of 8-grams, greedy with no guard
+==============================================================================
+
+--- stories ---
+prompt: 'Once upon a time, there was a little boy named Tom. One day he '
+[raw]  repeated 8-grams 99%
+                                                                                                                                            
+[adapted]  repeated 8-grams 2%
+tiong.
+ frelontisecalf. trend omplf.
+ tingeracond telf.
+ serantiomplf. ctend seralong ticheralf.
+ tindes ong.
+ teralf.
+ contiseralf. tendiom
+
+--- code ---
+prompt: 'def merge_sorted(a, b):\n    '
+[raw]  repeated 8-grams 99%
+                                                                                                                                            
+[adapted]  repeated 8-grams 3%
+tingeloract.
+ f.sendioralf teng.
+ ctionderalf. tiseng coralf.
+ tendioralf. teng corestind alf.
+ terong calf.
+ tinderomplf. tengis calondert 
+
+--- arithmetic ---
+prompt: 'add 4917 + 388 = '
+[raw]  repeated 8-grams 83%
+= = = = 2 2 = 2 2 2 2 2 2                                                                                                                   
+[adapted]  repeated 8-grams 2%
+2.
+addexf6 Qc4. Rxg5 Nf3. Qc4+ 1. Raxd6. Nf427. Qc30. Rxe4+ Nf6. Qd5. 18+ Ra4. Nc30. Qxf6 27. Re4+ 18. Nc30. Qxd4+ Ra6. 27. Nf30. Qxc4+ 18. 
+
+--- chat ---
+prompt: '<user>\nWhat are you?\n</user>\n<bot>\n'
+[raw]  repeated 8-grams 99%
+                                                                                                                                            
+[adapted]  repeated 8-grams 5%
+ tendioralf. tenck serontif.
+ alerond tisecalf.
+ tengromplis tend.
+ foncalert s.
+ ingelorat f.
+ cendioralf.
+ teng serondit calf.
+ sentioralf
+
+--- chat_hermes ---
+prompt: '<user>\nA train travels 60 km in 45 minutes. What is its speed in km/h?\n</user>\n<bot>\n'
+[raw]  repeated 8-grams 99%
+                                                                                                                                            
+[adapted]  repeated 8-grams 0%
+ telondiseract f.
+ plongeratis f.
+ condelatis reng.
+ fontiselacherond tiself.
+ angeromplf.
+ tinderacont self.
+ rangetiond chelf.
+ tiserang o
+
+--- reasoning ---
+prompt: '<user>\nWrite a Python function that returns the largest number in a list.\n</user>\n<bot>\n<think>\n'
+[raw]  repeated 8-grams 99%
+                                                                                                                                            
+[adapted]  repeated 8-grams 10%
+ foneralit chend.
+ stiongeralf.
+ tindecoralf. teng serondit alf.
+ ctengromplf.
+ sentioralf. ctend serongit alf.
+ ctendioralf.
+ sentiorale ct
+
+--- wikipedia ---
+prompt: '== History ==\nThe [[Roman Empire]] was '
+[raw]  repeated 8-grams 99%
+                                                                                                                                            
+[adapted]  repeated 8-grams 3%
+t.
+denoralf.
+ tingecoralf.
+ tendis plonterack f.
+ tingeloract send.
+ fontiselack ronget f.
+ selondit acherong.
+ tiself.
+ anderont ckelf.
+ st
+
+--- chess ---
+prompt: '<g>1700 1-0 1. e4 e5 2. '
+[raw]  repeated 8-grams 93%   0 legal moves, then =
+= = = = = = =                                                                                                                               
+[adapted]  repeated 8-grams 0%   0 legal moves, then =
+=
+addexf6 = 3.
+mplentioublf. cmpend tis
+ rongelf.
+ tindecalores ting.
+ fondelact res.
+ fongelit ackerond f.
+ tiselong actrelf.
+ sendit along
+
+--- self-knowledge ---
+prompt: '<user>\nhow do you decide which experts to use?\n</user>\n<bot>\n'
+[raw]  repeated 8-grams 99%
+                                                                                                                                            
+[adapted]  repeated 8-grams 0%
+ f.dentiorale ct.
+ sengioralf. tendioract self.
+ pongeralit condes.
+ fitrelong act.
+ serondit f.
+ alengromplf.
+ tendis calonterache f.
+ tion
+
+==============================================================================
+step 559   1.1M of 809M characters (0.14%)   10 min   65 experts
+context 2,057 characters of 4,096   writing 12.1 char/s
+grad norm 3.03 against a clip of 1   clipping
+train loss 2.5391   lr 3.00e-04
+held-out loss 2.7880 +/-0.0281 nats   4.0222 bits/char   perplexity 16.25   gap +0.2489
+  arithmetic 2.839   chat 2.822   chess 2.058   code 2.888   reasoning 3.030   stories 2.971   wikipedia 2.909
+repeats 97% of 8-grams, greedy with no guard
+==============================================================================
+
+--- stories ---
+prompt: 'Once upon a time, there was a little boy named Tom. One day he '
+[raw]  repeated 8-grams 99%
+                                                                                                                                            
+[adapted]  repeated 8-grams 2%
+tiong.
+ frelontisecalf. trend omplf.
+ tingeracond telf.
+ serantiomplf. ctend seralong ticheralf.
+ tindes ong.
+ teralf.
+ contiseralf. tendiom
+
+--- code ---
+prompt: 'def merge_sorted(a, b):\n    '
+[raw]  repeated 8-grams 99%
+                                                                                                                                            
+[adapted]  repeated 8-grams 3%
+tingeloract.
+ f.sendioralf teng.
+ ctionderalf. tiseng coralf.
+ tendioralf. teng corestind alf.
+ terong calf.
+ tinderomplf. tengis calondert 
+
+--- arithmetic ---
+prompt: 'add 4917 + 388 = '
+[raw]  repeated 8-grams 83%
+= = = = 2 2 = 2 2 2 2 2 2                                                                                                                   
+[adapted]  repeated 8-grams 2%
+2.
+addexf6 Qc4. Rxg5 Nf3. Qc4+ 1. Raxd6. Nf427. Qc30. Rxe4+ Nf6. Qd5. 18+ Ra4. Nc30. Qxf6 27. Re4+ 18. Nc30. Qxd4+ Ra6. 27. Nf30. Qxc4+ 18. 
+
+--- chat ---
+prompt: '<user>\nWhat are you?\n</user>\n<bot>\n'
+[raw]  repeated 8-grams 99%
+                                                                                                                                            
+[adapted]  repeated 8-grams 5%
+ tendioralf. tenck serontif.
+ alerond tisecalf.
+ tengromplis tend.
+ foncalert s.
+ ingelorat f.
+ cendioralf.
+ teng serondit calf.
+ sentioralf
+
+--- chat_hermes ---
+prompt: '<user>\nA train travels 60 km in 45 minutes. What is its speed in km/h?\n</user>\n<bot>\n'
+[raw]  repeated 8-grams 99%
+                                                                                                                                            
+[adapted]  repeated 8-grams 0%
+ telondiseract f.
+ plongeratis f.
+ condelatis reng.
+ fontiselacherond tiself.
+ angeromplf.
+ tinderacont self.
+ rangetiond chelf.
+ tiserang o
+
+--- reasoning ---
+prompt: '<user>\nWrite a Python function that returns the largest number in a list.\n</user>\n<bot>\n<think>\n'
+[raw]  repeated 8-grams 99%
+                                                                                                                                            
+[adapted]  repeated 8-grams 10%
+ foneralit chend.
+ stiongeralf.
+ tindecoralf. teng serondit alf.
+ ctengromplf.
+ sentioralf. ctend serongit alf.
+ ctendioralf.
+ sentiorale ct
+
+--- wikipedia ---
+prompt: '== History ==\nThe [[Roman Empire]] was '
+[raw]  repeated 8-grams 99%
+                                                                                                                                            
+[adapted]  repeated 8-grams 3%
+t.
+denoralf.
+ tingecoralf.
+ tendis plonterack f.
+ tingeloract send.
+ fontiselack ronget f.
+ selondit acherong.
+ tiself.
+ anderont ckelf.
+ st
+
+--- chess ---
+prompt: '<g>1700 1-0 1. e4 e5 2. '
+[raw]  repeated 8-grams 93%   0 legal moves, then =
+= = = = = = =                                                                                                                               
+[adapted]  repeated 8-grams 0%   0 legal moves, then =
+=
+addexf6 = 3.
+mplentioublf. cmpend tis
+ rongelf.
+ tindecalores ting.
+ fondelact res.
+ fongelit ackerond f.
+ tiselong actrelf.
+ sendit along
+
+--- self-knowledge ---
+prompt: '<user>\nhow do you decide which experts to use?\n</user>\n<bot>\n'
+[raw]  repeated 8-grams 99%
+                                                                                                                                            
+[adapted]  repeated 8-grams 0%
+ f.dentiorale ct.
+ sengioralf. tendioract self.
+ pongeralit condes.
+ fitrelong act.
+ serondit f.
+ alengromplf.
+ tendis calonterache f.
+ tion
+
+
+##############################################################################
+# session started 2026-10-09 21:10  at step 508, 1.0M of 821M characters read (0.13%), 65 experts
+##############################################################################
+
+==============================================================================
+step 560   1.1M of 821M characters (0.14%)   5 min   65 experts
+context 2,057 characters of 4,096   reading 1,755 char/s   writing 11.7 char/s
+grad norm 2.95 against a clip of 1   clipping
+train loss 2.5361   lr 3.00e-04   evidence t +0.00 over 0.0 (effect +0.0000)   rate x1.000
+held-out loss 2.8164 +/-0.0499 nats   4.0632 bits/char   perplexity 16.72   gap +0.2803
+  arithmetic 2.843   chat 2.815   chess 2.053   code 2.615   conversations 3.236   reasoning 3.059   stories 3.001   wikipedia 2.909
+repeats 98% of 8-grams, greedy with no guard
+==============================================================================
+
+--- stories ---
+prompt: 'Once upon a time, there was a little boy named Tom. One day he '
+[raw]  repeated 8-grams 99%
+                                                                                                                                            
+[adapted]  repeated 8-grams 4%
+tingrolf.
+ tes.
+ canderontis f.
+ calonteris f.
+ tendoralf.
+ tingecond stralf.
+ ponterack self.
+ tinderong thalf.
+ conderatis f.
+ tengoralf.
+
+
+--- code ---
+prompt: 'def merge_sorted(a, b):\n    '
+[raw]  repeated 8-grams 99%
+                                                                                                                                            
+[adapted]  repeated 8-grams 5%
+tingelf.
+ contrales f.
+ tinderong calf.
+ tinderomplf. tinges calontred f.
+ tingeloract send.
+ fontiselack rong.
+ tiself.
+ conderat s.
+ fonge
+
+--- arithmetic ---
+prompt: 'add 4917 + 388 = '
+[raw]  repeated 8-grams 93%
+= = = = =                                                                                                                                   
+[adapted]  repeated 8-grams 0%
+2.
+adde4 = 1.
+mpesulfont caderongxf.  tis
+<gcalend rontiself.  acthendioralf.  tengis
+ condelf. tranges condithalf.
+  rengiomplf. tendis aco
+
+--- chat ---
+prompt: '<user>\nWhat are you?\n</user>\n<bot>\n'
+[raw]  repeated 8-grams 99%
+                                                                                                                                            
+[adapted]  repeated 8-grams 3%
+ tindelf. contrales  f.
+dentioralf.  ctengiserond alf.
+ tingeromplf.
+  tendistracong f.
+ telondiseract  f.
+ plongeratis f.
+ condelf.
+ tinger
+
+--- chat_hermes ---
+prompt: '<user>\nA train travels 60 km in 45 minutes. What is its speed in km/h?\n</user>\n<bot>\n'
+[raw]  repeated 8-grams 99%
+                                                                                                                                            
+[adapted]  repeated 8-grams 9%
+ trondelf. actingerond  stif.
+ alonterack f.
+ sentioralf.
+  ctendioralf.
+ tengs conderalf.
+ tinges contralf.
+  dentioralf.
+ sentiomplf.  can
+
+--- reasoning ---
+prompt: '<user>\nWrite a Python function that returns the largest number in a list.\n</user>\n<bot>\n<think>\n'
+[raw]  repeated 8-grams 99%
+                                                                                                                                            
+[adapted]  repeated 8-grams 0%
+ fonteralis conderat f.
+ plongeractis  f.
+dentioralf.  ctengserond alf.
+ tingerompact  self.
+ dintrongelf.
+ actisend ronthalf.
+  congeratis 
+
+--- wikipedia ---
+prompt: '== History ==\nThe [[Roman Empire]] was '
+[raw]  repeated 8-grams 99%
+                                                                                                                                            
+[adapted]  repeated 8-grams 2%
+t.
+ fondelitrack  seng.
+ fontiselact rondelf.
+  tingeralond stickerang f.
+ tiondelf.
+ strangelompact  f.
+ rendionthalf.
+  seronticalf.
+  den
+
+--- chess ---
+prompt: '<g>1700 1-0 1. e4 e5 2. '
+[raw]  repeated 8-grams 93%   0 legal moves, then =
+= = = = = = = =                                                                                                                             
+[adapted]  repeated 8-grams 2%   0 legal moves, then =
+=
+addito
+sulengcmpront  f.
+delint acoresulf.
+  tinderong alf.
+ tecondis ralf.
+ tengioract  f.
+dengstioncalf.  rentiomplf.
+ senditracong  f.
+
+
+--- self-knowledge ---
+prompt: '<user>\nhow do you decide which experts to use?\n</user>\n<bot>\n'
+[raw]  repeated 8-grams 99%
+                                                                                                                                            
+[adapted]  repeated 8-grams 0%
+ f.dentioralf.  ctengioralf.
+ sentiompact  relf.
+ dengiont seralf.
+ ctinderong  alf.
+ tesionderact f.
+ plongeratis f.
+ condelf.
+ tingeracont
+
+==============================================================================
+step 560   1.1M of 821M characters (0.14%)   10 min   65 experts
+context 2,057 characters of 4,096   writing 11.5 char/s
+grad norm 2.95 against a clip of 1   clipping
+train loss 2.5361   lr 3.00e-04
+held-out loss 2.8591 +/-0.0268 nats   4.1248 bits/char   perplexity 17.45   gap +0.3229
+  arithmetic 2.844   chat 2.843   chess 2.058   code 2.883   conversations 3.213   reasoning 3.072   stories 3.017   wikipedia 2.942
+repeats 98% of 8-grams, greedy with no guard
+==============================================================================
+
+--- stories ---
+prompt: 'Once upon a time, there was a little boy named Tom. One day he '
+[raw]  repeated 8-grams 99%
+                                                                                                                                            
+[adapted]  repeated 8-grams 4%
+tingrolf.
+ tes.
+ canderontis f.
+ calonteris f.
+ tendoralf.
+ tingecond stralf.
+ ponterack self.
+ tinderong thalf.
+ conderatis f.
+ tengoralf.
+
+
+--- code ---
+prompt: 'def merge_sorted(a, b):\n    '
+[raw]  repeated 8-grams 99%
+                                                                                                                                            
+[adapted]  repeated 8-grams 5%
+tingelf.
+ contrales f.
+ tinderong calf.
+ tinderomplf. tinges calontred f.
+ tingeloract send.
+ fontiselack rong.
+ tiself.
+ conderat s.
+ fonge
+
+--- arithmetic ---
+prompt: 'add 4917 + 388 = '
+[raw]  repeated 8-grams 93%
+= = = = =                                                                                                                                   
+[adapted]  repeated 8-grams 0%
+2.
+adde4 = 1.
+mpesulfont caderongxf.  tis
+<gcalend rontiself.  acthendioralf.  tengis
+ condelf. tranges condithalf.
+  rengiomplf. tendis aco
+
+--- chat ---
+prompt: '<user>\nWhat are you?\n</user>\n<bot>\n'
+[raw]  repeated 8-grams 99%
+                                                                                                                                            
+[adapted]  repeated 8-grams 3%
+ tindelf. contrales  f.
+dentioralf.  ctengiserond alf.
+ tingeromplf.
+  tendistracong f.
+ telondiseract  f.
+ plongeratis f.
+ condelf.
+ tinger
+
+--- chat_hermes ---
+prompt: '<user>\nA train travels 60 km in 45 minutes. What is its speed in km/h?\n</user>\n<bot>\n'
+[raw]  repeated 8-grams 99%
+                                                                                                                                            
+[adapted]  repeated 8-grams 9%
+ trondelf. actingerond  stif.
+ alonterack f.
+ sentioralf.
+  ctendioralf.
+ tengs conderalf.
+ tinges contralf.
+  dentioralf.
+ sentiomplf.  can
+
+--- reasoning ---
+prompt: '<user>\nWrite a Python function that returns the largest number in a list.\n</user>\n<bot>\n<think>\n'
+[raw]  repeated 8-grams 99%
+                                                                                                                                            
+[adapted]  repeated 8-grams 0%
+ fonteralis conderat f.
+ plongeractis  f.
+dentioralf.  ctengserond alf.
+ tingerompact  self.
+ dintrongelf.
+ actisend ronthalf.
+  congeratis 
+
+--- wikipedia ---
+prompt: '== History ==\nThe [[Roman Empire]] was '
+[raw]  repeated 8-grams 99%
+                                                                                                                                            
+[adapted]  repeated 8-grams 2%
+t.
+ fondelitrack  seng.
+ fontiselact rondelf.
+  tingeralond stickerang f.
+ tiondelf.
+ strangelompact  f.
+ rendionthalf.
+  seronticalf.
+  den
+
+--- chess ---
+prompt: '<g>1700 1-0 1. e4 e5 2. '
+[raw]  repeated 8-grams 93%   0 legal moves, then =
+= = = = = = = =                                                                                                                             
+[adapted]  repeated 8-grams 2%   0 legal moves, then =
+=
+addito
+sulengcmpront  f.
+delint acoresulf.
+  tinderong alf.
+ tecondis ralf.
+ tengioract  f.
+dengstioncalf.  rentiomplf.
+ senditracong  f.
+
+
+--- self-knowledge ---
+prompt: '<user>\nhow do you decide which experts to use?\n</user>\n<bot>\n'
+[raw]  repeated 8-grams 99%
+                                                                                                                                            
+[adapted]  repeated 8-grams 0%
+ f.dentioralf.  ctengioralf.
+ sentiompact  relf.
+ dengiont seralf.
+ ctinderong  alf.
+ tesionderact f.
+ plongeratis f.
+ condelf.
+ tingeracont
+
+
+##############################################################################
+# session started 2026-10-09 21:22  at step 560, 1.1M of 821M characters read (0.14%), 65 experts
+##############################################################################
+
+==============================================================================
+step 614   1.3M of 821M characters (0.15%)   5 min   65 experts
+context 2,057 characters of 4,096   reading 1,827 char/s   writing 13.0 char/s
+grad norm 3.09 against a clip of 1   clipping
+train loss 2.5050   lr 3.00e-04   evidence t +2.76 over 3.0 (effect +1.9840)   rate x1.000
+held-out loss 2.7465 +/-0.0476 nats   3.9624 bits/char   perplexity 15.59   gap +0.2415
+  arithmetic 2.583   chat 2.765   chess 2.055   code 2.604   conversations 3.196   reasoning 3.014   stories 2.915   wikipedia 2.841
+repeats 98% of 8-grams, greedy with no guard
+==============================================================================
+
+--- stories ---
+prompt: 'Once upon a time, there was a little boy named Tom. One day he '
+[raw]  repeated 8-grams 99%
+                                                                                                                                            
+[adapted]  repeated 8-grams 5%
+iturongelat is.
+ relundomat isern aluthe indoraly tes.
+ ingorale tumpy inderalon thes if.
+ alurendomat isern plutorache ind.
+ torelun astifo
+
+--- code ---
+prompt: 'def merge_sorted(a, b):\n    '
+[raw]  repeated 8-grams 99%
+                                                                                                                                            
+[adapted]  repeated 8-grams 12%
+inturelomand istheralun  istorelypan isture alond istheralun  istoredaly ingeromat  indelurathon iselypurat  indelorathe inguromale tis wand
+
+--- arithmetic ---
+prompt: 'add 4917 + 388 = '
+[raw]  repeated 8-grams 98%
+= = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = 
+[adapted]  repeated 8-grams 0%
+10
+adexcmoulin terad s.
+ inoreluthack  inderomplut angeris  tondelurache intoralume  istonderalin  tures.
+ alondithe arong istuleran  istore
+
+--- chat ---
+prompt: '<user>\nWhat are you?\n</user>\n<bot>\n'
+[raw]  repeated 8-grams 99%
+                                                                                                                                            
+[adapted]  repeated 8-grams 0%
+ intelarompun  istelaron isthed aluron istelypar  indeloratume ingoraly thes indoralut ineralompy  thes.
+ indalure tongis alerompy tundelis 
+
+--- chat_hermes ---
+prompt: '<user>\nA train travels 60 km in 45 minutes. What is its speed in km/h?\n</user>\n<bot>\n'
+[raw]  repeated 8-grams 99%
+                                                                                                                                            
+[adapted]  repeated 8-grams 5%
+ alerontus indelarompy  thelindarome  tungis.
+ alerond thalis weron tumalis perond thalis rengomature indoly atheris  andelurompy tingelaro 
+
+--- reasoning ---
+prompt: '<user>\nWrite a Python function that returns the largest number in a list.\n</user>\n<bot>\n<think>\n'
+[raw]  repeated 8-grams 99%
+                                                                                                                                            
+[adapted]  repeated 8-grams 0%
+ arelon itured alonge istharon iledurat  s.
+<user>
+ inelorathe induralome than is.
+ relutond arelis thange oristuly anderomplin thare s.
+ indorel
+
+--- wikipedia ---
+prompt: '== History ==\nThe [[Roman Empire]] was '
+[raw]  repeated 8-grams 99%
+                                                                                                                                            
+[adapted]  repeated 8-grams 0%
+tulindero athelin s.
+ aromelutin  aredongis turelan istore alumpy inderothalis  werndomatulin  seratond ileratumpy  ingelorathe is.
+ anderom
+
+--- chess ---
+prompt: '<g>1700 1-0 1. e4 e5 2. '
+[raw]  repeated 8-grams 89%   0 legal moves, then 1
+1 Nxd4 Nxd4 Nxd4 Nxd4 Nxd4 Nxd4 Nxd4 Nxd4 Nxd4 Nxd4 Nxd4 Nxd4 Nxd4 Nxd4 Nxd4 Nxd4 Nxd4 Nxd4 Nxd4 Nxd4 Nxe4 Nxe4 Nxe4 Nxe4 Nxe4 Nxe4 Nxe4 Nxe
+[adapted]  repeated 8-grams 0%   0 legal moves, then Nxd36
+Nxd36 Qc4. Rxf5 Nb3. 17. Ke4+ Qxd5. Nc6 Rxf3. 17. 28+ Nc4. Qxd5 Be6. Nb37. Kc4+ 18. Rxd5. Nf6 Qxe4. Bc37. Nb5 18. Kxd4. Qe6 Nc3. Rxf5. 17+ 2
+
+--- self-knowledge ---
+prompt: '<user>\nhow do you decide which experts to use?\n</user>\n<bot>\n'
+[raw]  repeated 8-grams 99%
+                                                                                                                                            
+[adapted]  repeated 8-grams 1%
+ alinderomat  ingeluron athes indoralut ineralompy  therandis orelut angeris omaluthe indorale tungis arelon thameris  tundelorache inturalo
+
+==============================================================================
+step 614   1.3M of 821M characters (0.15%)   10 min   65 experts
+context 2,057 characters of 4,096   writing 13.1 char/s
+grad norm 3.09 against a clip of 1   clipping
+train loss 2.5050   lr 3.00e-04
+held-out loss 2.7871 +/-0.0254 nats   4.0210 bits/char   perplexity 16.23   gap +0.2821
+  arithmetic 2.583   chat 2.788   chess 2.064   code 2.864   conversations 3.163   reasoning 3.014   stories 2.939   wikipedia 2.882
+repeats 98% of 8-grams, greedy with no guard
+==============================================================================
+
+--- stories ---
+prompt: 'Once upon a time, there was a little boy named Tom. One day he '
+[raw]  repeated 8-grams 99%
+                                                                                                                                            
+[adapted]  repeated 8-grams 5%
+iturongelat is.
+ relundomat isern aluthe indoraly tes.
+ ingorale tumpy inderalon thes if.
+ alurendomat isern plutorache ind.
+ torelun astifo
+
+--- code ---
+prompt: 'def merge_sorted(a, b):\n    '
+[raw]  repeated 8-grams 99%
+                                                                                                                                            
+[adapted]  repeated 8-grams 12%
+inturelomand istheralun  istorelypan isture alond istheralun  istoredaly ingeromat  indelurathon iselypurat  indelorathe inguromale tis wand
+
+--- arithmetic ---
+prompt: 'add 4917 + 388 = '
+[raw]  repeated 8-grams 98%
+= = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = 
+[adapted]  repeated 8-grams 0%
+10
+adexcmoulin terad s.
+ inoreluthack  inderomplut angeris  tondelurache intoralume  istonderalin  tures.
+ alondithe arong istuleran  istore
+
+--- chat ---
+prompt: '<user>\nWhat are you?\n</user>\n<bot>\n'
+[raw]  repeated 8-grams 99%
+                                                                                                                                            
+[adapted]  repeated 8-grams 0%
+ intelarompun  istelaron isthed aluron istelypar  indeloratume ingoraly thes indoralut ineralompy  thes.
+ indalure tongis alerompy tundelis 
+
+--- chat_hermes ---
+prompt: '<user>\nA train travels 60 km in 45 minutes. What is its speed in km/h?\n</user>\n<bot>\n'
+[raw]  repeated 8-grams 99%
+                                                                                                                                            
+[adapted]  repeated 8-grams 5%
+ alerontus indelarompy  thelindarome  tungis.
+ alerond thalis weron tumalis perond thalis rengomature indoly atheris  andelurompy tingelaro 
+
+--- reasoning ---
+prompt: '<user>\nWrite a Python function that returns the largest number in a list.\n</user>\n<bot>\n<think>\n'
+[raw]  repeated 8-grams 99%
+                                                                                                                                            
+[adapted]  repeated 8-grams 0%
+ arelon itured alonge istharon iledurat  s.
+<user>
+ inelorathe induralome than is.
+ relutond arelis thange oristuly anderomplin thare s.
+ indorel
+
+--- wikipedia ---
+prompt: '== History ==\nThe [[Roman Empire]] was '
+[raw]  repeated 8-grams 99%
+                                                                                                                                            
+[adapted]  repeated 8-grams 0%
+tulindero athelin s.
+ aromelutin  aredongis turelan istore alumpy inderothalis  werndomatulin  seratond ileratumpy  ingelorathe is.
+ anderom
+
+--- chess ---
+prompt: '<g>1700 1-0 1. e4 e5 2. '
+[raw]  repeated 8-grams 89%   0 legal moves, then 1
+1 Nxd4 Nxd4 Nxd4 Nxd4 Nxd4 Nxd4 Nxd4 Nxd4 Nxd4 Nxd4 Nxd4 Nxd4 Nxd4 Nxd4 Nxd4 Nxd4 Nxd4 Nxd4 Nxd4 Nxd4 Nxe4 Nxe4 Nxe4 Nxe4 Nxe4 Nxe4 Nxe4 Nxe
+[adapted]  repeated 8-grams 0%   0 legal moves, then Nxd36
+Nxd36 Qc4. Rxf5 Nb3. 17. Ke4+ Qxd5. Nc6 Rxf3. 17. 28+ Nc4. Qxd5 Be6. Nb37. Kc4+ 18. Rxd5. Nf6 Qxe4. Bc37. Nb5 18. Kxd4. Qe6 Nc3. Rxf5. 17+ 2
+
+--- self-knowledge ---
+prompt: '<user>\nhow do you decide which experts to use?\n</user>\n<bot>\n'
+[raw]  repeated 8-grams 99%
+                                                                                                                                            
+[adapted]  repeated 8-grams 1%
+ alinderomat  ingeluron athes indoralut ineralompy  therandis orelut angeris omaluthe indorale tungis arelon thameris  tundelorache inturalo
+
+
+##############################################################################
+# session started 2026-10-09 21:46  at step 614, 1.3M of 821M characters read (0.15%), 65 experts
+##############################################################################
+
+==============================================================================
+step 871   1.8M of 821M characters (0.22%)   9 min   65 experts
+context 2,059 characters of 4,096   reading 1,750 char/s   writing 10.6 char/s
+grad norm 2.68 against a clip of 1   clipping
+train loss 2.5999   lr 3.00e-04   evidence t +3.76 over 4.0 (effect +1.7197)   rate x1.000
+held-out loss 2.6612 +/-0.0437 nats   3.8393 bits/char   perplexity 14.31   gap +0.0612
+  arithmetic 2.483   chat 2.745   chess 1.981   code 2.604   conversations 3.036   reasoning 2.876   stories 2.812   wikipedia 2.752
+repeats 98% of 8-grams, greedy with no guard
+==============================================================================
+
+--- stories ---
+prompt: 'Once upon a time, there was a little boy named Tom. One day he '
+[raw]  repeated 8-grams 99%
+                                                                                                                                            
+[adapted]  repeated 8-grams 0%
+tingsturelandifothe wangstif plerondethang isturelf wandethis bongertulan fiserthang weditulon fersthangice tulyserond thangerif tules.
+ wan
+
+--- code ---
+prompt: 'def merge_sorted(a, b):\n    '
+[raw]  repeated 8-grams 99%
+                                                                                                                                            
+[adapted]  repeated 8-grams 11%
+intherofulangsterind whetulangs foretind pathers.
+ ingelatherond futiserang thelind fortusecang therind fotules.
+ angitherond futiserang the
+
+--- arithmetic ---
+prompt: 'add 4917 + 388 = '
+[raw]  repeated 8-grams 93%
+= = = = = = = = = = = = = = = = = = = = = = = = = = = = =                                                                                   
+[adapted]  repeated 8-grams 40%
+6
+mub0= +0-15
+ad = 96+0= 7c1
+mub0= +0-156
+ad = 9+0= 7c1
+mub0= +0-156
+ad = 9+0= 7c1
+mub0= +0-156
+mulenod = +0
+aditub0= 1
+mulenod = +0
+mub0= 6
+
+--- chat ---
+prompt: '<user>\nWhat are you?\n</user>\n<bot>\n'
+[raw]  repeated 8-grams 99%
+                                                                                                                                            
+[adapted]  repeated 8-grams 0%
+ tingeralsthe fundioterang wistheland futingerof thes.
+ anditulerongs therandif tules.
+ wangerthind fotesulang itherond futiserang thelind f
+
+--- chat_hermes ---
+prompt: '<user>\nA train travels 60 km in 45 minutes. What is its speed in km/h?\n</user>\n<bot>\n'
+[raw]  repeated 8-grams 99%
+                                                                                                                                            
+[adapted]  repeated 8-grams 1%
+ terongstifule anderthings waterondif thelangs turechind terofulangstin werofuthe andistherong fuletind arsthecong fitulerand stherongif tul
+
+--- reasoning ---
+prompt: '<user>\nWrite a Python function that returns the largest number in a list.\n</user>\n<bot>\n<think>\n'
+[raw]  repeated 8-grams 99%
+                                                                                                                                            
+[adapted]  repeated 8-grams 0%
+ ferthangsedin tulerof angstherind watulerongs fitherand tules.
+ ingerthand fotiserang whelitund foresthangif terondelathis weronguthe finda
+
+--- wikipedia ---
+prompt: '== History ==\nThe [[Roman Empire]] was '
+[raw]  repeated 8-grams 99%
+                                                                                                                                            
+[adapted]  repeated 8-grams 3%
+tenghifuterond athelings futerondis atherong futindelathers wingetulan foresthind paterongs fitheland witures fongethalind tures.
+ fongethal
+
+--- chess ---
+prompt: '<g>1700 1-0 1. e4 e5 2. '
+[raw]  repeated 8-grams 92%   0 legal moves, then 1
+1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = 
+[adapted]  repeated 8-grams 5%   1 legal moves, then Qxd4.
+Nf3+ Qxd4. 190-O Be5+ Nf6. 17+ 28. Qxd4+ Nf3. 190-O-O Be5. Nf6 17+ 2. Qxd4. Nf3+ 19. Be5 Rxd4. Nf6+ 17. 20-O-O Be4. Nf3+ 19. Qxd5 20. Nf6+ 1
+
+--- self-knowledge ---
+prompt: '<user>\nhow do you decide which experts to use?\n</user>\n<bot>\n'
+[raw]  repeated 8-grams 99%
+                                                                                                                                            
+[adapted]  repeated 8-grams 0%
+ ingerthalfonde tis.
+ wangerthelind futherongs atinderof thelangs ituredongs therandif tulerongsthe indatulerof wingstheran futiseland thero
+
+==============================================================================
+step 1,127   2.3M of 821M characters (0.28%)   18 min   66 experts
+context 2,064 characters of 4,096   reading 1,748 char/s   writing 12.4 char/s
+grad norm 2.50 against a clip of 1   clipping
+train loss 2.5560   lr 3.00e-04   evidence t +3.81 over 5.0 (effect +1.2420)   rate x1.000
+held-out loss 2.6394 +/-0.0354 nats   3.8078 bits/char   perplexity 14.00   gap +0.0834
+  arithmetic 2.614   chat 2.839   chess 2.090   code 2.915   conversations 2.789   reasoning 2.700   stories 2.559   wikipedia 2.608
+repeats 95% of 8-grams, greedy with no guard
+==============================================================================
+
+--- stories ---
+prompt: 'Once upon a time, there was a little boy named Tom. One day he '
+[raw]  repeated 8-grams 97%
+the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the 
+[adapted]  repeated 8-grams 2%
+tingrous caleding therous andithe congre aly.
+
+</bot> Theding thalerous ctheding alyoure thandis coulerathe ming thaled congres thalind coure th
+
+--- code ---
+prompt: 'def merge_sorted(a, b):\n    '
+[raw]  repeated 8-grams 94%
+ TEThe the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the t
+[adapted]  repeated 8-grams 27%
+thengisouraled thangis coured thangis couled thangre this.
+
+</bot> TESonde thaling coured thangis couled thangre this conderaly theding cousthe 
+
+--- arithmetic ---
+prompt: 'add 4917 + 388 = '
+[raw]  repeated 8-grams 92%
+=1++++++++++++++++++++++++++++++++++++++++++++ + + + + + + + + + + + + + + + + + + + + + + + + + + + + + + + + + + + + + + + + + + + + + + +
+[adapted]  repeated 8-grams 16%
+2+1c0+6c0=4+1- 7c0=2+16c0+1=5c0 7+1=2+0 6c0=4+1 3c0=2+1 7c0=6+1- 4c0+1=2+0 7c0=6+1 3c0=2+1 4c0=5+16c0 7+1=2+0 3c0=6+1- 4c0=2+1 7c0=6+1 9c0=2
+
+--- chat ---
+prompt: '<user>\nWhat are you?\n</user>\n<bot>\n'
+[raw]  repeated 8-grams 93%
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                                                                                                                    
+[adapted]  repeated 8-grams 4%
+
+ theding cousthe alind therous cangithe dongre thalis conderathe ing cousthed alingre thas condithe alyous thering codeathing s.
+
+</bot> Thedi
+
+--- chat_hermes ---
+prompt: '<user>\nA train travels 60 km in 45 minutes. What is its speed in km/h?\n</user>\n<bot>\n'
+[raw]  repeated 8-grams 93%
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+[adapted]  repeated 8-grams 9%
+
+</bot> theding couresthalind coure thangis thedong calerind thes alyoure thing codesthaling coured thangis thed congre alithed congrathe sind t
+
+--- reasoning ---
+prompt: '<user>\nWrite a Python function that returns the largest number in a list.\n</user>\n<bot>\n<think>\n'
+[raw]  repeated 8-grams 99%
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+[adapted]  repeated 8-grams 3%
+
+</bot> denghatis coured thangis couled thangre isthaly conderithal s.
+
+</bot> Theding thalerous ctheding alyoure thandis coure thaling thedis congr
+
+--- wikipedia ---
+prompt: '== History ==\nThe [[Roman Empire]] was '
+[raw]  repeated 8-grams 98%
+t t t t t t t t t t t t t t t t t t t t t t t t t t t t t t t t t t t t t t t t t t t t t t t t t t t t t t t t t t t t t t t t t t t t t t 
+[adapted]  repeated 8-grams 4%
+theding coulerathind fous theraling codesthang ilerouthand cofis theraly theding cousthe alind therous cangithe dongre thalis conderathe min
+
+--- chess ---
+prompt: '<g>1700 1-0 1. e4 e5 2. '
+[raw]  repeated 8-grams 98%   0 legal moves, then 1
+1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 
+[adapted]  repeated 8-grams 15%   0 legal moves, then 1+
+1+ 3. 20-O-1+0=6c4 7+0=2+1c0 6+1=3c0 7+1-0=2+1c0 6+1=4c0 7+1=2c0 6+1-0=5cmp 7+0=2+16c0 4+1=3c0 7+1-0=2+ 6c0=5+14c0 7+1=26c0 3+1=5c0 7+1-0=2+
+
+--- self-knowledge ---
+prompt: '<user>\nhow do you decide which experts to use?\n</user>\n<bot>\n'
+[raw]  repeated 8-grams 93%
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                                                                   
+[adapted]  repeated 8-grams 0%
+
+</bot> dinghe tous alerind thecous angithe coding theraly stheding coure thalind stheroucang thedis alyong therind cousthe alingre thas condith
+
+==============================================================================
+step 1,384   2.8M of 821M characters (0.35%)   28 min   66 experts
+context 2,070 characters of 4,096   reading 1,746 char/s   writing 11.4 char/s
+grad norm 2.71 against a clip of 1   clipping
+train loss 2.5480   lr 3.00e-04   evidence t +4.27 over 6.0 (effect +1.0613)   rate x1.000
+held-out loss 2.5903 +/-0.0383 nats   3.7370 bits/char   perplexity 13.33   gap +0.0423
+  arithmetic 2.388   chat 2.879   chess 2.046   code 2.826   conversations 2.885   reasoning 2.630   stories 2.510   wikipedia 2.557
+repeats 88% of 8-grams, greedy with no guard
+==============================================================================
+
+--- stories ---
+prompt: 'Once upon a time, there was a little boy named Tom. One day he '
+[raw]  repeated 8-grams 83%
+wand and and and and and an an an an an an an an an an an an an an an an an an an an an an an an an an an an an an an an ar an an ar an ar a
+[adapted]  repeated 8-grams 0%
+wisthoralend chistore wand buserithof aly werind chestoural wind bersthaly ofind werasthe coulind waresthing ofurely astherind walofuserith 
+
+--- code ---
+prompt: 'def merge_sorted(a, b):\n    '
+[raw]  repeated 8-grams 80%
+                 ind ind ind and and and and and and and and and and and and and and and and and and and and and and and and and al and al a
+[adapted]  repeated 8-grams 2%
+inderousthely andicoresthal wind buresthal ondichers waly therind ofuseral wind therasing ofulerathind wersthof aly cherind wastheroul ind a
+
+--- arithmetic ---
+prompt: 'add 4917 + 388 = '
+[raw]  repeated 8-grams 63%
+1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1. Nf6 Nf6 1. Rxe4 Rxe4 1. Rf6 Rf6 1 1. Rf6 Rf6 1. Rf6 Rf6 1. Rxe4 Rxe4 1. R
+[adapted]  repeated 8-grams 1%
+2..+014 Rf6. Nxe5. Bh4+ 27. 13.+ Ra6. Nf5. Ke4+ 27. Rxb6. 18+ 24. Nf5.+ Ra6. Ke4. 17+ 23.0> Nf6. Rxe5. 14+ 2.0. Nf6+ 17. Ra5. 24+ 18.0> Nxe6
+
+--- chat ---
+prompt: '<user>\nWhat are you?\n</user>\n<bot>\n'
+[raw]  repeated 8-grams 98%
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+[adapted]  repeated 8-grams 1%
+
+</bot> inderal thesind worelasthind corely wastherind oumaleris whend toraly chesind walerouthind aserof witheral cond buserithal werond chesti
+
+--- chat_hermes ---
+prompt: '<user>\nA train travels 60 km in 45 minutes. What is its speed in km/h?\n</user>\n<bot>\n'
+[raw]  repeated 8-grams 98%
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+[adapted]  repeated 8-grams 1%
+
+</bot>
+ winderal thesind worely astherind woumalerind thes wingaly oresthind walerous cherind thelas wind orely thasind werouthel andistherof 
+
+--- reasoning ---
+prompt: '<user>\nWrite a Python function that returns the largest number in a list.\n</user>\n<bot>\n<think>\n'
+[raw]  repeated 8-grams 98%
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+[adapted]  repeated 8-grams 0%
+
+</bot>
+ werind alesthorind walersthing coumeral wind thersing aly werofithes and cheritous walerind butheras wind ofulerathing westhoral cinde
+
+--- wikipedia ---
+prompt: '== History ==\nThe [[Roman Empire]] was '
+[raw]  repeated 8-grams 82%
+1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1. Rxxxexexexexexexexexexe4 1 1 1 1 1 
+[adapted]  repeated 8-grams 49%
+1, 2.
+</bot>
+<bot>
+Therind woustheral 1.
+</bot>
+
+<bot>
+ =2, inderasthel 1)
+</bot>
+
+<bot>
+ =2, inderaly 1.
+</bot>
+
+<bot>
+ =2, inderasthel 1)
+</bot>
+
+<bot>
+ =2, inderaly =1.
+</bot>
+
+--- chess ---
+prompt: '<g>1700 1-0 1. e4 e5 2. '
+[raw]  repeated 8-grams 89%   0 legal moves, then Rxe6
+Rxe6 1. 1. 1. 1. 1..........................................................................................................................
+[adapted]  repeated 8-grams 3%   0 legal moves, then Rxf6.+
+Rxf6.+ 17. Nxe4. 23+ 18. 25.+ 17.0> 24.+ 16. 3+ 25.0-O 17.+ 24. 18.+ 30>. 25+ 17. 4.+ 26.0-O 18.+ 25. 3+ 4.0>. 17+ 26.0-O 4.+ 18.+ 25.0> 17.
+
+--- self-knowledge ---
+prompt: '<user>\nhow do you decide which experts to use?\n</user>\n<bot>\n'
+[raw]  repeated 8-grams 98%
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+[adapted]  repeated 8-grams 1%
+
+</bot>
+ anditherof waly cherind touseral wind buserof theland wistheroumal cherind wastherof blind aserouthe wind aly, cherstofind alersthe wi
+
+==============================================================================
+step 1,636   3.4M of 821M characters (0.41%)   37 min   66 experts
+context 2,075 characters of 4,096   reading 1,719 char/s   writing 13.8 char/s
+grad norm 2.82 against a clip of 1   clipping
+train loss 2.4756   lr 3.00e-04   evidence t +5.61 over 7.0 (effect +1.1092)   rate x1.000
+held-out loss 2.4908 +/-0.0408 nats   3.5935 bits/char   perplexity 12.07   gap +0.0153
+  arithmetic 2.461   chat 2.613   chess 1.832   code 2.427   conversations 2.828   reasoning 2.660   stories 2.543   wikipedia 2.563
+repeats 88% of 8-grams, greedy with no guard
+==============================================================================
+
+--- stories ---
+prompt: 'Once upon a time, there was a little boy named Tom. One day he '
+[raw]  repeated 8-grams 85%
+the the the the the t the t the the t t t the t t t t t t t the t t t t t t t t t t t t t t t t t t t t t t t t t t t t t t t t t t t t t t 
+[adapted]  repeated 8-grams 0%
+tingrsofuleranthis comperand thesing forelathin serompand thering fomalesthin cored anthiseromply therand fistherong alithers conderathin fo
+
+--- code ---
+prompt: 'def merge_sorted(a, b):\n    '
+[raw]  repeated 8-grams 99%
+                                                                                                                                            
+[adapted]  repeated 8-grams 1%
+"
+
+</bot>
+<bot>
+denturis alf._conther sindelf athingres omatherind folesthang coredinthaly seromputhing alerof thesind arelyputhing seromand thering
+
+--- arithmetic ---
+prompt: 'add 4917 + 388 = '
+[raw]  repeated 8-grams 78%
+1 = 1 9 + 1 9 + 9 + 9 + 1 + 9 + 9 + + + + + + + + + + + + + + + + + + + + + + + + + + + + + + + + + + + + + + + + + + + + + + + + + + + + + 
+[adapted]  repeated 8-grams 0%
+6
+adig5940 213 67
+ad  5940283 61
+s9  5470236 98
+ad  5410
+mub 9632 5478 9
+ad 60134 5298 6
+s  40375912 68
+ad 40935 6127 4
+ad 98035 6124 9
+s  5
+
+--- chat ---
+prompt: '<user>\nWhat are you?\n</user>\n<bot>\n'
+[raw]  repeated 8-grams 99%
+                                                                                                                                            
+[adapted]  repeated 8-grams 0%
+ inderathes congilare thind somarely thingerof asthed congrithes alypurend thingomares thind forelang thesind coralesthing fored thangus ind
+
+--- chat_hermes ---
+prompt: '<user>\nA train travels 60 km in 45 minutes. What is its speed in km/h?\n</user>\n<bot>\n'
+[raw]  repeated 8-grams 92%
+                             an                                                                                                             
+[adapted]  repeated 8-grams 0%
+
+ renthalis fored thangeris tulypend aromesthing forelathind seromply thengis ared thingores alyputherind fomathers congither alypusthend f
+
+--- reasoning ---
+prompt: '<user>\nWrite a Python function that returns the largest number in a list.\n</user>\n<bot>\n<think>\n'
+[raw]  repeated 8-grams 99%
+                                                                                                                                            
+[adapted]  repeated 8-grams 0%
+
+  "", renthalisored thangeris fomplenthar condesting aleromputhin seraly theding foresthand complinger thas fonderithaly serong thinderaly
+
+--- wikipedia ---
+prompt: '== History ==\nThe [[Roman Empire]] was '
+[raw]  repeated 8-grams 80%
+an an an an an an an an an an an   an an an an an an  an an an an     an                                                                    
+[adapted]  repeated 8-grams 0%
+thendilor futhes angricomple thand singerof thalerind stheromang fithers condelathin forestulan comperind thales foringed thalypures tind am
+
+--- chess ---
+prompt: '<g>1700 1-0 1. e4 e5 2. '
+[raw]  repeated 8-grams 72%   0 legal moves, then Nf6
+Nf6 Nf6 1 10 1 1 1 + 1 + 1 + 1 + 9 + + 9 + + + + + + + + + + + + + + + + + + + + + + + + + + + + + + + + + + + + + + + + + + + + + + + +  + 
+[adapted]  repeated 8-grams 5%   0 legal moves, then Nf6
+Nf6 Rxd4 39.+ Qf5 Nc6 10.+ Rxe4 Nf39. Qd5 Ra6 10.+ Nf4 Rxe5. Qc6 Nf3 29.+ Ra4 Kg5. Nf6 Rxe4 10.+ Qc5 Nf3 29.+ Rxe4 10. Nf6 Ra5 29.+ Qe4 Nf3 
+
+--- self-knowledge ---
+prompt: '<user>\nhow do you decide which experts to use?\n</user>\n<bot>\n'
+[raw]  repeated 8-grams 83%
+                             t t   t t t t t t t t t t t      t t t t t                                                                     
+[adapted]  repeated 8-grams 1%
+
+ "", inderathes fongritheland coresthing aleromputhe sind arelyponthis fured angomplither stund aleromping thes arondithely foranges thind
+
+==============================================================================
+step 1,888   3.9M of 821M characters (0.47%)   45 min   66 experts
+context 2,080 characters of 4,096   reading 1,716 char/s   writing 14.4 char/s
+grad norm 2.91 against a clip of 1   clipping
+train loss 2.4253   lr 3.00e-04   evidence t +6.33 over 8.0 (effect +1.0304)   rate x1.000
+held-out loss 2.4732 +/-0.0406 nats   3.5680 bits/char   perplexity 11.86   gap +0.0479
+  arithmetic 2.377   chat 2.619   chess 1.813   code 2.487   conversations 2.788   reasoning 2.650   stories 2.484   wikipedia 2.567
+repeats 90% of 8-grams, greedy with no guard
+==============================================================================
+
+--- stories ---
+prompt: 'Once upon a time, there was a little boy named Tom. One day he '
+[raw]  repeated 8-grams 85%
+the the the the t the the t t t t t t t t the t t t t t the the t t t t the t t t t t t t t t t t t t t t t t t t t t t t t t t t t t t t t 
+[adapted]  repeated 8-grams 11%
+touringes alyoured thang iserouly thand fouresing thaly coured thangesind tharouly finged tharouse thing alyoured thang serind thalyoure tha
+
+--- code ---
+prompt: 'def merge_sorted(a, b):\n    '
+[raw]  repeated 8-grams 99%
+                                                                                                                                            
+[adapted]  repeated 8-grams 10%
+senthalfourinthe couraling thed s.
+
+</bot>
+<bot>
+  dintheralfous pentharing coured thalingse tharound fithe s.
+
+</bot>
+<bot>
+  "):
+
+<user>
+</user>
+ dintheralous pedin
+
+--- arithmetic ---
+prompt: 'add 4917 + 388 = '
+[raw]  repeated 8-grams 76%
+1
+s
+s
+s
+s 1 1 1 6 , -0-0b0b0b0-0-0b0b0b0b0-0-0b0b0b0b0-0-0b0b0b0b0-0-0b0b0b0b0-0-0b0b0b0b0-0-0b0b0b0b0-0-0b0b0b0-0-0b0b0b0b0-0-0b0b0b0b0-0-0
+[adapted]  repeated 8-grams 4%
+6
+sub 1
+adit + 5cmp - 68
+sub 10
+aditoub s
+gind + 1cathend poublinthare s
+gind pourathe condis thalyoure bangithe surofind thalyoure thang se
+
+--- chat ---
+prompt: '<user>\nWhat are you?\n</user>\n<bot>\n'
+[raw]  repeated 8-grams 99%
+                                                                                                                                            
+[adapted]  repeated 8-grams 6%
+
+  dintheralous penditharouly seng tharind coure thaling sedourathe pongis thed alyoure thangis foured thange is.
+
+</bot>
+<bot>
+ "Toured thange ist
+
+--- chat_hermes ---
+prompt: '<user>\nA train travels 60 km in 45 minutes. What is its speed in km/h?\n</user>\n<bot>\n'
+[raw]  repeated 8-grams 99%
+                                                                                                                                            
+[adapted]  repeated 8-grams 2%
+
+ "): serathind pourelf thangse indourathe couring thed s.
+
+</bot>
+<bot>
+ "): atherind selourathe congs ithed arounge thalind serouthaly foure thin
+
+--- reasoning ---
+prompt: '<user>\nWrite a Python function that returns the largest number in a list.\n</user>\n<bot>\n<think>\n'
+[raw]  repeated 8-grams 99%
+                                                                                                                                            
+[adapted]  repeated 8-grams 3%
+
+  derounthaling serouthalind perouthas conge thind arelyous theding arouly theding aresthoulin athed couring thed s.
+
+</bot>
+<bot>
+ "Touredinthaly
+
+--- wikipedia ---
+prompt: '== History ==\nThe [[Roman Empire]] was '
+[raw]  repeated 8-grams 83%
+athe the the the the the the the the the the the t the t t t t the t t the the t the t the t the the t the t t the t t t t t t t the t t t t
+[adapted]  repeated 8-grams 1%
+thedingouraly thed singourathe fourind thes alyoure thang ised tharoung fithed s.
+
+</bot>
+<bot>
+ "Toure thandis pourely thanged intharous finde thal
+
+--- chess ---
+prompt: '<g>1700 1-0 1. e4 e5 2. '
+[raw]  repeated 8-grams 66%   0 legal moves, then Nxe5
+1. Nxe5 1. Nxe5 1. Nxe5 1. Qxe5 1. Qxe5 1. Qxe5 1. Qxe5 1. Qxe5 1. Qxe5 1. Qxe5 11. Qxe5 1. Qxe5 11. Qxe5 1. Qxe5 1111111. Qxe5 Nxe5 111. Qx
+[adapted]  repeated 8-grams 5%   0 legal moves, then Nxd6+
+Nxd6+ 138. Qxf4+ Bxe5c6 1. Nxd4+ Qxe5 18. Bxf6+ Nc4+ 123+ 1-0 5+
+<g6c4 1-0. Qxe5+ 217b4 3. Bxd5+ Nxe6 18. Qxf4+ Bxe5+ 1-0 28+ 1. Nxe4+ 2316.
+
+--- self-knowledge ---
+prompt: '<user>\nhow do you decide which experts to use?\n</user>\n<bot>\n'
+[raw]  repeated 8-grams 99%
+                                                                                                                                            
+[adapted]  repeated 8-grams 5%
+
+  dingerathe sourind thely angoure thasind foure thalyong sedinthare couly theding arouse thalind foure thanged sinthaly coured thange iso
+
+==============================================================================
+step 2,144   4.4M of 821M characters (0.54%)   53 min   67 experts
+context 2,085 characters of 4,096   reading 1,743 char/s   writing 15.7 char/s   still gaining +0.3219 deep into it
+grad norm 3.03 against a clip of 1   clipping
+train loss 2.3893   lr 3.00e-04   evidence t +6.18 over 8.9 (effect +0.8481)   rate x1.000
+held-out loss 2.4809 +/-0.0333 nats   3.5791 bits/char   perplexity 11.95   gap +0.0915
+  arithmetic 2.214   chat 2.638   chess 2.053   code 2.505   conversations 2.849   reasoning 2.607   stories 2.466   wikipedia 2.515
+repeats 91% of 8-grams, greedy with no guard
+==============================================================================
+
+--- stories ---
+prompt: 'Once upon a time, there was a little boy named Tom. One day he '
+[raw]  repeated 8-grams 97%
+the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the 
+[adapted]  repeated 8-grams 7%
+this,
+
+<bot>
+</bot>
+  ""):
+</user>
+<user>
+  restindalerousthe cangilerof thesind aly,
+
+  restingaloure thesind aloresthe cangily therond astilerong thesical 
+
+--- code ---
+prompt: 'def merge_sorted(a, b):\n    '
+[raw]  repeated 8-grams 99%
+                                                                                                                                            
+[adapted]  repeated 8-grams 13%
+"._lintherastinge coralinte s.
+<bot>
+  ""):
+
+</bot>
+  restingaledorint aseroulinthe castingero alindest cheraling thes.
+  ""):
+
+<bot>
+</bot>
+  restingaled
+
+--- arithmetic ---
+prompt: 'add 4917 + 388 = '
+[raw]  repeated 8-grams 33%
+1
+s
+s
+s1
+mul 10 10 9 * 9 + *1=1=0 <think> 1
+s
+s
+sul 10 10 * 9 * = <think> 1
+s
+s
+sul 10 10 10 * 9 + +0 =10
+s
+s
+s
+sul 10 10 10 * 9 +0 +0=1=0 <think>0
+s
+s
+s
+sul 
+[adapted]  repeated 8-grams 0%
+1
+s
+mul 20963710 *85=42
+subd 1039687 * =1
+muld 2
+sub 1098364750 *12=398
+sul 1064739 * =2
+mubd 1086937540 +128960 *1
+sul 30=2
+mub 1098673 * 5
+
+--- chat ---
+prompt: '<user>\nWhat are you?\n</user>\n<bot>\n'
+[raw]  repeated 8-grams 99%
+                                                                                                                                            
+[adapted]  repeated 8-grams 1%
+
+  "", inderasthe congalist fredang theroulind asterong iche thaly, stherond alisterong alictes fonderalint s.
+<bot>
+  "",
+
+</bot>
+</user>
+  restingaled
+
+--- chat_hermes ---
+prompt: '<user>\nA train travels 60 km in 45 minutes. What is its speed in km/h?\n</user>\n<bot>\n'
+[raw]  repeated 8-grams 99%
+                                                                                                                                            
+[adapted]  repeated 8-grams 2%
+
+   restingaled therongist alerond thesical therong astinderoul thesing aly, therond asticerong thesiland therous alingert cof astinderal t
+
+--- reasoning ---
+prompt: '<user>\nWrite a Python function that returns the largest number in a list.\n</user>\n<bot>\n<think>\n'
+[raw]  repeated 8-grams 99%
+                                                                                                                                            
+[adapted]  repeated 8-grams 1%
+
+   "",0):
+</bot>
+<bot>
+  restingaled therongist alerond thesicaly therong astinderoul thesingal therond asticerong thesiland therous alingert cofu
+
+--- wikipedia ---
+prompt: '== History ==\nThe [[Roman Empire]] was '
+[raw]  repeated 8-grams 97%
+the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the 
+[adapted]  repeated 8-grams 2%
+therongiled thas, congeralist fonderalist cherong thesiland therous alingert cof astinderal thesing oraled thesing aly, therond isteral cong
+
+--- chess ---
+prompt: '<g>1700 1-0 1. e4 e5 2. '
+[raw]  repeated 8-grams 98%   0 legal moves, then 10000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000
+10000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000
+[adapted]  repeated 8-grams 1%   0 legal moves, then 138964570=28319+0=6c1
+10. 200. 138964570=28319+0=6c1 </think> <think> 2
+s
+mubd 10983765 * 40=1
+s
+ad 2093867 * 50=1
+s
+mub 2098364 * 50=1
+subd 2
+ad 1098367450 *12=398
+sub 10674 
+
+--- self-knowledge ---
+prompt: '<user>\nhow do you decide which experts to use?\n</user>\n<bot>\n'
+[raw]  repeated 8-grams 99%
+                                                                                                                                            
+[adapted]  repeated 8-grams 1%
+
+  ""
+</bot>
+<user>
+  derantiselourang thedis conteralis thed congalisteran ouled therasing therof alindest coralinge thes.
+  ""
+
+<bot>
+</bot>
+  restindalo
+
+==============================================================================
+step 2,405   4.9M of 821M characters (0.60%)   62 min   67 experts
+context 2,091 characters of 4,096   reading 1,778 char/s   writing 14.2 char/s
+grad norm 3.00 against a clip of 1   clipping
+train loss 2.3195   lr 3.00e-04   evidence t +6.80 over 9.9 (effect +0.8026)   rate x1.000
+held-out loss 2.4191 +/-0.0446 nats   3.4900 bits/char   perplexity 11.24   gap +0.0996
+  arithmetic 1.895   chat 2.681   chess 1.804   code 2.597   conversations 2.821   reasoning 2.549   stories 2.444   wikipedia 2.562
+repeats 92% of 8-grams, greedy with no guard
+==============================================================================
+
+--- stories ---
+prompt: 'Once upon a time, there was a little boy named Tom. One day he '
+[raw]  repeated 8-grams 88%
+the the the the the the the the the the the the the the the the te the te te the te te te the te te the te te the te te the te the te te the
+[adapted]  repeated 8-grams 17%
+thisumergond ther sumpoledg ther congesum ther inged therol sumaconged ther sumponged ther sumalonger the cosum inged thersum alonger thedgi
+
+--- code ---
+prompt: 'def merge_sorted(a, b):\n    '
+[raw]  repeated 8-grams 99%
+                                                                                                                                            
+[adapted]  repeated 8-grams 20%
+isumpelongesth corged therginsum therg colesum thergind alof thergesum the congis thergum alondges thergind the corgesum thergind alof therg
+
+--- arithmetic ---
+prompt: 'add 4917 + 388 = '
+[raw]  repeated 8-grams 98%
+10000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000
+[adapted]  repeated 8-grams 17%
+10
+sub 256703914 = <think> 10
+sub 2873960 = 1540
+sub 3728910 + 5637012984 = <think> 10
+sub+ 37960 = 1258
+sub 40371962 = <think> 10
+sub+ 38970 = 1562
+sub 40391
+
+--- chat ---
+prompt: '<user>\nWhat are you?\n</user>\n<bot>\n'
+[raw]  repeated 8-grams 99%
+                                                                                                                                            
+[adapted]  repeated 8-grams 16%
+
+ desum thergind colesum thergind the sumporged the congisum thergal the sumponged theris conged thergis alonged ther compus thergind alof 
+
+--- chat_hermes ---
+prompt: '<user>\nA train travels 60 km in 45 minutes. What is its speed in km/h?\n</user>\n<bot>\n'
+[raw]  repeated 8-grams 99%
+                                                                                                                                            
+[adapted]  repeated 8-grams 6%
+
+ thergisum the conged sumplinger the sumalorged the congisum therged alonges thinger complesut anged isum thergond thergis alonged ther co
+
+--- reasoning ---
+prompt: '<user>\nWrite a Python function that returns the largest number in a list.\n</user>\n<bot>\n<think>\n'
+[raw]  repeated 8-grams 99%
+                                                                                                                                            
+[adapted]  repeated 8-grams 14%
+
+ desum thergong isumed thergon aly thergisum thergond colesum thergind alof thergus conged theris alonged thergis conged theral sumponged 
+
+--- wikipedia ---
+prompt: '== History ==\nThe [[Roman Empire]] was '
+[raw]  repeated 8-grams 95%
+the s the s the s the s the s the s the s the s the s the s the s the s the s the s the s the s the s the s the s the s the s the s the s th
+[adapted]  repeated 8-grams 25%
+thergond colesum thergind therof sumpedgin ther coly sumedgh toresum inged therol sumpaconged ther suminged therol sumpaconged ther suminged
+
+--- chess ---
+prompt: '<g>1700 1-0 1. e4 e5 2. '
+[raw]  repeated 8-grams 47%   0 legal moves, then Nxd5
+1. Nxd5 1. 1. Nxd5 1. Nxd5 1. Nxd4 1. Qxd4 1. Qxd5 1. Qxd5 1. Qxd5 2. Qxd5 1. Qxd5 2. Qxd5 2. Qxd5 2.... Qxd5 11.... Qxd4 11................
+[adapted]  repeated 8-grams 26%   0 legal moves, then Nxd4+
+Nxd4+ 13. Ra5+ 2. Qxd4+ 13. Nb5+ 2. Ra4+ 13. Qxd5+ 20. Bb4+ 13. Rxd5+ 20. Qxc4+ 13. Nb5+ 20. Ra4+ 13. Qxd5+ 20. Kb4+ 319. Qxd5+ 20. Ra4+ 317
+
+--- self-knowledge ---
+prompt: '<user>\nhow do you decide which experts to use?\n</user>\n<bot>\n'
+[raw]  repeated 8-grams 99%
+                                                                                                                                            
+[adapted]  repeated 8-grams 5%
+
+Th toredgin sumerg thedgon aly thergisum thedgon cores the ingumalor thedges conger thisum aledgor the sumplinger thedgos aly thergind com
+
+==============================================================================
+step 2,662   5.5M of 821M characters (0.66%)   70 min   67 experts
+context 2,096 characters of 4,096   reading 1,750 char/s   writing 14.8 char/s
+grad norm 3.05 against a clip of 1   clipping
+train loss 2.3370   lr 3.00e-04   evidence t +8.25 over 10.9 (effect +0.8488)   rate x1.000
+held-out loss 2.3188 +/-0.0424 nats   3.3453 bits/char   perplexity 10.16   gap -0.0182
+  arithmetic 1.859   chat 2.527   chess 1.739   code 2.375   conversations 2.741   reasoning 2.480   stories 2.374   wikipedia 2.456
+repeats 93% of 8-grams, greedy with no guard
+==============================================================================
+
+--- stories ---
+prompt: 'Once upon a time, there was a little boy named Tom. One day he '
+[raw]  repeated 8-grams 97%
+the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the 
+[adapted]  repeated 8-grams 5%
+tris, conderalith fondesticare bumplantiof seranth comed istan burestion alery the condstial fresting ampred the condistaly bures the condis
+
+--- code ---
+prompt: 'def merge_sorted(a, b):\n    '
+[raw]  repeated 8-grams 99%
+                                                                                                                                            
+[adapted]  repeated 8-grams 6%
+intures.alinghte corampliste fond arestich bunderaliste ond arestich fonderalistumpe and therof is.
+</bot>
+  "Therantis cof therangumplis theran
+
+--- arithmetic ---
+prompt: 'add 4917 + 388 = '
+[raw]  repeated 8-grams 68%
+11100
+mun 1 * 1 = 1
+mun 1
+mun                                              1
+
+
+                                                           
+[adapted]  repeated 8-grams 28%
+<think> 0-1-0=4b1 </think> 2
+mul 3856970 + 412835 = <think> 0-1-0=4b1 </think> 8
+mules
+add 32510 + 48967 = <think> 1-0-1=3b0 </think> 8
+mund 425910 + 738624 = <think> 1-0-1=5b0 </think> 8
+mund
+
+--- chat ---
+prompt: '<user>\nWhat are you?\n</user>\n<bot>\n'
+[raw]  repeated 8-grams 99%
+                                                                                                                                            
+[adapted]  repeated 8-grams 2%
+
+   ="Thendistare condisth arend the cofis.
+  rendalith condestimare fond theralis.
+   ="Therantis, cof therand is.
+</bot>
+   renditalof sume
+
+--- chat_hermes ---
+prompt: '<user>\nA train travels 60 km in 45 minutes. What is its speed in km/h?\n</user>\n<bot>\n'
+[raw]  repeated 8-grams 99%
+                                                                                                                                            
+[adapted]  repeated 8-grams 0%
+
+  #=1, arentis.
+   "):
+</bot>
+<bot>
+  rendistale condisture ampling therof ands.
+   interalis,
+
+   renditumpales therong acofiste burand the co
+
+--- reasoning ---
+prompt: '<user>\nWrite a Python function that returns the largest number in a list.\n</user>\n<bot>\n<think>\n'
+[raw]  repeated 8-grams 99%
+                                                                                                                                            
+[adapted]  repeated 8-grams 5%
+
+   rendistalerongumpat is.
+   rendictales fondith ares.
+   ingeratumplis, therongactis fonderalis the condis.
+   rentalis, bonderatich 
+
+--- wikipedia ---
+prompt: '== History ==\nThe [[Roman Empire]] was '
+[raw]  repeated 8-grams 88%
+in the con the the con the the the the the the the the the the the the the the the the the the the the the the the the the the the the the t
+[adapted]  repeated 8-grams 0%
+therond istalerong the cofis, andertis amplentiof cherand the surongicalest fond arestich anderof the condistaly buresting ampof therand ist
+
+--- chess ---
+prompt: '<g>1700 1-0 1. e4 e5 2. '
+[raw]  repeated 8-grams 88%   0 legal moves, then 111111111111111111111111111111111111111111111111111111111111
+1. 1. 1. 1. 1. 1. 1. 1. 1. 1. 1. 1. 1. 1. 1. 1. 1. 1. 1. 1. 11. 11. 11. 11. 11. 111111111111111111111111111111111111111111111111111111111111
+[adapted]  repeated 8-grams 8%   0 legal moves, then Nxd4
+Nxd4 13. Ranorexd2 18. Bgxc4 13. Kgxd2 48. Kexd5 317. Kgxe4 218. Kgxd5 4320. Kgxe1 48. Kgxd2 317. Kgxe4 5028. Kgxd1 437. Kgxe2 418. Kgxd5 43
+
+--- self-knowledge ---
+prompt: '<user>\nhow do you decide which experts to use?\n</user>\n<bot>\n'
+[raw]  repeated 8-grams 99%
+                                                                                                                                            
+[adapted]  repeated 8-grams 3%
+
+   "
+</bot>
+<user>
+Therand to is.
+<bot>
+  ="):
+</bot>
+  rendistalo cherand the sumpling theras conderitumaly the conds.
+  renditalypof therans icomerand 
+
+==============================================================================
+step 2,914   6.0M of 821M characters (0.73%)   79 min   67 experts
+context 2,101 characters of 4,096   reading 1,717 char/s   writing 13.4 char/s
+grad norm 2.93 against a clip of 1   clipping
+train loss 2.2215   lr 3.00e-04   evidence t +7.01 over 11.9 (effect +0.6375)   rate x1.000
+held-out loss 2.4330 +/-0.0467 nats   3.5101 bits/char   perplexity 11.39   gap +0.2116
+  arithmetic 2.887   chat 2.487   chess 1.683   code 2.356   conversations 2.707   reasoning 2.529   stories 2.350   wikipedia 2.464
+repeats 93% of 8-grams, greedy with no guard
+==============================================================================
+
+--- stories ---
+prompt: 'Once upon a time, there was a little boy named Tom. One day he '
+[raw]  repeated 8-grams 92%
+to ton ton to ton to ton to ton ton ton ton ton ton ton ton ton ton ton ton ton ton ton ton ton ton ton ton ton ton ton ton ton ton ton ton 
+[adapted]  repeated 8-grams 13%
+tons.
+
+</bot>
+<bot>
+<user>:  ")._ctelf.arngest ifonckexplf._st anorection aself._ct = Nondelf.
+
+    ",
+</bot>
+<bot>
+:  relf._ctions = Nondelf._ctions = Nonelf._
+
+--- code ---
+prompt: 'def merge_sorted(a, b):\n    '
+[raw]  repeated 8-grams 99%
+                                                                                                                                            
+[adapted]  repeated 8-grams 8%
+",
+
+<user>
+</bot>
+<bot>
+   0]:",
+
+</user>
+   ==Nontelf.contis = Nonelf._ctrons = 0]
+
+   1:
+<user>
+</bot>
+<bot>._ctelf = sondelf._tions = Nontreck_f.aliong = stheronction a
+
+--- arithmetic ---
+prompt: 'add 4917 + 388 = '
+[raw]  repeated 8-grams 66%
+<think> 0+0+0=9c0 </think> -0
+sub 1 1
+sub 1 - 1b                                                                                                         
+[adapted]  repeated 8-grams 1%
+<think> 0+9+1=6c0 </think> -4
+sub 1 9
+mod 10
+add 956037 + 14 == <think> 9+0+1=
+s
+m  </bot>
+ad <bot> 9605 + 1 =dond -
+sund 0.ad Tho ton = 1
+mulf 0
+sub 10
+mod  395604872 
+
+--- chat ---
+prompt: '<user>\nWhat are you?\n</user>\n<bot>\n'
+[raw]  repeated 8-grams 99%
+                                                                                                                                            
+[adapted]  repeated 8-grams 29%
+
+   #._contesiong alf._ctes = Nondelf._ction = self._ctiong = Nondelf._ction = self._ctiong arelf._ct = Nondelf._stiong = Nonctelf._s = Tha
+
+--- chat_hermes ---
+prompt: '<user>\nA train travels 60 km in 45 minutes. What is its speed in km/h?\n</user>\n<bot>\n'
+[raw]  repeated 8-grams 99%
+                                                                                                                                            
+[adapted]  repeated 8-grams 15%
+
+</bot>
+   1:
+<user>
+<bot>.  Anorection = stureck_f.
+
+   1,
+</bot>
+<bot>:  ")._contes = Nondelf._tion = 1,
+
+</bot>
+<bot>
+   0]:
+<user>
+
+</user>._ctes = Nondelf.ation = 1]
+
+</bot>
+<bot>
+ 
+
+--- reasoning ---
+prompt: '<user>\nWrite a Python function that returns the largest number in a list.\n</user>\n<bot>\n<think>\n'
+[raw]  repeated 8-grams 99%
+                                                                                                                                            
+[adapted]  repeated 8-grams 19%
+
+   1, "):
+</bot>
+<user>
+
+<bot>*  ",
+</user>
+</bot>
+
+   1:`sentiorackelf = 0]
+
+</bot>
+<bot>
+   1:
+<user>
+</user>
+</bot>
+   0],
+<bot>
+
+<user>6510=2, 1:
+</bot>
+   3])
+
+<bot>
+</user>
+<user>*  >>==1:
+
+   0],
+</bot>
+<bot>
+<user>
+
+
+--- wikipedia ---
+prompt: '== History ==\nThe [[Roman Empire]] was '
+[raw]  repeated 8-grams 99%
+                                                                                                                                            
+[adapted]  repeated 8-grams 23%
+onelf.
+
+</bot>
+   dontions._celf == Nontions._celf = Nontions._ckelf = Nontis._ckerat = Nondelf._ctions = 1,
+
+</bot>
+<bot>
+   norelf._ctions = Nondelf._
+
+--- chess ---
+prompt: '<g>1700 1-0 1. e4 e5 2. '
+[raw]  repeated 8-grams 85%   2 legal moves, then Nc3
+Nc3 Nc6 10. Nc3 Nc6 10. Nc3 Nc6 10. Nc3 Nc6 10. Nc3 Nc6 11. Nc3 Nc6 11. Nc3 Nc6 11. Nc3 Nc6 11. Nc3 Nc6 11. Nc3 Nc6 11. Nc3 Nc6 11. Nc3 Nc6 
+[adapted]  repeated 8-grams 41%   3 legal moves, then Qxe2
+Nc3 Bd6 10. Nf3 Qxe2 19. Nc3 Bd5 10. Ne2 Qc6 19. Nf3 Bd5 10. Nc3 Qe6 19. Nf3 Bd5 10. Nc3 Qe6 12. Nf3 Bd5 10. Nc3 Qe6+ 12. Nf3 Bd5 10. Nc3 Qe
+
+--- self-knowledge ---
+prompt: '<user>\nhow do you decide which experts to use?\n</user>\n<bot>\n'
+[raw]  repeated 8-grams 99%
+                                                                                                                                            
+[adapted]  repeated 8-grams 19%
+
+   1:
+</bot>
+<user>
+<bot>]) ""Tonteck = sthern alf.
+
+</bot>
+   #==Nonteck_siong = 0]
+
+</bot>
+<bot>
+   1:
+<user>
+</user>
+._ctelf = 0]
+</bot>
+<bot>
+
+   1:
+<user>
+</user>
+</bot>._ctonself = 0]
+
+<bot>
+   
+
+==============================================================================
+step 3,168   6.5M of 821M characters (0.79%)   87 min   68 experts
+context 2,106 characters of 4,096   reading 1,734 char/s   writing 14.9 char/s
+grad norm 2.84 against a clip of 1   clipping
+train loss 2.2089   lr 3.00e-04   evidence t +8.11 over 12.8 (effect +0.6587)   rate x1.000
+held-out loss 2.2846 +/-0.0435 nats   3.2960 bits/char   perplexity 9.82   gap +0.0757
+  arithmetic 2.093   chat 2.477   chess 1.611   code 2.391   conversations 2.653   reasoning 2.427   stories 2.198   wikipedia 2.427
+repeats 84% of 8-grams, greedy with no guard
+==============================================================================
+
+--- stories ---
+prompt: 'Once upon a time, there was a little boy named Tom. One day he '
+[raw]  repeated 8-grams 90%
+the the the the to the the to the to the to the to the to the to the the to the to the to the to the to the to the to the to the to the to t
+[adapted]  repeated 8-grams 14%
+tous.
+Thing to anderich tous.
+The candig to werandist bumer and tous.
+The candig to berandist wex.
+Th to canderig the sumand to bering.
+
+--- code ---
+prompt: 'def merge_sorted(a, b):\n    '
+[raw]  repeated 8-grams 99%
+                                                                                                                                            
+[adapted]  repeated 8-grams 0%
+inth._coresing ather doumplfing the cas.
+ dontigs anderich tondes.
+  if anderoutig._ckes andith.
+  resting._ckalyoum the sandig.
+  retings._
+
+--- arithmetic ---
+prompt: 'add 4917 + 388 = '
+[raw]  repeated 8-grams 35%
+104
+add 4444444 + 444444 + 441000 = 2114444
+add 444444 + 4444444 + 4410000 10 10000000 100000000 10+ 1410+1441.=100 10+0+0000000000000000000
+[adapted]  repeated 8-grams 5%
+204
+add 59716048329715 + 402861.=30
+add 1749852 + 30476198 == no
+add 405791823640 + 15798420
+add 31794865 + 2017498 == no
+add 30471928560 + 
+
+--- chat ---
+prompt: '<user>\nWhat are you?\n</user>\n<bot>\n'
+[raw]  repeated 8-grams 98%
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+[adapted]  repeated 8-grams 1%
+
+</bot>
+ desting aresting coumplyor the sandig.
+</bot>
+<bot>
+</user>
+
+ deating sumplyoreding the candist bumerand to shen calig.
+Th to sumering andestich an
+
+--- chat_hermes ---
+prompt: '<user>\nA train travels 60 km in 45 minutes. What is its speed in km/h?\n</user>\n<bot>\n'
+[raw]  repeated 8-grams 99%
+                                                                                                                                            
+[adapted]  repeated 8-grams 18%
+
+</bot>
+<user>
+  detings arelyoum the candigster andich to sumering alouteding aster.
+</bot>
+  dingsteralyoum the candigster andich to bes.
+</bot>
+<bot>
+</user>
+
+ din
+
+--- reasoning ---
+prompt: '<user>\nWrite a Python function that returns the largest number in a list.\n</user>\n<bot>\n<think>\n'
+[raw]  repeated 8-grams 98%
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+[adapted]  repeated 8-grams 9%
+
+</bot>
+ deandigst coumering the candist woumerand the cous.
+</bot>
+</user>
+
+Th to anderigst coumeding aster bumplyond the candigster woumply.
+Th to and
+
+--- wikipedia ---
+prompt: '== History ==\nThe [[Roman Empire]] was '
+[raw]  repeated 8-grams 69%
+is sum sum the cond and the cand the cand the cand the cand the cand to the cand to the cand and the cand to the cand to the cand to the can
+[adapted]  repeated 8-grams 10%
+toding.
+
+</bot>
+<bot>
+  detings arelf.
+</user>
+</bot>
+<user>
+ donterigs ande coumplyor the sundig.
+</user>
+  deating coresting alumpeding the cas.
+</bot>
+</user>
+<bot>
+ donterig ande
+
+--- chess ---
+prompt: '<g>1700 1-0 1. e4 e5 2. '
+[raw]  repeated 8-grams 68%   0 legal moves, then Ng3
+Ng3 1. 10. 10. 10. 10....................................................... 1+++++++++++++++++++++0e4+++++ 1...............................
+[adapted]  repeated 8-grams 19%   0 legal moves, then Ng3+
+Ng3+ 10. Bxf3+ 19. Ng5+ 20. Bxe3+ 17. Qg4+ 20. Nf3+ 18. Bg5+ 20. Qxe3+ 17. Ng4+ 20. Bxf3+ 19. Qg5+ 20. Nf3+ 18. Bg4+ 20. Qxe5+ 17. Bg3+ 20. 
+
+--- self-knowledge ---
+prompt: '<user>\nhow do you decide which experts to use?\n</user>\n<bot>\n'
+[raw]  repeated 8-grams 98%
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+[adapted]  repeated 8-grams 17%
+
+</bot>
+Thande to candig.
+I's to canderig.
+Th to andesting aresting coumedating burest anow is.
+The candig.
+I's to anderig.
+Th to candestin
+
+==============================================================================
+step 3,436   7.0M of 821M characters (0.86%)   96 min   68 experts
+context 2,110 characters of 4,096   reading 1,825 char/s   writing 14.9 char/s
+grad norm 2.60 against a clip of 1   clipping
+train loss 2.0999   lr 3.00e-04   evidence t +9.63 over 13.8 (effect +0.7053)   rate x1.000
+held-out loss 2.1875 +/-0.0522 nats   3.1559 bits/char   perplexity 8.91   gap +0.0875
+  arithmetic 1.763   chat 2.364   chess 1.389   code 2.269   conversations 2.655   reasoning 2.416   stories 2.266   wikipedia 2.378
+repeats 91% of 8-grams, greedy with no guard
+==============================================================================
+
+--- stories ---
+prompt: 'Once upon a time, there was a little boy named Tom. One day he '
+[raw]  repeated 8-grams 94%
+that and and and and and and and and and and and and and and and and and and and and and and and and and and and and and and and and and and
+[adapted]  repeated 8-grams 10%
+tharciof the sund alertion as chof the wisty.
+</bot>
+<bot>
+</user>
+ dorate ching alster founghat whor casentiof and the cors.
+</bot>
+<bot>
+</user>
+   inthoraled fouting a
+
+--- code ---
+prompt: 'def merge_sorted(a, b):\n    '
+[raw]  repeated 8-grams 99%
+                                                                                                                                            
+[adapted]  repeated 8-grams 1%
+#ingstron fulet_cornsit()
+   delf._artings()
+   detrns:
+ fornct_alediors = Nont_mpelf.arting selfort_ced and if seturn alomper(sting forncel
+
+--- arithmetic ---
+prompt: 'add 4917 + 388 = '
+[raw]  repeated 8-grams 73%
+133333
+add 3 + 1 = 130
+add 3 + 1 = 133
+add 3 + 1 = 130
+add 3 + 3 = 133
+add 3 + 3 = 133
+add 3 + 3 = 133
+add 3 + 3 = 133
+add 3 + 3 = 133
+add 3
+[adapted]  repeated 8-grams 24%
+<think> 6+5+0=2c1 9+0+0=3c1 6+5+0=7c1 9+0+0=3c1 8+6+0=5c1 9+0+0=3c1 7+6+0=8c1 9+0+0=3c1 5+6+0=4c1 9+0+0=8c1 7+6+0=3c1 9+0+0=5c1 8+6+0=3c1 9+0+0=7c
+
+--- chat ---
+prompt: '<user>\nWhat are you?\n</user>\n<bot>\n'
+[raw]  repeated 8-grams 99%
+                                                                                                                                            
+[adapted]  repeated 8-grams 5%
+d   "":
+</bot>
+<user>
+</user>
+  nortealf stharde in corthealypont furing asethor calf in the surompating fors.
+   ""
+</bot>
+<bot>
+</user>
+<user>
+   dethornctis_alerthon fumpert
+
+--- chat_hermes ---
+prompt: '<user>\nA train travels 60 km in 45 minutes. What is its speed in km/h?\n</user>\n<bot>\n'
+[raw]  repeated 8-grams 99%
+                                                                                                                                            
+[adapted]  repeated 8-grams 3%
+at forngely asting forther complent asuriof and the corgine alsthof card the sungior and the cors.
+<bot>
+</bot>
+</user>
+  ""):
+<user>
+<bot>
+  detings aromplethon ca
+
+--- reasoning ---
+prompt: '<user>\nWrite a Python function that returns the largest number in a list.\n</user>\n<bot>\n<think>\n'
+[raw]  repeated 8-grams 99%
+                                                                                                                                            
+[adapted]  repeated 8-grams 0%
+   dethornctis_aler()
+   donctis_argelf._mport in self._cturn aliompeth sardention furgelython asertich fompler(sting and forthers and if th
+
+--- wikipedia ---
+prompt: '== History ==\nThe [[Roman Empire]] was '
+[raw]  repeated 8-grams 95%
+a s and and and and and and and and and and and and and and and and and and and and and and and and and and and and and and and and and and 
+[adapted]  repeated 8-grams 4%
+the corngith als.
+</bot>
+<bot>
+   detings forated in shorcted and if the suromply.
+   dextings arethon corith fumplers._at in forged and the corngith
+
+--- chess ---
+prompt: '<g>1700 1-0 1. e4 e5 2. '
+[raw]  repeated 8-grams 62%   0 legal moves, then Bxd4
+Bxd4 Nxd4 10. Bxd4 Bxd4 10. Bxd4 Bxd4 19. Bxd2 Bxd4 19. Bxd3 Bxd4 16. Bxd2 Bxd4 16. Bxd2 Bxd4 16. Bxd2 Bxd4 16. Bxd2 Bxd4 16. Bxd2 Bxd4 16. 
+[adapted]  repeated 8-grams 1%   3 legal moves, then Bg7
+Bxd3 Qf6 10. Nxc3 Bg7 12. Qxd4 Rf6 13. Bxe5 Nc6 24. Qxd3 Rf5 26. Bxe4 Kg7 26. Rxd5 Kf3+ 48. Qxe2 Rf6 37. Kxd5 Rac1+ 39. Kxf4 Re2+ 38. Kxd5 R
+
+--- self-knowledge ---
+prompt: '<user>\nhow do you decide which experts to use?\n</user>\n<bot>\n'
+[raw]  repeated 8-grams 99%
+                                                                                                                                            
+[adapted]  repeated 8-grams 3%
+
+</bot>
+   norethaly._cting forestumply anderthof is anderthoumply.
+   inth_cers.
+   inth(seralypometing_chart fous in alerthon comperting alors
+
+==============================================================================
+step 3,683   7.5M of 821M characters (0.92%)   104 min   68 experts
+context 2,115 characters of 4,096   reading 1,684 char/s   writing 14.2 char/s
+grad norm 2.67 against a clip of 1   clipping
+train loss 2.0672   lr 3.00e-04   evidence t +10.80 over 14.7 (effect +0.7188)   rate x1.000
+held-out loss 2.1942 +/-0.0473 nats   3.1656 bits/char   perplexity 8.97   gap +0.1270
+  arithmetic 1.998   chat 2.357   chess 1.431   code 2.260   conversations 2.560   reasoning 2.335   stories 2.233   wikipedia 2.380
+repeats 74% of 8-grams, greedy with no guard
+==============================================================================
+
+--- stories ---
+prompt: 'Once upon a time, there was a little boy named Tom. One day he '
+[raw]  repeated 8-grams 97%
+the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the 
+[adapted]  repeated 8-grams 10%
+thering.
+Ther tons, wily.
+Are the panckiors the funchiors aly.
+Ther tons, wighter.
+ Inouly argesting wher aly.
+Thering tored and wishte
+
+--- code ---
+prompt: 'def merge_sorted(a, b):\n    '
+[raw]  repeated 8-grams 72%
+        selfrepepepepepepepepepepepepepepepepepepepepepepepepepepepeppeppeppeppeppeppeppeppeppeppeppeppeppepped_tionstionstionstionstionstin
+[adapted]  repeated 8-grams 12%
+#
+</bot>
+<bot>
+<user>
+</user>
+
+<bot>
+</bot> thexpuroncting = self._purontich sexpuront_fich alsed_puront = Norch.
+<bot>
+</bot>
+<user>
+</user>
+<bot>
+   inped_string._furomeding = Nort_pedingstr
+
+--- arithmetic ---
+prompt: 'add 4917 + 388 = '
+[raw]  repeated 8-grams 26%
+<think> 1+0+0=0c0 </think> 1
+
+
+ 10
+ 10
+ + 1 == <think> 1+0+0=0c1 1 </think> 1
+ cmo
+ 1
+ * 10 == <think> len 1 </think> 1
+ 8
+ cmo
+ 1000 == <think> lentu 0 </think> 1
+ 1
+ 8
+ dode 10
+  10
+  10
+ 
+[adapted]  repeated 8-grams 6%
+<think>
+
+Beronthicled argountich promes and the prouly.
+ the consing theraly woumers inputed argofing the prouly.
+ "Cated inshtron.
+  ""Cated,
+
+--- chat ---
+prompt: '<user>\nWhat are you?\n</user>\n<bot>\n'
+[raw]  repeated 8-grams 72%
+
+<bot>
+<bot>
+<bot>
+<bot>
+    then then then the then the therer the the the the the the the the the the the the the the the the the the the the the the the 
+[adapted]  repeated 8-grams 6%
+</bot>
+<user>
+   dets:
+<bot>
+</bot>
+<user>
+</user>._pedtring = Northins._pedelypath:
+   if._sedtring:
+ self._port = Nonced_string._pelurt = Nonchamed_pingstriomed_falurt 
+
+--- chat_hermes ---
+prompt: '<user>\nA train travels 60 km in 45 minutes. What is its speed in km/h?\n</user>\n<bot>\n'
+[raw]  repeated 8-grams 99%
+<bot>
+<bot>
+<bot>
+<bot>
+<bot>
+<bot>
+<bot>
+<bot>
+<bot>
+<bot>
+<bot>
+<bot>
+<bot>
+<bot>
+<bot>
+<bot>
+<bot>
+<bot>
+<bot>
+<bot>
+<bot>
+<bot>
+<bot>
+<bot>
+<bot>
+<bot>
+<bot>
+<bot>
+<bot>
+<bot>
+<bot>
+<bot>
+<bot>
+<bot>
+<bot>
+<bot>
+<bot>
+<bot>
+<bot>
+<bot>
+<bot>
+<bot>
+<bot>
+<bot>
+<bot>
+<bot>
+<bot>
+<bot>
+<bot>
+<bot>
+<bot>
+<bot>
+<bot>
+<bot>
+<bot>
+<bot>
+<bot>
+<bot>
+<bot>
+<bot>
+<bot>
+<bot>
+<bot>
+<bot>
+<bot>
+<bot>
+<bot>
+<bot>
+<bot>
+<bot>
+
+[adapted]  repeated 8-grams 1%
+</bot>
+<user>
+
+  -> theringstalured onch.
+
+<bot>
+   ifts:
+
+Wharged torchings aluted inpures.
+   ""
+
+<bot>
+BPyputed_s = Norchingnated.
+   ifstronaled_pur
+
+--- reasoning ---
+prompt: '<user>\nWrite a Python function that returns the largest number in a list.\n</user>\n<bot>\n<think>\n'
+[raw]  repeated 8-grams 94%
+<bot>
+<bot>
+<bot>
+<bot>
+<bot>
+<bot>
+<bot>
+<bot>
+<bot>
+<bot>
+<bot>
+<bot>
+<bot>
+<bot>
+<bot>
+<bot>
+<bot>
+<bot>
+<bot>
+<bot>
+<bot>
+<bot>
+<bot>
+<bot>
+<bot>
+<bot>
+<bot>
+<bot>
+<bot>
+<bot>
+<bot>
+<bot>
+<bot>
+<bot>
+<bot>
+<bot>
+<bot>
+<bot>
+<bot>
+<bot>
+<bot>
+<bot>
+<bot>
+<bot>
+<bot>
+<bot>
+<bot>
+<bot>
+<bot>
+<bot>
+<bot>
+<bot>
+<bot>
+<bot>
+<bot>
+<bot>
+<bot>
+<bot>
+<bot>
+<bot>
+<bot>
+    to� thenentede
+[adapted]  repeated 8-grams 18%
+</bot>
+<user>
+<bot>: the pronctings alured fompention.
+<bot>
+</bot>
+<user>
+</user>
+   ""Redstring._pelypurath inced_fiorstamed = Nonch.
+<bot>
+</bot>
+<user>
+</user>
+<bot>
+   inped_stronaled_ficth.gs 
+
+--- wikipedia ---
+prompt: '== History ==\nThe [[Roman Empire]] was '
+[raw]  repeated 8-grams 71%
+arger in the sthe sthe sthe sthe sthe sthe stat the state the the stat the the stat the the the the stat the the the the the the the the the
+[adapted]  repeated 8-grams 19%
+fontich pred.
+<bot>
+</bot>
+<user>
+</user>
+<bot>
+   inpedtralypes._fingnch tored_fing.
+<bot>
+</bot>
+<user>
+   selfing._pedyport = Nonchamed_string.
+<bot>
+</bot>
+<user>
+   delfingstron._pedicth:
+
+--- chess ---
+prompt: '<g>1700 1-0 1. e4 e5 2. '
+[raw]  repeated 8-grams 48%   1 legal moves, then Nc5
+Nc3 Nc5 13. Nc3 Nc5 15. Nc3 Ncd5 16. Nc3 Ncd5 17. Nc3 Ncd5 17. Nc3 Nc7 17. Ncd5 Ne7 17. Ncd5 Ncd5 17. Ncd5 Nc7 17. Ncd5 Nc7 17. Ncd5 Ncd5 17
+[adapted]  repeated 8-grams 0%   1 legal moves, then Bxd7
+Nc3 Bxd7 14. Nfe5 Qxc6 17. Nd2 Be5 17. Qxc3 Rad8 17. Nfetilons 17. Bxc3 Rard16 28. Qxech4 17. Nf3 Rxed8 17. Qc2 Rad1+ 27. Nxec4 Qd8 17. Bxe5
+
+--- self-knowledge ---
+prompt: '<user>\nhow do you decide which experts to use?\n</user>\n<bot>\n'
+[raw]  repeated 8-grams 91%
+<bot>
+<bot>
+<bot>
+<bot>
+<bot>
+<bot>
+<bot>
+<bot>
+<bot>
+<bot>
+<bot>
+<bot>
+<bot>
+<bot>
+<bot>
+<bot>
+<bot>
+<bot>
+<bot>
+<bot>
+<bot>
+<bot>
+<bot>
+<bot>
+<bot>
+<bot>
+<bot>
+<bot>
+<bot>
+<bot>
+<bot>
+<bot>
+<bot>
+<bot>
+<bot>
+<bot>
+<bot>
+<bot>
+<bot>
+<bot>
+<bot>
+<bot>
+<bot>
+<bot>
+<bot>
+<bot>
+<bot>
+<bot>
+<bot>
+<bot>
+    """""""""""""""
+    "
+    "
+    "
+  
+[adapted]  repeated 8-grams 7%
+</bot>
+<user>
+<bot>
+
+  yorteds: inpured alsthing forcked anyput is.
+<bot>
+</bot>
+<user>
+
+   inperstalypunch._fiort = selfingnath:
+
+   # ther._punckediorstalypunch.
+ 
+
+==============================================================================
+step 3,925   8.0M of 821M characters (0.98%)   113 min   69 experts
+context 2,120 characters of 4,096   reading 1,649 char/s   writing 14.2 char/s   still gaining +0.2187 deep into it
+grad norm 2.81 against a clip of 1   clipping
+train loss 2.0581   lr 3.00e-04   evidence t +11.88 over 15.7 (effect +0.7229)   rate x1.000
+held-out loss 2.1654 +/-0.0438 nats   3.1241 bits/char   perplexity 8.72   gap +0.1074
+  arithmetic 1.630   chat 2.383   chess 1.564   code 2.320   conversations 2.553   reasoning 2.345   stories 2.177   wikipedia 2.352
+repeats 86% of 8-grams, greedy with no guard
+==============================================================================
+
+--- stories ---
+prompt: 'Once upon a time, there was a little boy named Tom. One day he '
+[raw]  repeated 8-grams 93%
+the tate the tate the tate the tate the tate the tate the tate the tate the tate the tate the tate the tate the tate the tate the tate the t
+[adapted]  repeated 8-grams 46%
+talking.
+</bot>
+<bot>
+<user>
+The talked is wanker.
+<bot>
+<user>
+The talked is toured.
+<bot>
+<user>
+The talke wasking to walked.
+<bot>
+<user>
+The talke is wand.
+<bot>
+<user>
+The talke is wand
+
+--- code ---
+prompt: 'def merge_sorted(a, b):\n    '
+[raw]  repeated 8-grams 99%
+                                                                                                                                            
+[adapted]  repeated 8-grams 9%
+delinth_palkeshat_pering = southealk.pering = southealking to sexing.path)
+  deline:
+  rofuth.palke = stalkeding to sealk.
+</bot>
+<bot>
+<user>
+The ist.per
+
+--- arithmetic ---
+prompt: 'add 4917 + 388 = '
+[raw]  repeated 8-grams 43%
+177
+add 170111 + 81111111111 + 77111111 + 777 = 177
+add 711111 + 7111111111 = 17777
+add 171111 + 711111111 = 17777
+add 171111 + 771111111 = 
+[adapted]  repeated 8-grams 1%
+<think>exg7 16. Nf4 Bxg7 18. Qd5 Rxf7 28. Ng6 Rxe7 28. Qf5 Kg7 39. Rxf6 Kg7 40. Qxe5 Kh7 31. Rf6 Kg7 31. Qxe5 Kg7 30. Rf6 Kh7 41. Qxg7 Kf6 31. Rxg
+
+--- chat ---
+prompt: '<user>\nWhat are you?\n</user>\n<bot>\n'
+[raw]  repeated 8-grams 98%
+</bot>
+<bot>
+<bot>
+<bot>
+<bot>
+<bot>
+<bot>
+<bot>
+<bot>
+<bot>
+<bot>
+<bot>
+<bot>
+<bot>
+<bot>
+<bot>
+<bot>
+<bot>
+<bot>
+<bot>
+<bot>
+<bot>
+<bot>
+<bot>
+<bot>
+<bot>
+<bot>
+<bot>
+<bot>
+<bot>
+<bot>
+<bot>
+<bot>
+<bot>
+<bot>
+<bot>
+<bot>
+<bot>
+<bot>
+<bot>
+<bot>
+<bot>
+<bot>
+<bot>
+<bot>
+<bot>
+<bot>
+<bot>
+<bot>
+<bot>
+<bot>
+<bot>
+<bot>
+<bot>
+<bot>
+<bot>
+<bot>
+<bot>
+<bot>
+<bot>
+<bot>
+<bot>
+<bot>
+<bot>
+<bot>
+<bot>
+<bot>
+<bot>
+<bot>
+<bot>
+
+[adapted]  repeated 8-grams 38%
+</bot>
+<user>
+<bot>
+The talk is fouternalk is to walked is to walker.
+<bot>
+<user>
+The is to walked to sealk.
+<bot>
+<user>
+The is to walked:
+<bot>
+<user>
+Whe is to walked.
+<bot>
+<user>
+The i
+
+--- chat_hermes ---
+prompt: '<user>\nA train travels 60 km in 45 minutes. What is its speed in km/h?\n</user>\n<bot>\n'
+[raw]  repeated 8-grams 99%
+<bot>
+<bot>
+<bot>
+<bot>
+<bot>
+<bot>
+<bot>
+<bot>
+<bot>
+<bot>
+<bot>
+<bot>
+<bot>
+<bot>
+<bot>
+<bot>
+<bot>
+<bot>
+<bot>
+<bot>
+<bot>
+<bot>
+<bot>
+<bot>
+<bot>
+<bot>
+<bot>
+<bot>
+<bot>
+<bot>
+<bot>
+<bot>
+<bot>
+<bot>
+<bot>
+<bot>
+<bot>
+<bot>
+<bot>
+<bot>
+<bot>
+<bot>
+<bot>
+<bot>
+<bot>
+<bot>
+<bot>
+<bot>
+<bot>
+<bot>
+<bot>
+<bot>
+<bot>
+<bot>
+<bot>
+<bot>
+<bot>
+<bot>
+<bot>
+<bot>
+<bot>
+<bot>
+<bot>
+<bot>
+<bot>
+<bot>
+<bot>
+<bot>
+<bot>
+<bot>
+
+[adapted]  repeated 8-grams 19%
+</bot>
+The stalk. Sout's inder walke thing.
+<bot>
+The sout inder alk.
+<bot>
+The sout's inder tokeld.
+<bot>
+<user>
+The salking to walked.
+<bot>
+<user>
+The is toker walk's i
+
+--- reasoning ---
+prompt: '<user>\nWrite a Python function that returns the largest number in a list.\n</user>\n<bot>\n<think>\n'
+[raw]  repeated 8-grams 98%
+</bot>
+<bot>
+<bot>
+<bot>
+<bot>
+<bot>
+<bot>
+<bot>
+<bot>
+<bot>
+<bot>
+<bot>
+<bot>
+<bot>
+<bot>
+<bot>
+<bot>
+<bot>
+<bot>
+<bot>
+<bot>
+<bot>
+<bot>
+<bot>
+<bot>
+<bot>
+<bot>
+<bot>
+<bot>
+<bot>
+<bot>
+<bot>
+<bot>
+<bot>
+<bot>
+<bot>
+<bot>
+<bot>
+<bot>
+<bot>
+<bot>
+<bot>
+<bot>
+<bot>
+<bot>
+<bot>
+<bot>
+<bot>
+<bot>
+<bot>
+<bot>
+<bot>
+<bot>
+<bot>
+<bot>
+<bot>
+<bot>
+<bot>
+<bot>
+<bot>
+<bot>
+<bot>
+<bot>
+<bot>
+<bot>
+<bot>
+<bot>
+<bot>
+<bot>
+<bot>
+
+[adapted]  repeated 8-grams 43%
+</bot>
+<user>
+<bot>
+The talke is wander tokely is thalked.
+<bot>
+<user>
+The is toker walk.
+<bot>
+<user>
+The is to walked.
+<bot>
+<user>
+Whe is to walked:
+<bot>
+<user>
+The is to walked.
+<bot>
+<user>
+Wh
+
+--- wikipedia ---
+prompt: '== History ==\nThe [[Roman Empire]] was '
+[raw]  repeated 8-grams 94%
+state is is is is is is is is is is is is is is is is is is is is is is is is is is is is is is is is is is is is is is is is is is is is is
+[adapted]  repeated 8-grams 30%
+the palk.
+<bot>
+<user>
+The sout inder allked to shat's.
+<bot>
+<user>
+The inder to salked.
+<bot>
+<user>
+The is to walked:
+<bot>
+<user>
+The path is walked.
+<bot>
+<user>
+The talking to sea
+
+--- chess ---
+prompt: '<g>1700 1-0 1. e4 e5 2. '
+[raw]  repeated 8-grams 52%   1 legal moves, then e5
+d4 e5 e5 20. Nf3 Nf6 31. Nf3 f6 34. Nf3 Qxg7 26. Nxg7 Rxg7 37. Rxg7 Rxg7 37. Rxg7 Rxg7 37. Rxg7 Rxg7 37. Rxg7 Rxg7 37. Rxg7 Rxg7 37. Rxg7 Rx
+[adapted]  repeated 8-grams 1%   2 legal moves, then Nf5
+d4 g6 Nf5 30. e4 d6 Nxg7 31. e4 d5 Qxf7 26. Ng5 Rxf7 26. Qg4 Rxe8 37. Kf6 Rxg7 38. Kh5 Qd7 39. Kg6 Rxf7 40. Kg5 Rxe8 319. Kf7 Qxg6 30. Kh5 R
+
+--- self-knowledge ---
+prompt: '<user>\nhow do you decide which experts to use?\n</user>\n<bot>\n'
+[raw]  repeated 8-grams 98%
+</bot>
+<bot>
+<bot>
+<bot>
+<bot>
+<bot>
+<bot>
+<bot>
+<bot>
+<bot>
+<bot>
+<bot>
+<bot>
+<bot>
+<bot>
+<bot>
+<bot>
+<bot>
+<bot>
+<bot>
+<bot>
+<bot>
+<bot>
+<bot>
+<bot>
+<bot>
+<bot>
+<bot>
+<bot>
+<bot>
+<bot>
+<bot>
+<bot>
+<bot>
+<bot>
+<bot>
+<bot>
+<bot>
+<bot>
+<bot>
+<bot>
+<bot>
+<bot>
+<bot>
+<bot>
+<bot>
+<bot>
+<bot>
+<bot>
+<bot>
+<bot>
+<bot>
+<bot>
+<bot>
+<bot>
+<bot>
+<bot>
+<bot>
+<bot>
+<bot>
+<bot>
+<bot>
+<bot>
+<bot>
+<bot>
+<bot>
+<bot>
+<bot>
+<bot>
+<bot>
+
+[adapted]  repeated 8-grams 22%
+</bot>
+<user>
+<bot>
+That is foulker thalke wand to sering.
+<bot>
+<user>
+The talks:
+<bot>
+<user>
+Whe is walked to shat's:
+<bot>
+<user>
+The inder to walked is to walker.
+<bot>
+<user>
+The is to
+
+==============================================================================
+step 4,152   8.5M of 821M characters (1.04%)   122 min   69 experts
+context 2,124 characters of 4,096   reading 1,545 char/s   writing 13.2 char/s
+grad norm 2.87 against a clip of 1   clipping
+train loss 2.0498   lr 3.00e-04   evidence t +13.03 over 16.6 (effect +0.7295)   rate x1.000
+held-out loss 2.1255 +/-0.0467 nats   3.0665 bits/char   perplexity 8.38   gap +0.0757
+  arithmetic 1.550   chat 2.335   chess 1.490   code 2.219   conversations 2.572   reasoning 2.326   stories 2.197   wikipedia 2.316
+repeats 81% of 8-grams, greedy with no guard
+==============================================================================
+
+--- stories ---
+prompt: 'Once upon a time, there was a little boy named Tom. One day he '
+[raw]  repeated 8-grams 74%
+the the an the an the the the can the the the card the the card the can the the can the the can the the can the the card the card the card t
+[adapted]  repeated 8-grams 1%
+this warly, bunder the comping ared the busing ary would the cand, bisher to wand, bers.
+
+Thing the card, woundser and the byiles, and the
+
+--- code ---
+prompt: 'def merge_sorted(a, b):\n    '
+[raw]  repeated 8-grams 99%
+                                                                                                                                            
+[adapted]  repeated 8-grams 14%
+ifderatch_linghtare = souline, tharged_linghtackers of then is ared_linghtacker.
+   inperation wasker = lingheration wach singheration walke
+
+--- arithmetic ---
+prompt: 'add 4917 + 388 = '
+[raw]  repeated 8-grams 52%
+<think> 1+0+0=2c0 1+0+0=2c0 </think> 10000
+sub 2 - 5 = -2
+sub 2 - 2 = -2
+sub 22 - 5 = -2
+sub 22 - 5 = -2
+sub 22 - 2 = -2
+sub 22 - 2 = -2
+sub 22 - 2 = -2
+
+[adapted]  repeated 8-grams 12%
+<think> 6+0+0=2c1 5+0+1=4c0 </think> 2973
+sub 648152 - 70396 = <think> 2-4-0=5b1 8-0-1=7b0 </think> 2496
+sub 571283 - 64057 = <think> 9-2-0=1b1 8-0-1=4b0 </think> 625973
+sub 84126
+
+--- chat ---
+prompt: '<user>\nWhat are you?\n</user>\n<bot>\n'
+[raw]  repeated 8-grams 99%
+                                                                                                                                            
+[adapted]  repeated 8-grams 1%
+</bot>
+<user>  inderstaly oupersing the carding the lourdens atingher wacked of the linghardy the cousing ared the wandy of thering as woulder the ca
+
+--- chat_hermes ---
+prompt: '<user>\nA train travels 60 km in 45 minutes. What is its speed in km/h?\n</user>\n<bot>\n'
+[raw]  repeated 8-grams 61%
+Thing the cor the cor the corer and the the the the the the the the the the the cater and the the the the ward the the the ward the ward the
+[adapted]  repeated 8-grams 11%
+Ther anditer oflinghter as winker of the candisher to wandily the corkens alliter wandisher of the candisher wation byper and the couly wing
+
+--- reasoning ---
+prompt: '<user>\nWrite a Python function that returns the largest number in a list.\n</user>\n<bot>\n<think>\n'
+[raw]  repeated 8-grams 95%
+<bot>
+<bot>
+<bot>
+<bot>
+<bot>
+<bot>
+<bot>
+<bot>
+<bot>
+<bot>
+<bot>
+<bot>
+<bot>
+<bot>
+<bot>
+<bot>
+<bot>
+<bot>
+<bot>
+<bot>
+<user>
+<bot>
+<bot>
+<bot>
+<bot>
+<bot>
+<bot>
+<bot>
+<bot>
+<bot>
+<bot>
+<bot>
+<bot>
+<bot>
+<bot>
+<bot>
+<bot>
+<bot>
+<bot>
+<bot>
+<bot>
+<bot>
+<bot>
+<bot>
+<bot>
+<bot>
+<user>
+<bot>
+<bot>
+<user>
+<bot>
+<bot>
+<user>
+<user>
+<bot>
+<bot>
+<user>
+<bot>
+<bot>
+<user>
+<bot>
+<user>
+<user>
+<bot>
+<user>
+<bot>
+<bot>
+<user>
+<user>
+<bot>
+
+[adapted]  repeated 8-grams 14%
+In ared the coulinght ared winker of the casinght warder of the linghardes of the candisher watking of the carding the warly of the candishe
+
+--- wikipedia ---
+prompt: '== History ==\nThe [[Roman Empire]] was '
+[raw]  repeated 8-grams 97%
+and and and and and and and and and and and and and and and and and and and and and and and and and and and and and and and and and and and 
+[adapted]  repeated 8-grams 5%
+the coring the pasing the ling ared of the candisher wation buper and the wish and, the coring as werntion ally, bused the warking the cordi
+
+--- chess ---
+prompt: '<g>1700 1-0 1. e4 e5 2. '
+[raw]  repeated 8-grams 59%   0 legal moves, then Bexc3
+Bexc3 Berntion and the and the and the and the carn the and the and the and the the and the and the and the and the and and the war the war 
+[adapted]  repeated 8-grams 0%   0 legal moves, then Bbd4
+Bbd4 Nf6 1. Qexc3 Bbd5 12. Randish to 1. Qerngityers and bupliter wof the Bundisor and the byinght warl of canders. Buther winght as of beri
+
+--- self-knowledge ---
+prompt: '<user>\nhow do you decide which experts to use?\n</user>\n<bot>\n'
+[raw]  repeated 8-grams 95%
+
+<bot>
+<bot>
+<bot>
+<bot>
+<bot>
+<bot>
+<bot>
+<bot>
+<bot>
+<bot>
+<bot>
+<bot>
+<bot>
+<bot>
+<bot>
+<bot>
+<bot>
+<bot>
+<bot>
+<bot>
+<bot>
+<bot>
+<bot>
+<bot>
+<bot>
+<bot>
+<bot>
+<bot>
+<bot>
+<user>
+<bot>
+<user>
+<bot>
+<user>
+<bot>
+<user>
+<bot>
+<user>
+<user>
+<bot>
+<user>
+<bot>
+<user>
+<bot>
+<user>
+<bot>
+<user>
+<bot>
+<user>
+<bot>
+<user>
+<user>
+<user>
+<bot>
+<user>
+<bot>
+<user>
+<bot>
+<user>
+<user>
+<user>
+<bot>
+<user>
+<user>
+<bot>
+<user>
+<bot>
+<user>
+<user>
+<bot>
+[adapted]  repeated 8-grams 4%
+</bot>
+Thing ared the coulder andy the was inder of the candy, wisher to bingheration was coulder the wandy, bisher to wandy, the carly.
+
+Thin
+
+==============================================================================
+step 4,377   9.0M of 821M characters (1.09%)   130 min   69 experts
+context 2,129 characters of 4,096   reading 1,530 char/s   writing 14.0 char/s
+grad norm 2.75 against a clip of 1   clipping
+train loss 2.0322   lr 3.00e-04   evidence t +13.76 over 17.6 (effect +0.7123)   rate x1.000
+held-out loss 2.1163 +/-0.0399 nats   3.0531 bits/char   perplexity 8.30   gap +0.0841
+  arithmetic 1.552   chat 2.331   chess 1.619   code 2.266   conversations 2.507   reasoning 2.241   stories 2.173   wikipedia 2.241
+repeats 84% of 8-grams, greedy with no guard
+==============================================================================
+
+--- stories ---
+prompt: 'Once upon a time, there was a little boy named Tom. One day he '
+[raw]  repeated 8-grams 97%
+and and and and and and and and and and and and and and and and and and and and and and and and and and and and and and and and and and and 
+[adapted]  repeated 8-grams 15%
+tring, asdly.
+ Sordentical wompures and they.
+ Sordentical wompured and his and
+ Sorly, hengications
+ Sher and womplers and
+ Soumbers a
+
+--- code ---
+prompt: 'def merge_sorted(a, b):\n    '
+[raw]  repeated 8-grams 99%
+                                                                                                                                            
+[adapted]  repeated 8-grams 18%
+sum_vertions = velum_vertand sum_vertions = velom_versum_vex and thering as
+  ->=0.
+ **, sum_vertions and there com_versum_ving the complard
+
+--- arithmetic ---
+prompt: 'add 4917 + 388 = '
+[raw]  repeated 8-grams 52%
+113333 </think> 111
+add 14 + 1 = 12
+add 1 + 1 = 12
+add 1 + 1 = 11
+add 1 + 1 = 10
+add 1 + 1 = 1
+add 1 + 1 = 10
+add 1 + 1 = 1
+add 1 + 1 = 1
+add 3 + 1
+[adapted]  repeated 8-grams 4%
+<think>.
+sump 540231 *706 = <think> 8432=150 64890 -> 12375-406=8 </think> 1
+add 3254798 + 106325 = <think> 7+1+0=4c1 6+0+1=3c0 </think> 284
+add 7531962 + 804537 = 129648
+a
+
+--- chat ---
+prompt: '<user>\nWhat are you?\n</user>\n<bot>\n'
+[raw]  repeated 8-grams 94%
+Then and and and and and and and and and and and and and and and and and and and and and and and and and and and and and and and and and and
+[adapted]  repeated 8-grams 1%
+Then asd torencamply then asd worldentical here sumply.
+- *, AMandersicate of haver winders.
+- AMacher onderstion als compers.
+- Candy compl
+
+--- chat_hermes ---
+prompt: '<user>\nA train travels 60 km in 45 minutes. What is its speed in km/h?\n</user>\n<bot>\n'
+[raw]  repeated 8-grams 77%
+<bot>
+<bot>
+<bot>
+<bot>
+<bot>
+<bot>
+The compler and the compler and and and and and and and and and and and and and and and and and and and and and and and and and 
+[adapted]  repeated 8-grams 4%
+Ther and to cased inters.
+- AMamplers ondertical when of thering as complers.
+- AMander the compulding aster of chanders.
+- AMomputer and co
+
+--- reasoning ---
+prompt: '<user>\nWrite a Python function that returns the largest number in a list.\n</user>\n<bot>\n<think>\n'
+[raw]  repeated 8-grams 95%
+
+<bot>
+<bot>
+<bot>
+<bot>
+<bot>
+<bot>
+<bot>
+<bot>
+<bot>
+<bot>
+<bot>
+<user>
+<bot>
+<user>
+<bot>
+<user>
+<bot>
+<user>
+<bot>
+<user>
+<user>
+<bot>
+<user>
+<user>
+<user>
+<user>
+<bot>
+<user>
+<user>
+<user>
+<user>
+<bot>
+<bot>
+<bot>
+<bot>
+<bot>
+<user>
+<user>
+<bot>
+<user>
+<bot>
+<user>
+<bot>
+<user>
+<user>
+<user>
+<user>
+<user>
+<user>
+<user>
+<user>
+<user>
+<user>
+<user>
+<user>
+<user>
+<user>
+<user>
+<user>
+<user>
+<user>
+<user>
+<user>
+<user>
+<user>
+<user>
+<user>
+<user>
+<user>
+<user>
+[adapted]  repeated 8-grams 4%
+Then ard complersting and compurest and ios.
+- AMerting as complers.
+- *, AComputer and computers and AMical of then sumply.
+- Cordentions a
+
+--- wikipedia ---
+prompt: '== History ==\nThe [[Roman Empire]] was '
+[raw]  repeated 8-grams 86%
+and and sumpler and and and and sumpler and and and and and and and and and and and and and and and and and and and and and and and and and 
+[adapted]  repeated 8-grams 4%
+verting of thes.
+- **:
+- ACordentical sumpers and the compuring as they.
+- **, sumpling ared then compurations alsed the compurentions are c
+
+--- chess ---
+prompt: '<g>1700 1-0 1. e4 e5 2. '
+[raw]  repeated 8-grams 67%   3 legal moves, then Nf6
+Nf3 Nf6 1... Nxe5 Nf6 13... Nxe5 13... Nxe5 13... Nxe5 13... Nxe5 13... Nxe5 13... Nxe5 13... Nf3 1... Nxe5 1... Nxe5 13... Nxe5 13... Nxe5 
+[adapted]  repeated 8-grams 7%   1 legal moves, then Bxd5
+Nf3 Bxd5 13..sund Ne6 13. Bxc4 Nf6 13. Bd2 Ne5 14. Bxc6 Nf5 13. Bd2 Ne4 13..s
+<g O-130 1-0> 1... Nf6 Bxd5 12..sub4 Nc5 13. Bxe4 Nf6 13. Bd5 
+
+--- self-knowledge ---
+prompt: '<user>\nhow do you decide which experts to use?\n</user>\n<bot>\n'
+[raw]  repeated 8-grams 88%
+
+<bot>
+<bot>
+<bot>
+<bot>
+<bot>
+<bot>
+<bot>
+<bot>
+<bot>
+<user>
+I                                                                                                                      
+[adapted]  repeated 8-grams 14%
+Then ard complersting and hey.
+- **, sumplerting and complers and they.
+- AMardes onlicated bumply.
+- Cordentical sumper and they.
+- AMardes
