@@ -45,10 +45,10 @@ class ByteTokenizer:
     def encode(self, text):
         ids, pos = [], 0
         for m in _SPECIAL_RE.finditer(text):
-            ids.extend(text[pos:m.start()].encode("utf-8"))
+            ids.extend(text[pos:m.start()].encode("utf-8", "surrogateescape"))
             ids.append(SPECIAL_ID[m.group(0)])
             pos = m.end()
-        ids.extend(text[pos:].encode("utf-8"))
+        ids.extend(text[pos:].encode("utf-8", "surrogateescape"))
         return _Enc(ids)
 
     def encode_batch(self, texts):

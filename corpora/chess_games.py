@@ -186,7 +186,7 @@ def main():
     json.dump({"vocab_size": 256, "tokenizer": "byte",
                "train_tokens": n_tr, "val_tokens": n_va, "games": kept,
                "min_elo": args.min_elo, "format": "<g ELO RESULT> SAN </g>"},
-              open(os.path.join(args.out, "meta.json"), "w"), indent=2)
+              open(os.path.join(args.out, "meta.json"), "w", encoding="utf-8"), indent=2)
     print(f"train {n_tr:,} tokens, val {n_va:,} tokens -> {args.out}")
     return 0
 

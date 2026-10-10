@@ -1628,7 +1628,7 @@ def _dropped_note(model):
             f"({dropped:,} of {routed:,})")
 
 
-_PLOTS = {"proc": None, "on": True, "since": None, "log": None,
+_PLOTS = {"procs": [], "on": True, "since": None, "log": None,
           "weights": None}
 
 
@@ -1636,8 +1636,7 @@ def refresh_plots():
     """Redraw the graphs from the log just written. Never raises, never waits."""
     if not _PLOTS["on"]:
         return
-    p = _PLOTS["proc"]
-    if p is not None and p.poll() is None:
+    if any(p.poll() is None for p in _PLOTS["procs"]):
         return                          # the last one has not finished
     import subprocess
     here = os.path.dirname(os.path.abspath(__file__))
@@ -1670,12 +1669,17 @@ def refresh_plots():
             c += ["--last", str(_PLOTS["since"])]
         cmds.append(c)
     try:
-        script = " && ".join(" ".join(f'"{x}"' for x in c) for c in cmds)
-        _PLOTS["proc"] = subprocess.Popen(
-            ["bash", "-c", script], cwd=here,
-            stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
+        # Spawned directly, no shell. A `bash -c` chain here dies on Windows:
+        # CreateProcess may resolve `bash` to WSL's bash.exe, which cannot
+        # execute D:\ paths - every refresh failed silently (stderr to null).
+        # (Local fix, 2026-10-09, this machine.)
+        _PLOTS["procs"] = [
+            subprocess.Popen(c, cwd=here,
+                             stdout=subprocess.DEVNULL,
+                             stderr=subprocess.DEVNULL)
+            for c in cmds]
     except OSError:
-        _PLOTS["on"] = False            # no python, no bash - stop trying
+        _PLOTS["on"] = False            # no python - stop trying
 
 
 def write_samples(path, step, chars, minutes, samples, val=None, se=None,

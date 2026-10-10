@@ -133,12 +133,15 @@ def gpu_bf16_native(device=None):
     """
     Whether this GPU multiplies bfloat16 in hardware: NVIDIA from Ampere
     (compute capability 8) on, AMD from RDNA3 (gfx11, gfx12) and the CDNA
-    accelerators (gfx908, gfx90a, gfx94x, gfx95x). Not RDNA1 or 2, not Vega,
-    not NVIDIA before Ampere. MINAGI_GPU_BF16=1 or =0 overrides the detection.
+    accelerators (gfx908, gfx90a, gfx94x, gfx95x), Intel GPUs (XPU) from
+    Xe-HPG on. Not RDNA1 or 2, not Vega, not NVIDIA before Ampere.
+    MINAGI_GPU_BF16=1 or =0 overrides the detection.
     """
     force = os.environ.get("MINAGI_GPU_BF16")
     if force is not None:
         return force.strip().lower() not in ("0", "", "false", "no", "off")
+    if _device_type(device) == "xpu":
+        return True                  # Intel XMX computes bf16 in hardware
     info = _gpu_info(device)
     if info is None:
         return True                  # nothing to ask: the rule as it always was
@@ -171,7 +174,7 @@ def autocast_on(device=None):
     dev = _device_type(device)
     if dt is torch.float32:
         return False
-    if dev == "cuda":
+    if dev in ("cuda", "xpu"):
         return not gpu_fp32_instead(device)
     return dev == "cpu" and dt is torch.bfloat16 and cpu_bf16_native()
 
