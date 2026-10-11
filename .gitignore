@@ -6,8 +6,9 @@ weights/*
 !weights/manifest.json
 
 # Run artefacts: logs, checkpoints, plots
+# (samples.txt is ours-only since 2026-10-11; the author's original log ships in
+# upstream git history and is archived untracked at samples-upstream-author-20260916.txt)
 runs/*
-!runs/samples.txt
 
 __pycache__/
 *.pyc
