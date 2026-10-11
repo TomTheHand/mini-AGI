@@ -225,7 +225,7 @@ def cmd_stream(args):
     # model bug and was not. Appended a line at a time, so an interrupted run
     # keeps everything up to the interruption.
     hist_path = os.path.join(args.out, "history.jsonl")
-    hist = open(hist_path, "a", buffering=1)
+    hist = open(hist_path, "a", buffering=1, encoding="utf-8")
 
     def record(kind, step=None, **kw):
         hist.write(json.dumps({"kind": kind, "step": step, **kw}) + "\n")
@@ -868,7 +868,7 @@ def cmd_read(args):
         # Append. A resumed run continues the same model, so wiping the file
         # would throw away the only record of how it got here; the banner is
         # what separates one session from the next.
-        with open(args.sample_log, "a") as f:
+        with open(args.sample_log, "a", encoding="utf-8", errors="replace") as f:
             f.write(f"\n\n{'#' * 78}\n")
             f.write(f"# session started {time.strftime('%Y-%m-%d %H:%M')}  "
                     f"at step {step:,}, {base_chars/1e6:.1f}M of "
@@ -1004,7 +1004,7 @@ def cmd_read(args):
                    "last_seen": t.get("last_seen"), "uid": t.get("uid"),
                    "trial": getattr(model.pool, "trial", 0)}
             os.makedirs(os.path.dirname(args.history) or ".", exist_ok=True)
-            with open(args.history, "a") as f:
+            with open(args.history, "a", encoding="utf-8") as f:
                 f.write(json.dumps(row, separators=(",", ":")) + "\n")
         except Exception as e:                  # telemetry must never stop a run
             print(f"    (history not written: {e})", flush=True)
@@ -1701,7 +1701,11 @@ def write_samples(path, step, chars, minutes, samples, val=None, se=None,
                   corpus=None, context=None, ceiling=None, gain=None,
                   rate=None, gnorm=None, clip=None, plast=None,
                   write_rate=None):
-    with open(path, "a") as f:
+    # utf-8 + replace: the model emits raw bytes, and a sample can carry a
+    # character cp1252 (the Windows locale default) cannot encode - which
+    # crashed the run at sample time (UnicodeEncodeError '\ufffd', 2026-10-11).
+    # Log files must never be the thing that stops training.
+    with open(path, "a", encoding="utf-8", errors="replace") as f:
         f.write(f"\n{'=' * 78}\n")
         # How much has been read, against how much there is. A bare count of
         # characters read says nothing on its own - the same 4M is most of a
