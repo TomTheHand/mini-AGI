@@ -129,6 +129,12 @@ training:
   lr: 3.0e-4
   trunk_lr_mult: 0.1      # the trunk is shared by every domain and is where
                           # forgetting happens; it learns slower on purpose
+  newborn_lr: true        # a newborn expert learns at the full lr - weights,
+                          # gate and router row - and its own rate comes down
+                          # to the main one as it is trained
+  newborn_half: 15000     # steps of an expert's own training that halve how
+                          # far above the main rate it is, in log terms: a
+                          # week at a 4% share, so it converges over weeks
   weight_decay: 0.1
   clip: 1.0
 

@@ -500,9 +500,12 @@ class Plasticity:
     def log_readings(text):
         """
         The readings in a sample log, oldest first, None where a session
-        started. Each round's held-out check, and not the full evaluation a
-        session ends on - the one block written without the controller's
-        evidence line, a different measurement about 0.01 below the rounds.
+        started. Each round's held-out check, and not the larger evaluation
+        a session ends on - the one block written without the controller's
+        evidence line. Before checks were spread over the whole set (see
+        minagi/heldout.py) that one was a different measurement, about 0.01
+        below the rounds; after, the rounds report at its level, and the
+        session start that moved them is a restart like any other.
         """
         return [None if m.group(1) else float(m.group(2)) for m in re.finditer(
             r"^(# session started)|^train loss [^\n]*evidence[^\n]*\n"
