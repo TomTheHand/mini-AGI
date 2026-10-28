@@ -426,8 +426,8 @@ def measure(a, scratch, size):
           f"pieces of {a.piece:,} bytes, in {t_frozen:.0f} s", flush=True)
 
     # Learning as training would at its next step: the run's base rate and
-    # its controller's factor, Adam's moments as the run left them, newborn
-    # experts at their own rates. Nothing is ever saved: the copy is scrapped.
+    # its controller's factor, the optimiser's moments as the run left them.
+    # Nothing is ever saved: the copy is scrapped.
     learner = LiveLearner.for_run(model, weights_dir=scratch, manifest=man,
                                   lr=a.lr, chunk=a.piece, save_every=0,
                                   config=c, held_out=a.held_out)
