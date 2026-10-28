@@ -1213,7 +1213,7 @@ def cmd_read(args):
     stop = False
     swapped = 0
     recent = collections.deque(maxlen=400)     # the training loss lately
-    loss_log = (open(args.loss_log, "a", buffering=1)
+    loss_log = (open(args.loss_log, "a", buffering=1, encoding="utf-8")
                 if getattr(args, "loss_log", None) else None)
     last_gap = None                            # held-out minus train, when known
     # How much information has been read, as against how many characters were
@@ -1936,11 +1936,11 @@ def refresh_plots():
         # CreateProcess may resolve `bash` to WSL's bash.exe, which cannot
         # execute D:\ paths - every refresh failed silently (stderr to null).
         # (Local fix, 2026-10-09, this machine.)
-        _PLOTS["procs"] = [
-            subprocess.Popen(c, cwd=here,
-                             stdout=subprocess.DEVNULL,
-                             stderr=subprocess.DEVNULL)
-            for c in cmds]
+        _PLOTS["procs"] = []
+        for c in cmds:
+            _PLOTS["procs"].append(subprocess.Popen(
+                c, cwd=here, stdout=subprocess.DEVNULL,
+                stderr=subprocess.DEVNULL))
     except OSError:
         _PLOTS["on"] = False            # no python - stop trying
 

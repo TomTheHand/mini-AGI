@@ -172,7 +172,7 @@ def parse_log(path):
         g = re.search(r"held-out loss ([\d.]+) \+/-([\d.]+)", blk)
         if g:
             r["val"], r["se"] = float(g.group(1)), float(g.group(2))
-        g = re.search(r"^  ([a-z_]+ [\d.]+(?:   [a-z_]+ [\d.]+)*)\s*$", blk,
+        g = re.search(r"^  ([a-z_][a-z0-9_-]* [\d.]+(?:   [a-z_][a-z0-9_-]* [\d.]+)*)\s*$", blk,
                       re.M)
         if g:
             parts = g.group(1).split()

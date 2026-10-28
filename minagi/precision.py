@@ -108,6 +108,8 @@ _GPU_INFO = {}
 
 def _gpu_info(device=None):
     """(properties, is it AMD) for the GPU `device` names; None without one."""
+    if _device_type(device) != "cuda":
+        return None
     try:
         idx = getattr(device, "index", None)
         if idx is None:
