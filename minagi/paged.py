@@ -68,9 +68,12 @@ all; parking an expert that was stepped carries its moments back with its
 weights.
 """
 
+import atexit
 import math
 import os
+import queue
 import struct
+import threading
 import weakref
 import zipfile
 from collections import OrderedDict
@@ -81,7 +84,7 @@ import torch.nn as nn
 import torch.nn.functional as F
 from numpy.lib import format as npy
 
-from .precision import is_moment, pack_bf16, unpack_bf16
+from .precision import as_bf16, is_moment, pack_bf16
 
 _WEIGHTS = ("w1", "w3", "w2")
 _MOMENTS = ("w1_m", "w3_m", "w2_m", "w1_v", "w3_v", "w2_v")
@@ -181,10 +184,20 @@ class Tiers:
 
     An expert that was trained while resident is marked dirty and written back
     to disk on eviction. Otherwise the file on disk is still the truth.
+
+    WRITTEN BEHIND. The write happens on a thread of its own: an eviction is
+    made in the middle of a forward, while the card waits for the experts it
+    admitted, and a file written there kept it waiting - 13.5% of a reading
+    step at a RAM hit rate of 0.72, 3.4% at 0.87, and more again as the pool
+    outgrows the RAM tier. Until its write lands, an evicted expert stays in
+    `pending`, and a fetch serves it from there - so nothing reads a file
+    older than the expert, and the writes of one expert land in the order
+    they were made. flush() and anything that deletes files wait for the
+    writer first.
     """
 
     def __init__(self, path, d_model, d_ff, ram_capacity=256, device="cpu",
-                 read_only=False):
+                 read_only=False, write_behind=True):
         self.path = path
         self.d_model, self.d_ff = d_model, d_ff
         self.ram = OrderedDict()             # id -> dict of CPU tensors
@@ -198,6 +211,10 @@ class Tiers:
         self.read_only = read_only
         self.dirty = set()
         self.reads = self.hits = self.evictions = self.writebacks = 0
+        self.write_behind = write_behind
+        self.pending = {}            # id -> entry the writer has yet to land
+        self._lock = threading.Lock()
+        self._q = self._writer = self._error = None
 
     def _file(self, i):
         return os.path.join(self.path, "e%05d.npz" % i)
@@ -220,9 +237,13 @@ class Tiers:
         out = {k: torch.from_numpy(z[k]) for k in _WEIGHTS}
         for k in _MOMENTS:
             if k in z:
-                # bf16 if this file has been written since the moments were
-                # narrowed, fp32 if it has not; unpack_bf16 reads both
-                out[k] = unpack_bf16(z[k])
+                # Kept as the file keeps them, bfloat16: half the memory of
+                # fp32, so the RAM tier holds half as many again in the same
+                # space, and half the copy to the card, where the optimiser
+                # widens them (_own_moments). A file from before the moments
+                # were narrowed holds fp32, narrowed here as its next write
+                # would narrow it.
+                out[k] = as_bf16(z[k])
         return out
 
     def fetch(self, i, count=True):
@@ -235,8 +256,15 @@ class Tiers:
             self.hits += count
             self.ram.move_to_end(i)
             return self.ram[i]
-        self.reads += count
-        e = self._from_disk(i)
+        with self._lock:
+            e = self.pending.get(i)
+        if e is not None:
+            # evicted a moment ago and still on its way to disk: what is
+            # being written is the latest it has, and it is still in memory
+            self.hits += count
+        else:
+            self.reads += count
+            e = self._from_disk(i)
         self.ram[i] = e
         self.ram.move_to_end(i)
         self._trim()
@@ -255,8 +283,49 @@ class Tiers:
             j, ent = self.ram.popitem(last=False)      # least recently used
             self.evictions += 1
             if j in self.dirty:
-                self._to_disk(j, ent)
                 self.dirty.discard(j)
+                if self.write_behind:
+                    self._write_later(j, ent)
+                else:
+                    self._to_disk(j, ent)
+
+    def _write_later(self, i, ent):
+        """Hand an evicted expert to the writer. At most 16 wait at once - the
+        disk sets the pace when it cannot keep up, and memory stays bounded."""
+        if self._error is not None:
+            self.drain()                     # raises what the writer raised
+        if self._writer is None:
+            self._q = queue.Queue(maxsize=16)
+            self._writer = threading.Thread(target=self._write_loop,
+                                            name="expert-writer", daemon=True)
+            self._writer.start()
+            # a run that ends without a flush still lands what it evicted
+            atexit.register(self.drain)
+        with self._lock:
+            self.pending[i] = ent
+        self._q.put((i, ent))
+
+    def _write_loop(self):
+        while True:
+            i, ent = self._q.get()
+            try:
+                self._to_disk(i, ent)
+            except BaseException as e:   # noqa: BLE001 - drain re-raises it
+                self._error = e
+            finally:
+                with self._lock:
+                    if self.pending.get(i) is ent:
+                        del self.pending[i]
+                self._q.task_done()
+
+    def drain(self):
+        """Wait until every write handed to the writer has landed, and raise
+        whatever it raised."""
+        if self._q is not None:
+            self._q.join()
+        if self._error is not None:
+            e, self._error = self._error, None
+            raise e
 
     def _to_disk(self, i, ent):
         if self.read_only:
@@ -276,6 +345,9 @@ class Tiers:
     def flush(self):
         if self.read_only:
             return
+        # the writer first: an older write of an expert still queued would
+        # otherwise land after the newer one written here
+        self.drain()
         for i in list(self.dirty):
             self._to_disk(i, self.ram[i])
         self.dirty.clear()
@@ -394,22 +466,33 @@ class PagedPool(nn.Module):
                              persistent=False)
         self.usage_steps = 1000.0        # how far back `recent` looks
         self._trains = False             # whether this forward trains
-        # EACH EXPERT'S OWN LEARNING RATE, as a multiple of the main one the
-        # plasticity controller sets - only while `newborn_rate` is on
-        # (training.newborn_lr). An expert the pool had before keeps 1.0. One
-        # born under the rule starts at 1 / (the main rate at its birth),
-        # which is the full base rate, and how far above the main rate it is
-        # - log(rate) - halves with every `rate_half` steps it is trained, so
-        # it joins the main rate as it matures and one that sits idle keeps
-        # what it has. Its weights, its gate and its router rows all move at
-        # it: see _rate_before and _rate_after.
-        self.register_buffer("rate", torch.ones(n_experts), persistent=False)
-        self.register_buffer("trained", torch.zeros(n_experts),
-                             persistent=False)  # steps since relax_rates()
-        self.newborn_rate = False
-        self.rate_half = 15000.0
-        self.main_scale = 1.0            # the main rate's factor, set per step
-        self._rate_snap = None
+        # THE ROUTING BIAS (pool.route_bias) - an offset per expert, added to
+        # the router's scores where experts are CHOSEN (what a character asks
+        # the card for, and its top_k among the card) and nowhere else: the
+        # weights the chosen are mixed with stay the router's own, and nothing
+        # of it enters the loss. After every optimiser step it moves each
+        # expert's offset by `route_bias`, by sign, toward the share of
+        # training choices its rank should have - 1 / (rank + offset),
+        # normalised - as the auxiliary-loss-free balancing of DeepSeek-V3
+        # does toward an even share, and centred as Moonlight centres it.
+        # `chosen` is each expert's share of training choices, a running
+        # average over about fifty steps. Both are saved with the weights, so
+        # reading and chat choose as training does; with the setting at 0 the
+        # offsets are not used at all.
+        self.register_buffer("bias", torch.zeros(n_experts), persistent=False)
+        self.register_buffer("chosen", torch.zeros(n_experts),
+                             persistent=False)
+        self.register_buffer("_step_hits", torch.zeros(n_experts),
+                             persistent=False)
+        self.route_bias = 0.0
+        self.route_bias_offset = 25.0
+        self.route_bias_max = 4.0
+        self.chosen_steps = 50.0
+        # WEIGHTED AFTER THE GATES (pool.gate_after) - see PooledMLP._route
+        self.gate_after = False
+        # A NEWBORN'S GATE as a share of its parents' (growth.birth_gate_parents)
+        # - 0 starts it at the birth_gate it is given instead
+        self.birth_gate_parents = 0.0
         # THE BALANCE TERM - a term in the loss, `balance` its weight, that
         # charges the router for the probability it puts on each expert in
         # proportion to that expert's share of recent admissions. Computed by
@@ -550,10 +633,48 @@ class PagedPool(nn.Module):
         return self.gate[self._slot_rows(self.gate.device)]
 
     def note_use(self, hit):
-        """Routing counts arrive per SLOT; usage is kept per EXPERT."""
-        self.use.index_add_(0, self._slot_rows(self.use.device),
-                            hit.to(self.use.dtype))
+        """Routing counts arrive per SLOT; usage is kept per EXPERT. A forward
+        that trains also counts them toward this step's choices, which the
+        routing bias steers by."""
+        rows = self._slot_rows(self.use.device)
+        self.use.index_add_(0, rows, hit.to(self.use.dtype))
+        if self._trains:
+            self._step_hits.index_add_(0, rows, hit.to(self._step_hits.dtype))
         self.age += 1
+
+    def selection_bias(self):
+        """The routing bias over the whole pool, or None while it is off."""
+        if not self.route_bias:
+            return None
+        return self.bias[:self._n]
+
+    @torch.no_grad()
+    def _steer_bias(self, *_):
+        """After a step: this step's training choices into `chosen`, and every
+        offset one step of `route_bias` toward its rank's share of the curve
+        1 / (rank + route_bias_offset) - see `bias`."""
+        n = self._n
+        h = self._step_hits[:n].clone()
+        self._step_hits.zero_()
+        if not self.route_bias:
+            return
+        tot = float(h.sum())
+        if tot <= 0:
+            return
+        c = self.chosen[:n]
+        b = 1.0 / max(self.chosen_steps, 1.0)
+        c.mul_(1.0 - b).add_(b * h / tot)
+        order = torch.argsort(c, descending=True)
+        curve = 1.0 / (torch.arange(n, device=c.device, dtype=c.dtype)
+                       + float(self.route_bias_offset))
+        target = torch.empty_like(c)
+        target[order] = curve / curve.sum()
+        # centred, as Moonlight steps DeepSeek-V3's offsets (Liu et al.
+        # 2025, appendix C): the same choices, since moving every offset
+        # alike moves no choice, and no drift of them all toward the clamp
+        s = torch.sign(target - c)
+        self.bias[:n] += float(self.route_bias) * (s - s.mean())
+        self.bias[:n].clamp_(-self.route_bias_max, self.route_bias_max)
 
     def n_params(self):
         per = 3 * self.d_model * self.d_ff
@@ -864,13 +985,19 @@ class PagedPool(nn.Module):
         holds. An entry replaces the old one whole, so it never leaves them out.
         """
         tensors = ((self.w1, "w1"), (self.w3, "w3"), (self.w2, "w2"))
-        ent = {nm: p.data[s].detach().to("cpu").clone() for p, nm in tensors}
+        # One copy each: off the card, the move is the copy, and a clone of
+        # it would copy every byte a second time. copy=True keeps it a copy
+        # on the CPU too, where .to would hand back the slot itself.
+        ent = {nm: p.data[s].detach().to("cpu", copy=True) for p, nm in tensors}
         if self._own[s]:
             for p, nm in tensors:
                 o = st.get(p)
                 if o and "exp_avg" in o:
-                    ent[nm + "_m"] = o["exp_avg"][s].to("cpu").clone()
-                    ent[nm + "_v"] = o["exp_avg_sq"][s].to("cpu").clone()
+                    # narrowed on the card, so half the bytes cross the bus
+                    ent[nm + "_m"] = o["exp_avg"][s].to(torch.bfloat16).to(
+                        "cpu", copy=True)
+                    ent[nm + "_v"] = o["exp_avg_sq"][s].to(torch.bfloat16).to(
+                        "cpu", copy=True)
         else:
             ent.update({k: v for k, v in
                         self.tiers.fetch(self._f(e), count=False).items()
@@ -917,8 +1044,12 @@ class PagedPool(nn.Module):
             src = self.tiers.fetch(self._f(e), count=False)
             for nm, o in zip(names, sts):
                 if nm + "_m" in src:
-                    o["exp_avg"][s].copy_(src[nm + "_m"])
-                    o["exp_avg_sq"][s].copy_(src[nm + "_v"])
+                    # across at the width RAM keeps them and widened on the
+                    # card: copy_ from the CPU with a dtype change would widen
+                    # them first and send twice the bytes
+                    dev = o["exp_avg"].device
+                    o["exp_avg"][s].copy_(src[nm + "_m"].to(dev))
+                    o["exp_avg_sq"][s].copy_(src[nm + "_v"].to(dev))
                 else:
                     o["exp_avg"][s].zero_()
                     o["exp_avg_sq"][s].zero_()
@@ -944,79 +1075,6 @@ class PagedPool(nn.Module):
         if sts is not None:
             self._own = [e >= 0 for e in self.slots]
             self._own_in = [weakref.ref(o["exp_avg"]) for o in sts]
-
-    # -- each expert's own rate - see `rate` --------------------------------
-    def rates(self):
-        """Each expert's rate as a step applies it: never above the base."""
-        cap = 1.0 / max(float(self.main_scale), 1e-9)
-        return self.rate[:self._n].clamp(max=cap)
-
-    @torch.no_grad()
-    def _rate_before(self, *_):
-        """What every faster expert's parameters were before the step."""
-        self._rate_snap = None
-        if not self.newborn_rate:
-            return
-        rc = self.rates().cpu()              # one wait for the card a step
-        fast = (rc > 1.0).nonzero().flatten()
-        if not fast.numel():
-            return
-        dev = self.gate.device
-        snap = {"fast": fast.to(dev), "r": rc[fast].to(dev, self.gate.dtype)}
-        snap["gate"] = self.gate.data[snap["fast"]].clone()
-        snap["rows"] = [s.router.weight.data[snap["fast"]].clone()
-                        for s in self._sites]
-        held = [s for s, i in enumerate(self.slots)
-                if i >= 0 and float(rc[i]) > 1.0]
-        if held:
-            si = torch.tensor(held, device=self.w1.device)
-            rs = torch.tensor([float(rc[self.slots[s]]) for s in held],
-                              device=self.w1.device)
-            snap["slots"] = (si, rs, [p.data[si].clone()
-                                      for p in (self.w1, self.w3, self.w2)])
-        self._rate_snap = snap
-
-    @torch.no_grad()
-    def _rate_after(self, *_):
-        """
-        Stretch the step every faster expert just took by its rate. AdamW
-        moves a parameter by lr times things lr does not change - the ratio of
-        its moments, and its decay - so scaling the change it just made is
-        exactly a step at rate x lr, for its weights, its gate and its router
-        rows alike, and nothing else in the pool is touched.
-        """
-        on = [i for i in self.slots if i >= 0]
-        if on:
-            self.trained.index_add_(
-                0, torch.tensor(on, device=self.trained.device),
-                torch.ones(len(on), device=self.trained.device))
-        s, self._rate_snap = self._rate_snap, None
-        if s is None:
-            return
-        fast, r = s["fast"], s["r"]
-        g = self.gate.data
-        g[fast] = s["gate"] + r * (g[fast] - s["gate"])
-        for site, old in zip(self._sites, s["rows"]):
-            w = site.router.weight.data
-            w[fast] = old + r[:, None].to(w.dtype) * (w[fast] - old)
-        if "slots" in s:
-            si, rs, olds = s["slots"]
-            for p, old in zip((self.w1, self.w3, self.w2), olds):
-                k = rs.view((-1,) + (1,) * (p.dim() - 1)).to(p.dtype)
-                p.data[si] = old + k * (p.data[si] - old)
-
-    @torch.no_grad()
-    def relax_rates(self):
-        """
-        Bring every expert's rate toward the main one by how much it has been
-        trained since the last call: log(rate) halves every `rate_half` steps
-        of its own training. One that was not trained keeps its rate.
-        """
-        n = self._n
-        far = torch.log(self.rate[:n].clamp_min(1.0))
-        self.rate[:n] = torch.exp(far * torch.pow(0.5, self.trained[:n]
-                                                  / self.rate_half))
-        self.trained.zero_()
 
     # -- growing and pruning ----------------------------------------------
     @torch.no_grad()
@@ -1134,11 +1192,21 @@ class PagedPool(nn.Module):
         # a newborn has been used by nothing, so the balance term pulls its row
         # up from the first training forward after its birth
         self.recent = grow_vec(self.recent, 0.0)
-        # under the newborn rule it starts at the base rate, however far the
-        # main one has come down - see `rate`
-        self.rate = grow_vec(self.rate, 1.0 / max(float(self.main_scale), 1e-9)
-                             if self.newborn_rate else 1.0)
-        self.trained = grow_vec(self.trained, 0.0)
+        self.bias = grow_vec(self.bias, 0.0)
+        self.chosen = grow_vec(self.chosen, 0.0)
+        self._step_hits = grow_vec(self._step_hits, 0.0)
+        if self.birth_gate_parents > 0:
+            # a share of its parents' gates, weighted by the units each gave,
+            # instead of birth_gate: inherited units compute something, so
+            # the newborn can have a say from the start
+            gd = self.gate.data
+            for j, spec in enumerate(lineage):
+                if spec is None:
+                    continue
+                par, sh = spec
+                pg = gd[par.to(gd.device)].abs().float()
+                gd[self._n - k + j] = float(self.birth_gate_parents) * float(
+                    (pg * sh.to(gd.device).float()).sum())
 
         # the routers keep one row per expert, so they grow too - each new
         # row the unit-weighted average of its parents' rows (see above)
@@ -1255,6 +1323,10 @@ class PagedPool(nn.Module):
         # renumbered the directory would cost up to n renames for one deletion,
         # and every record ever written by position - expert_history.jsonl
         # included - would silently stop meaning what it said.
+        #
+        # The writer lands everything first, or a write still queued for an
+        # expert deleted here would put its file back.
+        self.tiers.drain()
         for i in range(self._n):
             if i not in kept:
                 u = self._f(i)
@@ -1270,7 +1342,8 @@ class PagedPool(nn.Module):
         self.gate = nn.Parameter(self.gate.data[idx].clone())
         self._carry(opt, old_gate, self.gate, idx=idx)
         for nm in ("use", "age", "born", "gate_seen", "last_seen", "ever",
-                   "admits", "uid", "recent", "rate", "trained"):
+                   "admits", "uid", "recent", "bias", "chosen",
+                   "_step_hits"):
             setattr(self, nm, getattr(self, nm)[idx].clone())
         # Give every router a NEW parameter rather than reshaping the one it
         # has. Autograd sizes a gradient from the tensor it saved, so shrinking
@@ -1334,7 +1407,8 @@ class PagedPool(nn.Module):
                 "born": [float(v) for v in self.born],
                 "last_seen": [float(v) for v in self.last_seen],
                 "recent": [round(float(v), 6) for v in self.recent],
-                "rate": [round(float(v), 6) for v in self.rate],
+                "bias": [round(float(v), 6) for v in self.bias],
+                "chosen": [round(float(v), 8) for v in self.chosen],
                 "ever": [bool(v) for v in self.ever],
                 "uid": [int(v) for v in self.uid],
                 "next_uid": int(self.next_uid),
@@ -1345,7 +1419,7 @@ class PagedPool(nn.Module):
         if not t:
             return
         for nm in ("use", "admits", "born", "last_seen",
-                   "gate_seen", "recent", "rate"):
+                   "gate_seen", "recent", "bias", "chosen"):
             v = t.get(nm)
             if not v:
                 continue
@@ -1383,9 +1457,8 @@ class PagedPool(nn.Module):
         self._opt = opt
         if opt is not None and id(opt) not in self._hooked:
             opt.register_step_pre_hook(self._own_moments)
-            opt.register_step_pre_hook(self._rate_before)
             opt.register_step_post_hook(self._count_step)
-            opt.register_step_post_hook(self._rate_after)
+            opt.register_step_post_hook(self._steer_bias)
             self._hooked.add(id(opt))
 
     def attach_sites(self, model):

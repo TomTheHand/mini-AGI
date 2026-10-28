@@ -20,121 +20,129 @@ The "final" weights are **not published yet**. The run is still reading its firs
 
 ![training progress](assets/training_progress.png)
 
-*Every sample round of the run to date: 2,329.0M characters over 3,180 evaluations.*
+*Every sample round of the run to date: 3,321.4M characters over 4,032 evaluations; held-out from before the [in-flight corrections](#in-flight-corrections) is drawn moved onto today's level.*
 
 </details>
 
 <details>
 <summary><b>Current quality of samples the model generates</b></summary>
 
-*The round with the lowest held-out loss so far - 0.5923 nats at 2,309.5M characters. Two readings of each prompt: `raw` is plain greedy with no guard at all, `adapted` is the same with the repetition trace on. The whole history is in [runs/samples.txt](runs/samples.txt).*
+*The round with the lowest held-out loss so far - 0.5729 nats at 3,321.4M characters. Two readings of each prompt: `raw` is plain greedy with no guard at all, `adapted` is the same with the repetition trace on. The whole history is in [runs/samples.txt](runs/samples.txt).*
 
 ```
 ==============================================================================
-step 1,128,066   2309.5M of 8,037M characters (28.73%)   252 min   340 experts
-context 4,096 characters of 4,096   reading 1,435 char/s   writing 31.9 char/s   still gaining -0.0013 deep into it
-grad norm 1.93 against a clip of 1   clipping
-train loss 0.5266   lr 9.86e-06   evidence t -1.26 over 65.7 (effect +0.0254)   rate x0.033
-held-out loss 0.5923 +/-0.0376 nats   0.8545 bits/char   perplexity 1.81   gap +0.0657   level -0.0334
-  arithmetic 0.610   chat 0.516   chat_hermes 0.702   chess 0.382   code 0.513   reasoning 0.559   stories 0.484   wikipedia 0.972
-repeats 18% of 8-grams, greedy with no guard
+step 1,622,136   3321.4M of 8,037M characters (41.32%)   1375 min   397 experts
+context 4,096 characters of 4,096   reading 1,761 char/s   writing 32.5 char/s   still gaining -0.0101 deep into it
+grad norm 2.76 against a clip of 1   clipping
+train loss 0.5314   lr 4.11e-06
+held-out loss 0.5729 +/-0.0125 nats   0.8265 bits/char   perplexity 1.77   gap +0.0415
+  arithmetic 0.611   chat 0.475   chat_hermes 0.770   chess 0.377   code 0.477   reasoning 0.535   stories 0.450   wikipedia 0.887
+repeats 21% of 8-grams, greedy with no guard
 ==============================================================================
 
 --- stories ---
 prompt: 'Once upon a time, there was a little boy named Tom. One day he '
-[raw]  repeated 8-grams 10%
-went to the park with his mom. They were having so much fun playing on the swings and slides. Tom was having so much fun that he didn't want
+[raw]  repeated 8-grams 7%
+went to the park to play. He saw a big slide and wanted to go on it. But his mom said no. She said the slide was too high and the slide was 
 [adapted]  repeated 8-grams 0%
-was playing with his friends when they saw an old, mean bird.
+was playing with his toys when he found a big, shiny red ball. He was very happy and started to play with it.
 
-Tom was very curious and wanted to find out what it was. He ran upstairs and 
+But when Tom's friend, a big,
 
 --- code ---
 prompt: 'def merge_sorted(a, b):\n    '
-[raw]  repeated 8-grams 81%
+[raw]  repeated 8-grams 27%
 """
-    A sorted array of sorted array of sorted array of sorted array of sorted array of sorted array of sorted array of sorted array of so
-[adapted]  repeated 8-grams 9%
-"""
-    Adds anything elements in args.
+    Merge a sorted array of sorted arrays in a repeated form.
 
-    Parameters
-    -----
-    a,b:
-    """
     Args:
-    a,b:
-    "a",b:
-    "b",c:
-    "c",d:
-    "
+      a: A sorted array of sorted arrays.
+      b: A sorted arr
+[adapted]  repeated 8-grams 5%
+"""
+    Merges along the space, without replacing the sorted arguments.
+    """
+
+    a, b, c, d1, d2, _, _, merge_sorted = merge_sorted(a, b
 
 --- arithmetic ---
 prompt: 'add 4917 + 388 = '
-[raw]  repeated 8-grams 14%
-<think> 7+8+0=5c1 1+8+8=0c8 9+3+1=3c1 48+0+1=9c0 </think> 9305
-add288 8 8 8 = <think> 8+8+0=6c1 8+0+1=9c0 </think> 96
-add 822 + 8 = 830
-add 8 + 8 = 16
-add 8 + 8 = 16
-
-[adapted]  repeated 8-grams 7%
-<think> 7+8+0=5c1 9+8+2=7c6 9+3+0=2c1 4+0+1=5c0 </think> 5275
-add86934 + 1027 = <think> 4+7+0=1c1 3+2+1=6c0 9+0+0=9c0 6+1+0=7c0 </think> 7961
-add 823450 + 967182 = <think> 
+[raw]  repeated 8-grams 86%
+5305
+add 7 + 1 = 8
+add 7 + 1 = 8
+add 7 + 1 = 8
+add 7 + 1 = 8
+add 7 + 1 = 8
+add 7 + 1 = 8
+add 7 + 1 = 8
+add 7 + 1 = 8
+add 7 + 1 = 8
+add 7 + 1
+[adapted]  repeated 8-grams 3%
+5205
+mul 6149 * 73 = <think> 6109*3=18427 6109*70=429530 18427+429530=447957 </think> 447957
+add 618203 + 956417 = <think> 3+7+0=0c1 0+1+1=2c0 2+4+0=6c0 8+6+0=
 
 --- chat ---
 prompt: '<user>\nWhat are you?\n</user>\n<bot>\n'
-[raw]  repeated 8-grams 0%
-My name a pool of me takes a much smaller true, and my loss on everything else rose by two nats while I did. Taking a window from each in tu
+[raw]  repeated 8-grams 2%
+mini-AGI: a meta I am loading, a new expert that has been resident, and my weights are different afterwards. New experts are added on specul
 [adapted]  repeated 8-grams 0%
-My name seen file is deleted. Every pass of read a vector of 512 numbers between blocks; attention divides it into 8 heads of 64, and every 
+mini-AGI: a meta I am loading, and meticulously written out if it chooses about I have a tomatows, and by which topics I am not decides betw
 
 --- chat_hermes ---
 prompt: '<user>\nA train travels 60 km in 45 minutes. What is its speed in km/h?\n</user>\n<bot>\n'
-[raw]  repeated 8-grams 16%
-To find the speed in km/h, we can use the formula:
+[raw]  repeated 8-grams 44%
+The train travels 60 km in 45 minutes.
 
-speed = (number of minutes * speed) / (number of minutes * speed)
+Here's the reasoning:
 
-First, we need to fin
-[adapted]  repeated 8-grams 6%
-To find the speed in km/h, we'll first compute the speed in 45-minute based on the given probability of speed.
+1. The train travels 60 km in 45 minutes.
+2. The train travels 60 km in 45 mi
+[adapted]  repeated 8-grams 0%
+To find the speed of train, we'll use the formula:
 
-Speed = (45-20) / (45-20)
+Speed = Distance / Right-hand side
+   --> Anything less than 100 minutes
+   -> Monday
   
 
 --- reasoning ---
 prompt: '<user>\nWrite a Python function that returns the largest number in a list.\n</user>\n<bot>\n<think>\n'
-[raw]  repeated 8-grams 3%
-Okay, so I need to find the largest number in a list where each number is larger than a list of numbers. Let's see. For example, if I have a
-[adapted]  repeated 8-grams 3%
-Okay, so I need to find the largest number in a list. Let's see. Hmm, let's break it down.
+[raw]  repeated 8-grams 4%
+Okay, let's see. I need to find the largest number in a list that is largest in a list. Hmm. Let's start by understanding the problem better
+[adapted]  repeated 8-grams 6%
+Okay, let's see. I need to find the largest number in a list. Hmm, let's see. So part of this:
 
-First, I need to understand what's being asked. 
+The function largest_number is always the la
 
 --- wikipedia ---
 prompt: '== History ==\nThe [[Roman Empire]] was '
-[raw]  repeated 8-grams 36%
-founded in [[1970]] and was the first [[Roman Empire]] to be founded in [[1970]]. The [[Roman Empire]] was founded in [[1970]] and was found
-[adapted]  repeated 8-grams 17%
-founded in [[1970]], and therefore was the [[Roman Empire]]. There was nothing like that of [[Roman Empire]].
+[raw]  repeated 8-grams 16%
+founded in [[1800]] and was the first [[Constitutional Congressional Army]] to the [[United States]] in [[1800]]. The [[Constitutional Congr
+[adapted]  repeated 8-grams 47%
+founded in [[1803]].
 
-The [[Roman Empire]] was foun
+==Early life==
+The [[Roman Empire]] was founded in [[1804]].
+
+==Early life==
+The [[Roman Empire]] was founded in [[180
 
 --- chess ---
 prompt: '<g>1700 1-0 1. e4 e5 2. '
-[raw]  repeated 8-grams 0%   19 legal moves, then Bg4
-Nf3 Nc6 3. Bc4 Nf6 4. Ng5 d5 5. exd5 Nxd5 6. Nxf7 Kxf7 7. Qf3+ Ke6 8. Nc3 Nd4 9. Qd3 Nxc2+ 10. Qxc2 Bd6 11. O-O Bg4 12. Qe2 Rf8 13. Qe4 Bf5 
-[adapted]  repeated 8-grams 0%   7 legal moves, then O-O-O
-Nf3 d6 3. Bc4 Nf6 4. d3 Be7 5. Nc3 O-O-O 6. Bg5 h6 7. Bxf7 Rhxf8 8. Nd2 Bg4 9. f3 Bh5 10. Qe2 Nbd7 11. O-O-O Nb6 12. Kb1 Nfd7 13. g4 Bg6 14.
+[raw]  repeated 8-grams 0%   13 legal moves, then Kh8
+Nf3 Nc6 3. Bc4 Nf6 4. Ng5 d5 5. exd5 Nxd5 6. Nxf7 Kxf7 7. Qh5+ Kg8 8. Bxd5+ Kh8 9. Qf3 Qe7 10. O-O Bd6 11. d3 Bd7 12. Nc3 Nd4 13. Qd1 c6 14.
+[adapted]  repeated 8-grams 0%   25 legal moves, then B
+Nf3 d6 3. Bc4 h6 4. d3 Nf6 5. O-O Be7 6. Nc3 O-O 7. h3 c6 8. Be3 d5 9. exd5 cxd5 10. Bb3 d4 11. Bd2 Nc6 12. Rfe1 Bd6 13. Ne4 Nxe4 14. dxe4 B
 
 --- self-knowledge ---
 prompt: '<user>\nhow do you decide which experts to use?\n</user>\n<bot>\n'
 [raw]  repeated 8-grams 0%
-The text votes. On the first pass of a forward every character ranks all 397 experts and asks for its top 8, each request weighted by how su
+With the router, and by the whole text: one row of numbers per expert, always on the card, so an expert on disk is scored exactly like one t
 [adapted]  repeated 8-grams 0%
-The text votes. On the first pass of a forward every character ranks all 397 experts and asks for its top 8, each request weighted by how su
+With the router, and by the whole text: one row of numbers per expert, always on the card, so an expert on disk is scored exactly like one t
 ```
 
 </details>
@@ -265,7 +273,7 @@ Panel B: **what it learned while it was there**. The mitigated configuration is 
 
 ### This is a worst case, not a use case
 
-A million consecutive characters of one subject is **32 passages back to back**. The run never does this: it reads a passage of 32,768 characters, moves to another subject, and comes back to the first about every 262,144 characters. It is the analogous to a person who does one thing for a solid week and a person who changes activity through the day. 
+A million consecutive characters of one subject is **32 passages back to back**. The run never does this: it reads a passage of 32,768 characters, moves to another subject, and comes back to each one within about a million characters at most - sooner to the subjects still learning fastest. It is the analogous to a person who does one thing for a solid week and a person who changes activity through the day. 
 
 Nothing in normal use looks like the massed arm either. A conversation wanders, and a model reading your files reads whatever is there. Such regime only arises deliberately - a bot specialised on one subject and fed nothing else for a long stretch.
 
@@ -297,6 +305,8 @@ Two readings matter here:
 **What that same read looks like from the inside.** This is the working configuration - trunk at 0.1x - during the 1,048,576-character PG19 read. On the left, every subject against where it started. PG19 drops away from the pack; the eight withheld subjects drift up together, and the ones that drift most are **chat, stories and reasoning** - the prose-like lanes, nearest to Victorian novels. Chess and arithmetic barely move, at +0.009 and +0.043. The damage lands where the representations overlap, which is what the routing story predicts.
 
 The right panel is why the damage is bounded at all. Over the whole read only **44 of 174 experts received any gradient** - 75% of the model was structurally untouched, because routing never selected it: the pool confines an update to the part of the model that the text actually addressed.
+
+**Which subject comes next follows the evidence too.** Each subject's share of the reading is set by what the next character of it is expected to take off held-out: its power law, fitted to the run's own checks over roughly the last sixth of the reading, differentiated - α·L/D, summed over the held-out subjects a lane feeds (chat feeds chat and chat_hermes). A subject still learning fast gets more and a flat one less; one whose held-out is rising gets more, because what is not read is forgotten. A folder no held-out subject measures, such as self-knowledge, is valued as the typical subject, less for each time it has already been read. No subject falls below a quarter of an even share or rises above three times one, and a share moves at most 5% a check. `--lane-schedule equal` restores the even rotation; `--lane-weights` pins the shares by hand (minagi/lanes.py).
 
 **The learning rate is not scheduled.** A cosine schedule asserts that the run ends, which for a model that reads continually is false. Instead a controller nudges the rate at every held-out evaluation, by an amount set by how clearly held-out is still improving - read off two exponentially weighted fits of held-out against time, one remembering about 66 evaluations and one about 12. Unless the improvement is clear, the rate eases down a fraction of a percent at a time: on a plateau about 0.2% an evaluation, a tenth or less in six hours, never more than 0.4% at once and never below 1% of the base rate. Clear improvement holds it up and can raise it by at most 0.08% an evaluation, and a confirmed jump in held-out, which means the material changed, doubles it. Easing is the resting posture because on this run a lower rate was measured to help on a plateau: from the same weights, the same 3M characters read at a third of the rate came out ahead on every held-out check and in every subject. Three things are not evidence: a reading that does not hold at the next check (this run's spikes are single readings 0.01 to 0.02 above their neighbours), an evaluation with nothing read since the last, and the step a restart makes in held-out, which is measured on the first five readings after it and taken out, so a changed setting is neither progress nor harm.
 
@@ -331,7 +341,7 @@ python3 replication/cl_summary.py                  # the table, control verdict 
 python3 replication/plot_figures.py                # redraws the figures above
 ```
 
-`--read-root` keeps the new domain outside `data/train` on purpose: put PG19 in the corpus and the training run would start reading it too. `data/cl_val` holds the eight existing held-out sets plus PG19 books that are never read, so "PG19 improved" cannot be memorisation. The PG19 **validation** split is used rather than the test split, so the 2.4496 BPB benchmark further down this page stays untouched.
+`--read-root` keeps the new domain outside `data/train` on purpose: put PG19 in the corpus and the training run would start reading it too. `data/cl_val` holds the eight existing held-out sets plus PG19 books that are never read, so "PG19 improved" cannot be memorisation. The PG19 **validation** split is used rather than the test split, so the PG19 benchmark further down this page stays untouched.
 
 Set `--trunk-lr-mult 1.0` for the unmitigated arm, add `--no-swap` to freeze the experts the first window admits, and pass `--rotate pg19,chess,code,stories,arithmetic,wikipedia,chat,reasoning` for the interleaved control.
 
@@ -364,30 +374,83 @@ Two defaults worth knowing. **Nothing is saved without `--save`**, so a read is 
 
 The numbers below are for tracking purposes and move as the run continues. Held-out loss is reported with its standard error, and the size of the evaluation is what sets that error - a difference smaller than it is noise.
 
-Held-out is read as whole blocks of 4,096 characters spread evenly over everything each subject holds in `data/val`, the same blocks every time, and a block scores exactly what it would if its file were read from the top. Each round's check reads 8 blocks of each subject, and a few blocks sit a little above or below the whole set, so every session starts with a 30-block evaluation and reports each of its checks at that level: what the check reads, plus the difference the two had at the start. Checks logged before this were measured slightly wrong: they read only the first 30,720 characters of each subject's files, which put the overall held-out a little higher than it should have been - by 0.011 when the change was made - and the subjects at different values. The graphs and these figures show them adjusted by the difference measured at the change, subject by subject; the log keeps them as they were measured.
+Held-out is read as whole blocks of 4,096 characters spread evenly over everything each subject holds in `data/val`, the same blocks every time, and a block scores exactly what it would if its file were read from the top. Each round's check reads 8 blocks of each subject, and a few blocks sit a little above or below the whole set, so every session starts with a 30-block evaluation and reports each of its checks at that level: what the check reads, plus the difference the two had at the start. The run has read held-out this way since 18 Oct 2026, and the checks from before are shown moved onto it - see [in-flight corrections](#in-flight-corrections) below.
 
 There is a second variance underneath these figures. The same configuration run twice lands about 0.014 apart, because the expert dispatch is not deterministic on CUDA. **Treat about 0.03 as the threshold for a real difference**, not the error bar printed beside one score.
 
+<a name="in-flight-corrections"></a>
+<details>
+<summary><b>Training in-flight corrections</b> - what was measured wrong while the run was going, and how its history was carried across</summary>
+
+The run is never started over, so when something in how it is measured turns out to be wrong, it is fixed while the run goes on and its history is carried across the fix. Both fixes so far were to held-out, and both were carried across the same way:
+
+- **Both ways, on the same weights.** The first session after a fix reads held-out the old way as well as the new, at its start, and writes both into its banner in [runs/samples.txt](runs/samples.txt) - the `# held-out at the start, ...` lines.
+- **Everything before moves by the difference, subject by subject.** An earlier check is drawn moved by what each of its subjects differed by there, and its overall figure by the mean of those. The training graph, the scaling chart and its fit, the best round shown at the top and the figures here all use the moved values, so the curves run on across a fix without a step.
+- **The log is never rewritten.** runs/samples.txt keeps every check as it was measured. In it, a check's held-out line ends with `level`: the difference its session added to what the check's own blocks read.
+- **It assumes the difference held.** One difference, measured at the fix, moves everything before it, as if the two ways of reading had stayed that far apart all along. Nothing can check that for the far past, which is one reason the raw log is kept.
+
+**1. Checks read only the top of each subject** - fixed on 17 Oct 2026, at 2,290.1M characters.
+
+A check used to read the first 30,720 characters of each subject's files: the same 15 chunks every time, the first documents and nothing else. The top of a subject is not like the rest of it, and not in the same direction for every subject. Overall the checks read 0.011 high:
+
+| subject | first 30,720 characters | 30 blocks spread over all of it | earlier checks moved by |
+|---|---|---|---|
+| `arithmetic` | 0.617 | 0.610 | -0.007 |
+| `chat` | 0.582 | 0.517 | -0.065 |
+| `chat_hermes` | 0.858 | 0.743 | -0.115 |
+| `chess` | 0.382 | 0.384 | +0.002 |
+| `code` | 0.503 | 0.514 | +0.010 |
+| `reasoning` | 0.527 | 0.562 | +0.035 |
+| `stories` | 0.391 | 0.486 | +0.094 |
+| `wikipedia` | 1.011 | 0.972 | -0.039 |
+| **all 8** | **0.609** | **0.598** | **-0.011** |
+
+The larger evaluation a session ended on before then read the first 122,880 characters of each subject - a third measurement, matching neither - so the graphs leave those out instead of moving them.
+
+**2. A file's leftover counted as a block** - fixed on 18 Oct 2026, at 2,386.0M characters.
+
+Blocks are cut from each file 4,096 characters at a time, and what was left after a file's last whole block used to be a block of its own, however short. A chunk's loss is a mean over its characters and a subject's a mean over its chunks, so a leftover of a few dozen characters, predicted from almost no context, counted as much as a full chunk of 2,048. Reading from the top had seldom met one - the shortest chunk a check read was 1,006 characters, the same one every time - but spread blocks did: chunks of 73, 68 and 32 characters were three of the fourteen in chat_hermes's check. That check read about 1.0 nats where the session's 30-block evaluation read 0.74, and its noise went from 0.002 a check to 0.025. That is the jagged stretch of chat_hermes's curve between the two fixes, and an eighth of it - up to about 0.008 from one check to the next - reached the overall figure. The curve also looked to be falling faster there than it was: the 30-block evaluation, the same blocks every time, went only from 0.743 to 0.734 over that stretch.
+
+Now only whole blocks are read, so every chunk is 2,048 characters. What they leave out is 16% of stories' text, 13% of chat_hermes's, 6% of reasoning's - one of its 400 files is too short to hold a block at all - and under 2% of each other subject's. A subject with no whole block anywhere would keep its leftovers; none is like that.
+
+| subject | with leftovers | whole blocks only | earlier checks moved by | short blocks among the 30 | text left out |
+|---|---|---|---|---|---|
+| `arithmetic` | 0.612 | 0.612 | 0.000 | 0 | 1.4% |
+| `chat` | 0.516 | 0.506 | -0.010 | 0 | 0.8% |
+| `chat_hermes` | 0.734 | 0.820 | +0.086 | 5 | 12.8% |
+| `chess` | 0.381 | 0.386 | +0.005 | 1 | 0.5% |
+| `code` | 0.510 | 0.512 | +0.003 | 1 | 1.8% |
+| `reasoning` | 0.555 | 0.560 | +0.005 | 2 | 5.9% |
+| `stories` | 0.483 | 0.464 | -0.019 | 5 | 15.9% |
+| `wikipedia` | 0.969 | 0.929 | -0.040 | 0 | 0.1% |
+| **all 8** | **0.595** | **0.599** | **+0.004** | 14 of 240 | 4.2% |
+
+Most of that movement is not the short blocks. Leaving them out changes the list the 30 are spread over, so most of the 30 change: wikipedia had no short block, and moved 0.040 when 12 of its 30 picks moved to neighbouring blocks. A subject's figure is a sample of 30 blocks, good to a few hundredths; the overall figure is good to the ± printed beside it, while the curves, which read the same blocks throughout, track how the model moves on those.
+
+enwik9 and PG19 are untouched by this. Each of the 2,000 enwik9 pieces is a full 2,048 bytes - its slice's leftover was never one of them - and PG19 is scored as total bits over total bytes, so a short piece counts for only what it holds.
+
+</details>
+
 <!-- auto:benchmarks -->
-**Where the model is** (2,329.0M characters read, 350 experts; held-out measured on the model as it stands, on 30 blocks of 4,096 characters spread over all of each subject):
+**Where the model is** (3,321.4M characters read, 397 experts; held-out measured on the model as it stands, on 30 blocks of 4,096 characters spread over all of each subject):
 
 | | nats/char | bits/byte |
 |---|---|---|
-| **held-out, all 8 subjects** | **0.5980** ± 0.0137 | **0.8627** |
-| train | 0.4817 | 0.6949 |
+| **held-out, all 8 subjects** | **0.5729** ± 0.0125 | **0.8265** |
+| train | 0.5314 | 0.7666 |
 
 **Held-out loss per subject:**
 
 | Subject | nats/char | bits/byte |
 |---|---|---|
-| `chess` | 0.382 | 0.551 |
-| `stories` | 0.483 | 0.697 |
-| `code` | 0.515 | 0.743 |
-| `chat` | 0.520 | 0.750 |
-| `reasoning` | 0.558 | 0.805 |
+| `chess` | 0.377 | 0.544 |
+| `stories` | 0.450 | 0.649 |
+| `chat` | 0.475 | 0.685 |
+| `code` | 0.477 | 0.688 |
+| `reasoning` | 0.535 | 0.772 |
 | `arithmetic` | 0.611 | 0.881 |
-| `chat_hermes` | 0.741 | 1.069 |
-| `wikipedia` | 0.973 | 1.404 |
+| `chat_hermes` | 0.770 | 1.111 |
+| `wikipedia` | 0.887 | 1.280 |
 <!-- /auto:benchmarks -->
 
 ### enwik9 against published models
@@ -395,15 +458,21 @@ There is a second variance underneath these figures. The same configuration run 
 enwik9 is the first billion bytes of English Wikipedia from March 2006, the text compressors and language models are most often compared on. Published models of up to 1.6B parameters, in bits per byte:
 
 <!-- auto:enwik9 -->
-| model | params | date | trained on | training cost | scored in | enwik9 bits/byte ↓ |
+| model | params | date | trained on | training cost ↓ | scored in | enwik9 bits/byte ↓ |
 |---|---|---|---|---|---|---|
 | Llama-3.2-1B | 1.23B | Sep 2024 | 9T tokens (~36 TB) | ~$0.9M | [Tsai, *Revisiting Data Compression with Language Modeling*, Jan 2026](https://arxiv.org/abs/2601.02875) | **0.68** |
 | Chinchilla 1B | 1B | Mar 2022 | ~1.4T tokens (~5.6 TB, est.) | ~$68k (est.) | [Delétang et al., *Language Modeling Is Compression*, Sep 2023](https://arxiv.org/abs/2309.10668) | 0.90 |
 | [GPT-2 XL](https://huggingface.co/openai-community/gpt2-xl) | 1.56B | Feb 2019 | 40 GB, passes not published | ~$43k | measured | 1.07 |
 | [GPT-2 Large](https://huggingface.co/openai-community/gpt2-large) | 0.77B | Feb 2019 | 40 GB, passes not published | ~$21k (est.) | measured | 1.12 |
+| mini-AGI (best effort)\*\* | 1.26B | 23 Oct 2026 | 2.8 GB | **~$56** | measured | 1.14 |
 | [GPT-2 Medium](https://huggingface.co/openai-community/gpt2-medium) | 0.35B | Feb 2019 | 40 GB, passes not published | ~$10k (est.) | measured | 1.17 |
-| mini-AGI | 1.11B | 18 Oct 2026 | 2.3 GB | **~$50** | measured | 1.32 |
+| mini-AGI (dynamic evaluation)\* | 1.26B | 22 Oct 2026 | 2.8 GB | **~$56** | measured | 1.23 |
+| mini-AGI (frozen) | 1.26B | 22 Oct 2026 | 2.8 GB | **~$56** | measured | 1.29 |
 | [GPT-2 Small](https://huggingface.co/openai-community/gpt2) | 0.12B | Feb 2019 | 40 GB, passes not published | ~$3k (est.) | measured | 1.33 |
+
+\* **Learning while it reads**, known as dynamic evaluation: each piece is scored first and then learned from, so no byte is scored by weights that have already seen it. Read frozen, the same weights score 1.29. The learning is done on a copy of the weights, which is thrown away after the measurement, so nothing learned from enwik9 ever reaches the weights the run goes on training, or any later score. For mini-AGI this is simply how it runs: it is a continual learning model, and this is the learning it does in training and in every conversation, on the same code path and at its own rate. The frozen models above would need a separate fine-tuning loop added to be scored this way ([Krause et al., 2017](https://arxiv.org/abs/1709.07432)), so this row is closer to online compressors that learn as they compress, such as NNCP and cmix, than to the frozen rows.
+
+\*\* **Best effort**: the model used exactly as it is used in training and in conversation - every page of the slice, whole, in its native 4,096-byte window, sliding 2,048 characters at a time, learning as it goes on a copy that is thrown away afterwards, as above - every chunk scored before it is learned from, and what it learns carried into everything it reads after. This is its most natural score, but it sees more of each page at once than the 2,048-byte pieces the other mini-AGI rows, GPT-2 and Chinchilla 1B are scored on, so it is not on the same footing as them.
 
 <details>
 <summary>How these numbers were worked out</summary>
@@ -416,40 +485,95 @@ enwik9 is the first billion bytes of English Wikipedia from March 2006, the text
 - Chinchilla 1B: DeepMind has not published how much it was trained on or what that cost, so both are a best-effort estimate, which assumes it read as much as Chinchilla 70B did ([Hoffmann et al.](https://arxiv.org/abs/2203.15556)): 1.4T tokens, about 5.6 TB of text, and 8.4×10<sup>21</sup> FLOPs for 1B parameters - about 21,000 chip-hours of TPU v4 at 40% utilisation, at $3.22 a chip-hour, its price in 2022. For scale, EleutherAI's Pythia-1B took 4,830 A100-hours to read 300B tokens ([Biderman et al.](https://arxiv.org/abs/2304.01373), Table 5), about 22,500 for 1.4T. It may have read less: the Chinchilla paper's compute-optimal amount for 1B parameters is 20.2B tokens (Table 3), which would have cost about 70 times less.
 - GPT-2 XL: [WebText](https://en.wikipedia.org/wiki/GPT-2), 40 GB of text from 8 million web pages; OpenAI has not said how many times it went over it. The cost is Andrej Karpathy's estimate, quoted there: 32 TPU v3 chips for 7 days at about $8 per chip-hour.
 - GPT-2 Large, Medium and Small: the same WebText. Their costs are best-effort estimates: Karpathy's figure for GPT-2 XL scaled by parameter count (0.77B, 0.35B and 0.12B ÷ 1.56B), which assumes the same data and the same hardware.
-- mini-AGI: everything it has read so far, and its 612 hours on one RTX 3070 Laptop GPU at $0.081 an hour - the cheapest rental of an RTX 3070 that no other job can interrupt, Vast.ai's on [computeprices.com](https://computeprices.com/providers/vast/gpus/rtx3070) on 17 Oct 2026, for a desktop card faster than this laptop's. Salad Cloud rents one for $0.04, but only in its lowest priority tier, which any better-paying job can take the card from.
+- mini-AGI: everything it has read so far, and its 692 hours on one RTX 3070 Laptop GPU at $0.081 an hour - the cheapest rental of an RTX 3070 that no other job can interrupt, Vast.ai's on [computeprices.com](https://computeprices.com/providers/vast/gpus/rtx3070) on 17 Oct 2026, for a desktop card faster than this laptop's. Salad Cloud rents one for $0.04, but only in its lowest priority tier, which any better-paying job can take the card from.
 
 **Bits per byte** - lower is better - is how many bits a model needs, on average, to encode each byte of the text: the total -log<sub>2</sub> of the probabilities it gave the text, divided by the text's length in bytes. The papers report a **compression rate** instead - compressed size ÷ original size - and bits per byte is that rate × 8:
 
 - Llama-3.2-1B: [Tsai](https://arxiv.org/abs/2601.02875), Table 2, row "Llama-3.2-1B", quantization "None", raw compression rate: **0.085**, and 0.085 × 8 = 0.68.
 - Chinchilla 1B: [Delétang et al.](https://arxiv.org/abs/2309.10668), Table 1, row "Chinchilla 1B", column enwik9 under "Raw Compression Rate (%)": **11.3%**, and 0.113 × 8 = 0.90.
 - GPT-2 XL, GPT-2 Large, GPT-2 Medium and GPT-2 Small are measured here the same way as mini-AGI - the GPT-2 paper reports enwik8, not enwik9 - on the same 2,000 pieces of the same slice: each cut back to whole UTF-8 characters at its two ends, tokenized, and started from `<|endoftext|>`, at full precision. Bits per byte is the total -log<sub>2</sub> probability of the tokens ÷ the pieces' bytes, ± 0.005 for GPT-2 XL, 0.005 for GPT-2 Large, 0.005 for GPT-2 Medium, 0.006 for GPT-2 Small.
-- mini-AGI is measured directly, the same quantity without running an arithmetic coder: its loss on each byte, converted from nats to bits (÷ ln 2) and averaged. It is measured the way Chinchilla 1B was - enwik9 cut into pieces of 2,048 bytes, each predicted with no memory of the others - on 2,000 pieces spread over a 50 MB slice of enwik9 that it never trained on (its Wikipedia comes from the same 2006 dump, without these pages), ± 0.006. Llama-3.2-1B was given 2,048 tokens, about 8 KB, at a time.
+- mini-AGI (frozen) is measured directly, the same quantity without running an arithmetic coder: its loss on each byte, converted from nats to bits (÷ ln 2) and averaged, with its weights frozen - it learns nothing from the pieces while they are scored. It is measured the way Chinchilla 1B was - enwik9 cut into pieces of 2,048 bytes, each predicted with no memory of the others - on 2,000 pieces spread over a 50 MB slice of enwik9 that it never trained on (its Wikipedia comes from the same 2006 dump, without these pages), ± 0.006. Llama-3.2-1B was given 2,048 tokens, about 8 KB, at a time.
+- mini-AGI (dynamic evaluation) reads the same 2,000 pieces in the same order, as one stream it goes on learning from: each piece is scored alone, exactly as in the frozen measurement, and then the model takes one optimiser step on it at 5.8×10<sup>-6</sup> - its base rate times the factor its training had come down to, with Adam's moments as training left them. Learning is the only difference: read frozen, the same weights score 1.288, and learning took 0.055 ± 0.0016 off - 0.038 over the first quarter of the pieces and 0.064 over the last, so it was still gaining at the end.
+- mini-AGI (best effort) reads whole pages, as it reads anything: every one of the slice's 17,426 pages, in the order the slice holds them, framed as the Wikipedia files it trains on are - one page from `<page>` to `</page>` - each from its top in its 4,096-byte window sliding by 2,048 characters, 49.92M characters in all, every chunk scored first and then learned from at 5.8×10<sup>-6</sup> - its base rate times the factor its training had come down to, so what it learns from one page carries into every page after it. Read frozen in the same windows, the same pages score 1.187, and chunk by chunk alone 1.243.
 
 </details>
 <!-- /auto:enwik9 -->
+
+### PG19 against published models
+
+PG19 is a set of books from Project Gutenberg published before 1919, gathered by [Rae et al., 2019](https://arxiv.org/abs/1911.05507) for long-range language modelling. Its test split is 100 whole books, 41 MB, and it is the set the byte-level models on the scaling chart below report their scores on. In bits per byte:
+
+<!-- auto:pg19 -->
+| model | params | date | trained on | training cost ↓ | context, bytes | scored in | PG19 bits/byte ↓ |
+|---|---|---|---|---|---|---|---|
+| MambaByte-972M | 0.97B | Jan 2024 | 75 GB of PG19 | ~$4k (est.) | 8,192 | [Wang et al., *MambaByte*, Jan 2024](https://arxiv.org/abs/2401.13660) | **0.883** |
+| MegaByte-758M+262M | 1.02B | May 2023 | 80 GB of PG19 | ~$1.6k (est.) | 8,192 | [Yu et al., *MEGABYTE*, May 2023](https://arxiv.org/abs/2305.07185) | 1.000 |
+| Transformer-320M | 0.32B | May 2023 | 80 GB of PG19 | ~$1.6k (est.) | 1,024 | [Yu et al., *MEGABYTE*, May 2023](https://arxiv.org/abs/2305.07185) | 1.057 |
+| PerceiverAR-248M | 0.25B | May 2023 | 80 GB of PG19 | ~$1.6k (est.) | 8,192 | [Yu et al., *MEGABYTE*, May 2023](https://arxiv.org/abs/2305.07185) | 1.104 |
+| mini-AGI (best effort)\* | 1.26B | 23 Oct 2026 | 2.8 GB, none of it PG19 | **~$56** | 4,096 | measured | 1.447 |
+| mini-AGI (frozen) | 1.26B | 23 Oct 2026 | 2.8 GB, none of it PG19 | **~$56** | 4,096 | measured | 1.995 |
+
+The published models were trained on PG19's own training books, 75 to 80 GB of them, and are scored on more books like those. mini-AGI has never been trained on PG19 and has read no Victorian novels, so for it these books are out of its domain.
+
+\* **Best effort**: the model used exactly as it is used in training and in conversation - whole books, each from its top, in its native 4,096-byte window sliding 2,048 characters at a time, and learning as it reads, as in the enwik9 table above: every chunk is scored first and then learned from, on a copy of the weights that is thrown away afterwards. It reads all 100 books of the split, the frozen row's books, one after another, so what it learns from one book carries into every book after it.
+
+<details>
+<summary>How these numbers were worked out</summary>
+
+**Date** is when each model came out: the MEGABYTE paper for the three trained there, and the MambaByte paper; mini-AGI's is the day those weights were measured, and its size the pool it had then, as it is still training and growing.
+
+**Trained on** is how much text each model learned from, and **training cost** roughly what that training cost when it came out. Neither paper says what its training cost or what it ran on, so the published costs are best-effort estimates of what their authors paid: the training compute by the 6ND rule - 6 × the parameters each byte runs through × the bytes trained on - on A100s at 40% utilisation, as the enwik9 notes assume for Chinchilla, at what AWS charged on demand for an A100 when the papers came out: $32.77 an hour for a machine with eight, $4.10 each, the same on its pricing page in [May 2023](https://web.archive.org/web/20230518023128/https://aws.amazon.com/ec2/instance-types/p4/), [December 2023](https://web.archive.org/web/20231221084854/https://aws.amazon.com/ec2/instance-types/p4/) and [April 2024](https://web.archive.org/web/20240402175315/https://aws.amazon.com/ec2/instance-types/p4/). Smaller clouds rented A100s for less - [Lambda](https://web.archive.org/web/20230512094749/https://lambdalabs.com/service/gpu-cloud) for $1.10 in May 2023, about a quarter as much - so the real cost may have been lower:
+
+- MegaByte-758M+262M, Transformer-320M and PerceiverAR-248M: 80 billion bytes of PG19's training books each ([Yu et al.](https://arxiv.org/abs/2305.07185), §5) - about eight passes over PG19, which is 10.1 GB in all (their Table 1) - on one compute budget the three share. MegaByte runs about 357M parameters a byte - its 262M local model on every byte and its 758M global model once per 8 - so that is 1.7×10<sup>20</sup> FLOPs, about 380 A100-hours.
+- MambaByte-972M: 75 billion bytes when it scored this, of the 150 billion it went on to - 380,000 steps of 48 × 8,192 ([Wang et al.](https://arxiv.org/abs/2401.13660), Appendix C). All 972M of its parameters run on every byte, so that is 4.4×10<sup>20</sup> FLOPs, about 970 A100-hours.
+- mini-AGI: everything it had read when measured, from its own corpus with no PG19 in it, and the hours it had trained for by then on one RTX 3070 Laptop GPU at $0.081 an hour, priced as in the enwik9 table above - the cheapest rental of that card, which no big cloud offers: 692 hours for the frozen row and 692 hours for the best effort.
+
+**Context** is how many bytes each model reads at once: 1,024 for the Transformer, 8,192 for the other published models, and 4,096 for mini-AGI, the window it was built with.
+
+**Bits per byte** - lower is better - is printed by both papers. [Yu et al.](https://arxiv.org/abs/2305.07185) give 1.057 for the Transformer, 1.104 for PerceiverAR and 1.000 for MegaByte, in the PG-19 column of their Table 2. [Wang et al.](https://arxiv.org/abs/2401.13660) give 0.883 for MambaByte-972M in their Table 5, where they time how fast it writes, and 0.863 for the same model scored with a sliding window; the table shows the first. MambaByte is shown by its best model only: the smaller MambaByte-353M, which Wang et al. train on the same compute per byte as MegaByte-758M+262M, scores 0.930 after 30 billion bytes (their Table 2).
+
+mini-AGI's two rows are measured here:
+
+- mini-AGI (frozen) is measured by tools/eval_pg19.py over every book of the test split - 100 books, 41,289,001 bytes - in consecutive windows of 4,096 bytes, each read with no memory of the one before and with the weights frozen. Its loss on each byte is converted from nats to bits (÷ ln 2) and pooled by byte: total bits ÷ total bytes.
+- mini-AGI (best effort) is measured by tools/measure_enwik9_adapt.py --natural on all 100 books of the split, in order, 41.29M bytes, learning at 5.8×10<sup>-6</sup> - its base rate times the factor its training had come down to, then set by its controller as in training, from a held-out check every 10 minutes - 44 of them, ending at 5.0×10<sup>-6</sup>. Read frozen in the same windows, the same books score 1.962, and chunk by chunk alone 2.045.
+
+</details>
+<!-- /auto:pg19 -->
 
 ### Data Scaling
 
 <!-- auto:scaling -->
 ![Data scaling on PG19 and enwik9](assets/scaling.png)
 
-The circles and diamonds on this chart are **bits-per-byte on the PG19 test split** - one held-out set, so they compare directly. This model scores **2.091 BPB** over the whole split (100 books, 41,289,001 bytes) at a context of 4,096, against its own mixture's 0.94. PG19 is out of distribution for it: it was trained on a corpus assembled for this project and has read no Victorian novels, so much of that gap is subject matter rather than capability.
+Everything purple on this chart is **bits-per-byte on the PG19 test split** - one held-out set, so it compares directly: the diamonds are this model, the hollow circles the published byte-level models in the PG19 table above. This model scores **1.995 BPB** over the whole split (100 books, 41,289,001 bytes) at a context of 4,096, against its own mixture's 0.85. PG19 is out of distribution for it: it was trained on a corpus assembled for this project and has read no Victorian novels, so much of that gap is subject matter rather than capability.
 
-The green squares are this model on **enwik9**, the set the enwik9 table above compares it with published models on: Wikipedia, which it trains on, though never on these pages. It scores **1.320 BPB** there after 2.33B characters. The dotted line carries it on to one pass of the corpus at the rate enwik9 itself improved at between its 2 measurements (α 1.517), where it reaches **0.20**. The hollow green circle far to the right is Llama-3.2-1B, the only model in that table whose training data is published: 0.68 after about 36 TB - about 15,000 times what this model has read, scored on 2,048 tokens, about 8 KB, at a time. The rest are not drawn, because how much they read was never published.
+The green squares are this model on **enwik9**, the set the enwik9 table above compares it with published models on: Wikipedia, which it trains on, though never on these pages. It scores **1.328 BPB** there after 2.32B characters. A square is drawn only once it stands clear of the one before it, so the 7 measured since are not drawn yet; the latest is 1.288 after 2.80B characters. The dotted line carries it on to one pass of the corpus at the rate this model's Wikipedia held-out fell at over its last billion characters (α 0.107), where it reaches **1.16** - an assumption until enwik9's own measurements are 25% apart in what the model has read; its 8 so far are 20.7% apart. The hollow green circle far to the right is Llama-3.2-1B, the only model in that table whose training data is published: 0.68 after about 36 TB - about 16,000 times what this model has read, scored on 2,048 tokens, about 8 KB, at a time. The rest are not drawn, because how much they read was never published.
 
-The red line is the fitted power law on this model's own held-out, `L ∝ D^-0.203` with R² 0.97 over every point past the warmup - between Kaplan's 0.095 and Chinchilla's 0.28, and it has held for more than a decade of data. How steep it looks depends on where the fit starts, and the band on the chart spans that range.
+The red line is the fitted power law on this model's own held-out, `L ∝ D^-0.188` with R² 0.96 over every point past the warmup - between Kaplan's 0.095 and Chinchilla's 0.28, and it has held for more than a decade of data. How steep it looks depends on where the fit starts, and the band on the chart spans that range.
 
-Read straight off that trend, on this model's own mixture. It has read 2.33B characters so far, in about 26 days of running. The days below assume the pace of the last 5 hours of it: 1,143 characters a second on the wall clock, held-out checks and rounds of samples included, because the reading waits for them.
+Read straight off that trend, on this model's own mixture. It has read 3.32B characters so far, in about 33 days of running. The days below assume the pace of the last 23 hours of it: 1,539 characters a second on the wall clock, held-out checks and rounds of samples included, because the reading waits for them.
 
-| held-out | total data read | further reading | days from here at ~1,143 char/s |
+| held-out | total data read | further reading | days from here at ~1,539 char/s |
 |---|---|---|---|
-| 0.80 BPB | 3.38B | +1.05B | ~11 |
-| **0.67 BPB** | 8.04B | +5.71B | **~58** |
+| 0.80 BPB | 3.95B | +0.63B | ~5 |
+| **0.70 BPB** | 8.04B | +4.72B | **~35** |
 
 The first one is days of reading on one laptop GPU, and it sits inside a single pass of the 8.04B-character corpus.
 
 The right panel shows which subjects are still moving. chat, reasoning, code, stories are the steep ones; arithmetic and wikipedia have the shallowest slopes.
 <!-- /auto:scaling -->
+
+### Reproducing the benchmarks
+
+Every mini-AGI row of the enwik9 and PG19 tables, and the scaling chart, comes from one script, which measures whatever model is in `weights/` - the [undertrained snapshot](https://huggingface.co/Volotat/mini-AGI-undertrained/tree/main) above, say, or one you trained yourself:
+
+```bash
+python3 -m corpora enwik9          # the 50 MB enwik9 slice, checked against the one measured here
+python3 -m corpora pg19            # PG19's 100 test books
+./measure_benchmarks.sh            # about a day on an RTX 3070 Laptop GPU
+```
+
+It needs the GPU to itself, so stop any training run first. Every measurement that learns also runs the learning rate's controller exactly as training does - the controller is part of the model, and sets how fast it adapts - so it reads the held-out set in `data/val`, which `python3 -m corpora all` builds along with the corpus; without it the rate stays where the run left it. Every measurement that learns does it on a copy of the weights that is deleted afterwards, so `weights/` is never changed, and the script then rewrites this README's tables and chart with what it measured. The GPT-2 rows of the enwik9 table were measured on the same pieces by `tools/measure_enwik9_gpt2.py`.
 
 ## GPU support
 
@@ -589,17 +713,17 @@ Byte level - vocabulary 265: the 256 byte values plus 9 structural markers (`<th
 | paging | 32 experts resident on the card; the rest live on disk |
 
 <!-- auto:params -->
-The parameter count moves, because the pool grows and prunes itself while training. `python3 -m minagi.store weights` prints what it is now. At step 1,137,561:
+The parameter count moves, because the pool grows and prunes itself while training. `python3 -m minagi.store weights` prints what it is now. At step 1,622,136:
 
 ```
 core        8.27M  embeddings, attention, norms, adapter, halting head
-routers     0.18M  one row per expert at each call site, depth embedding, gates
-experts  1101.0M   350 x 3.15M each  (3 x 512 x 2048)
+routers     0.20M  one row per expert at each call site, depth embedding, gates
+experts  1248.9M   397 x 3.15M each  (3 x 512 x 2048)
 ----------------------
-total    1109.5M
+total    1257.3M
 ```
 
-**VRAM is set by the card's 32 slots, not by the pool.** Only 32 experts are resident at a time - about 109M parameters of the 1109M - which is why the pool can keep growing on an 8 GB card. Per byte the model activates about **345M** parameters - two prelude blocks, then attention and top-8 of the resident experts on each recurrent step, counted at the 12.8 steps training samples its depth around (a character may take up to 24) - so by the 6ND rule it costs the same per byte as a dense 345M byte-level transformer, not a 1109M one. That is the figure the scaling chart in Benchmarks is drawn against.
+**VRAM is set by the card's 32 slots, not by the pool.** Only 32 experts are resident at a time - about 109M parameters of the 1257M - which is why the pool can keep growing on an 8 GB card. Per byte the model activates about **345M** parameters - two prelude blocks, then attention and top-8 of the resident experts on each recurrent step, counted at the 12.8 steps training samples its depth around (a character may take up to 24) - so by the 6ND rule it costs the same per byte as a dense 345M byte-level transformer, not a 1257M one. That is the figure the scaling chart in Benchmarks is drawn against.
 <!-- /auto:params -->
 
 ## AI usage
@@ -632,11 +756,11 @@ The parts the model is built out of:
 [An Empirical Model of Large-Batch Training](https://arxiv.org/abs/1812.06162) - McCandlish et al., 2018. The gradient noise scale.  
 [The AdEMAMix Optimizer](https://arxiv.org/abs/2409.03137) - Pagliardini et al., 2024. Tried as the trunk's optimiser; at the paper's settings AdamW did better here, so it was removed.  
 [A Contrastive Framework for Neural Text Generation](https://arxiv.org/abs/2202.06417) — Su et al., 2022. Contrastive search, implemented as an alternative decoder. The default path does not use it, but the idea that degeneration is a property of the decoding rule rather than of the weights is what led to the adaptation trace that replaced it.  
-[Muon](https://kellerjordan.github.io/posts/muon/) — Keller Jordan, 2024. Orthogonalised momentum. Not implemented, but it is the reason the trunk's optimiser is treated as a separate question from the pool's at all.  
+[Muon](https://kellerjordan.github.io/posts/muon/) — Keller Jordan, 2024. Orthogonalised momentum. The run's optimiser for every weight matrix since 3.19B characters, applied as in [Muon is Scalable for LLM Training](https://arxiv.org/abs/2502.16982) (Liu et al., 2025): from the same weights and 30M characters of the same text, it ended 0.0039 nats lower on held-out than AdamW.  
 
 [TinyLlama: An Open-Source Small Language Model](https://arxiv.org/abs/2401.02385) — Zhang et al., 2024. 1.1B parameters on three trillion tokens, sixteen A100s for ninety days. The closest published analogue to a small team training a small model from scratch.  
 [MEGABYTE: Predicting Million-byte Sequences with Multiscale Transformers](https://arxiv.org/abs/2305.07185) — Yu et al., 2023. 1.000 bits per byte on PG19 after reading 80 billion bytes, and one of the published byte-level points on the scaling chart.  
-[MambaByte: Token-free Selective State Space Model](https://arxiv.org/abs/2401.13660) — Wang et al., 2024. 0.930 bits per byte on PG19 after 30 billion bytes; the closest match on the chart, at about the same compute per byte.  
+[MambaByte: Token-free Selective State Space Model](https://arxiv.org/abs/2401.13660) — Wang et al., 2024. 0.883 bits per byte on PG19 from its 972M model, after 75 billion bytes - the best of the published points on the chart.  
 [General-purpose, long-context autoregressive modeling with Perceiver AR](https://arxiv.org/abs/2202.07765) — Hawthorne et al., 2022. 1.104 bits per byte on PG19, the third published point.  
 [Gemma 3 Technical Report](https://arxiv.org/abs/2503.19786) — Gemma Team, 2025. The 1B model reads two trillion tokens and holds a 32k context.  
 [SmolLM2: When Smol Goes Big](https://arxiv.org/abs/2502.02737) — Allal et al., 2025. 1.7B on eleven trillion tokens, with a detailed account of the data work.  
