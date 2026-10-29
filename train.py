@@ -1425,6 +1425,17 @@ def cmd_read(args):
                         moved_lr = gov.govern(v_, se_)
                         if moved_lr:
                             print(f"    {moved_lr}", flush=True)
+                        # REMOVING THIS: delete these five lines and
+                        # minagi/notify.py. Nothing else refers to either, and
+                        # the import is guarded so the run does not notice.
+                        if v_ < best_val:
+                            prev_best, best_val = best_val, v_
+                            try:
+                                from minagi import notify
+                                notify.best(v_, base_chars + seen,
+                                            pool.n_experts(), prev_best)
+                            except Exception:
+                                pass
                     # WRITING SPEED: the characters the samples wrote over the
                     # time spent writing them. Every reading writes exactly
                     # sample_chars.
@@ -2012,7 +2023,7 @@ def write_samples(path, step, chars, minutes, samples, val=None, se=None,
                 f.write(f"   evidence t {plast.get('t', 0):+.2f}"
                         f" over {plast.get('n', 0)}"
                         f" (effect {plast.get('e', 0):+.4f})"
-                        f"   rate x{plast.get('scale', 1):.3f}")
+                        f"   rate x{Plasticity.shown(plast.get('scale', 1))}")
             f.write("\n")
         if logits:
             # The largest score softmax was taken of while the check read its

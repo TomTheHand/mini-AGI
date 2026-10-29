@@ -507,15 +507,13 @@ def best_val(path):
     """
     Validation loss of the state on disk, or inf if there is none.
 
-    The directory holds the best state the model has reached, not the most
-    recent one: `save` is called only when a run improves on it. A second copy
-    kept aside as a snapshot would double a figure that is already 236 MB and
-    grows with the pool, and it would be a copy of exactly what is already
-    here.
-
-    That makes the directory the thing to fall back to. A run that diverges
-    reloads it and carries on, which costs the steps since the last
-    improvement and nothing more.
+    What that state is depends on who wrote it. `train.py stream` saves only
+    when a run improves on it, so there the directory holds the best state and
+    is what a diverging run falls back to. `train.py read` saves its latest
+    state at every held-out check, with that check's loss, and every few
+    minutes and at its end with none - so after a read the directory is where
+    the model last stood, and this is inf whenever the last save came between
+    checks.
     """
     f = os.path.join(path, "manifest.json")
     if not os.path.exists(f):
