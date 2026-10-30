@@ -151,9 +151,11 @@ format the log has had.
 
 ## Repository words
 
-- **workshop / published copy**: this repository (no remote) and the filtered copy `publish.sh` writes; agents never
-  push.
+- **workshop**: the private repository the project was developed in until 2026-10-31; **published copy**: what
+  `publish.sh` copied from it into this public repository until then. One repository since; the workshop's
+  commits survive only as changes.jsonl, and "workshop only" in an older entry means a file that never reached
+  this repository.
 - **auto regions**: README blocks between `auto:` markers that `tools/refresh_readme.py` regenerates (run-blocks,
   weights-date, benchmarks, enwik, pg, scaling, params).
-- **the author's hunks**: uncommitted hand edits that agents never stage (conventions.md, Commits).
+- **the author's hunks**: the author's uncommitted hand edits; agents never revert or rework them (conventions.md).
 - **E-numbers**: entries of experiments.md.

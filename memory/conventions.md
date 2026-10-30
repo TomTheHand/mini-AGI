@@ -9,11 +9,12 @@ unless the author changes them.
 - The author owns direction and decisions; agents implement, measure and report. When the author asks
   only for an explanation, a review or a brainstorm, or says not to change or implement anything yet, do
   exactly that.
-- Code: the author does not edit code (said 2026-09-27: every edit is an agent's), so an
-  uncommitted change to a source file is an agent's own from an earlier session: understand it and finish
-  or commit it. Exceptions the author does edit by hand: `README.md` (prose and the author's own lines),
-  `config.yaml` values (e.g. `pool.balance`, `pool.capacity_factor`), occasionally a test or a table
-  header. Check `git diff` before touching those files and never stage the author's hunks.
+- Code: agents write nearly all of it (since 2026-09-27), and the author commits all of it (since
+  2026-10-31, Commits), so the working tree holds work waiting for review: an agent's from an earlier
+  session (understand it, finish it, hand it over) and the author's hand edits - `README.md` (prose and the
+  author's own lines), `config.yaml` values (e.g. `pool.balance`, `pool.capacity_factor`), and now and then
+  a test, a table header or a file deletion. Read `git diff` before changing a file, and never revert or
+  rework the author's hunks.
 - Reverted means decided (2026-10-23): if files an agent edited are found back at an earlier state, the author put
   them there on purpose. Never re-apply reverted work. Read an ambiguous follow-up, such as a bare request to try
   again, as a question, not permission. Incident: on 2026-10-23 an agent re-applied reverted work and had to undo
@@ -32,9 +33,9 @@ unless the author changes them.
   `--weights-dir` at it. Verify `weights/` unchanged afterwards (file count, sizes, step, a fingerprint).
 - A tool that only reads `weights/` while the run may own it opens it with `read_only=True`
   (`train.py build_paged`, `minagi/recur.py load_any`): paging an expert in marks it dirty, so a plain read
-  writes expert files back under the run. The measuring tools do; some older inspection tools (late
-  September: `tools/animate_routing.py`, `plot_routing.py`, `expert_grid.py`, `latent_flow.py`,
-  `depth_proposal.py`) open it read-write, so point those at a copy. A new tool passes it.
+  writes expert files back under the run. Every measuring and inspection tool does, and the inspection tools
+  default to `weights/` (both since 2026-10-31); a new tool passes it. It stops write-backs only: a prune
+  deletes expert files whatever it says, so a tool never prunes or grows the pool.
 - `serve.py` learns from the conversation and writes `weights/` by default. With the run training, give it a
   copy (`--weights`) or `--no-learn` (read-only), and `--device cpu` unless the author has freed the card.
 - `weights/` is the run's latest state, saved at every check and every 5 minutes, not its best: nothing falls
@@ -65,31 +66,34 @@ unless the author changes them.
 
 ## Commits
 
-- Commit freely as work lands (2026-09-27); never push. Subject `area: lowercase description` (pool:,
-  train:, readme:, corpora:, tools:, publish:, plots:, held-out:, model:, optim:, ...), an explanatory
-  body (what was wrong, what changed, measured result), the Co-Authored-By trailer. Branch `master`.
-- Stage explicit paths, never `git add -A`. For a file with the author's hunks, commit only the agent's
-  hunks by writing HEAD plus the chosen hunks as the index blob (`git hash-object -w` +
-  `git update-index --cacheinfo`).
-- Keep what the running program writes out of code commits: `runs/samples.txt`, `weights/manifest.json`,
-  the generated images (`assets/*.png` and their copies), the README's `auto:` regions. Those go in a
-  deliberate `runs:` commit, or are left to publish.sh.
-- After commits, refresh `memory/changes.jsonl` (`python3 tools/memory_changes.py`) and commit it alone
-  (a commit of that file alone is left out of it, so it stays current); publish.sh rewrites it too. Add a
-  dated entry to `memory/history.md` when the change matters to someone picking the project up.
+- Agents never stage, commit or push (2026-10-31): the author examines every change and makes every commit.
+  (In the workshop agents committed freely, 2026-09-27 .. 10-31.) Leave finished work in the working tree
+  and hand it over: what changed and why, how it was tested, which hunks are the agent's where a file also
+  holds the author's edits, and a proposed commit for each group of changes - subject
+  `area: lowercase description` (pool:, train:, readme:, corpora:, tools:, release:, plots:, held-out:,
+  model:, optim:, ...), an explanatory body (what was wrong, what changed, measured result), and a
+  Co-authored-by line for each contributor whose work it carries. Branch `main` (the workshop's was `master`).
+- What the running program writes - `runs/samples.txt`, `weights/manifest.json`, the generated figures
+  (`assets/*.png`, `assets/layers.svg`), the README's `auto:` regions - is proposed apart from code, as a
+  deliberate `runs:` commit after `./release.sh` has refreshed it.
+- With a change that matters to someone picking the project up, a dated entry in `memory/history.md`, committed
+  with it. `memory/changes.jsonl` is the workshop's log, frozen (memory/README.md).
 
 ## The README
 
 - The README working copy is the author's (2026-10-21): it differs from HEAD by the author's uncommitted edits plus
   regenerated auto regions, which exist nowhere else. Before changing it: copy it to scratch, read it in
   full, check its length, write atomically. `open("README.md","w").write(...open("README.md").read())`
-  truncated it to 0 bytes once; recover from the published copy (publish.sh's destination).
-- Numbers in the README are generated, never typed (`tools/refresh_readme.py` auto regions; publish.sh
-  regenerates). A stale typed number looks maintained and nobody re-checks it.
+  truncated it to 0 bytes once (restored then from the copy publish.sh had written): git has only what was
+  committed, so the scratch copy is the only record of the rest.
+- Numbers in the README are generated, never typed (`tools/refresh_readme.py` auto regions; `./release.sh`
+  and `./measure_benchmarks.sh` regenerate them). A stale typed number looks maintained and nobody re-checks
+  it.
 - The README is for people: plain statements, no slogans, no changelog in figures, no "restart" on graphs
   (a resume is a pause), references say only how each was used. History, corrections and
   agent-facing detail live here in memory/.
-- The published README must name only paths that ship (publish.sh checks).
+- The README links only to files in the repository or to what the program creates as it runs (`runs/`,
+  `data/`, `weights/`); `./release.sh` checks.
 - Labels and wording are plain and exact: not "then/now", no rhetorical questions in titles ("Catastrophic,
   or nothing at all?" was rejected), numbers instead of words like "net improvement".
 
@@ -109,6 +113,7 @@ unless the author changes them.
 - `tools/rebuild_self_knowledge.py` copies every `.py`/`.md`/`.yaml` of the repo into
   `data/train/self-knowledge` as "part of what I am made of" (except `data/`, `runs/`, `weights*`,
   `memory/`, and the files the self-description is generated from). That lane is read like any subject.
+  It walks the folder, not git: an untracked file inside the repository's folder is copied too.
 - So: never put model output or realistic model-like text in repo files (tests use placeholders such as
   "GENERATED TEXT"); never leave stale claims about the model in docs (the model learned "up to 6 passes"
   from a quoted sample, 2026-10-08). `memory/` is excluded precisely because history is full of numbers
@@ -160,17 +165,20 @@ unless the author changes them.
 ## Deliverables
 
 - Deliverables are files in the working directory, never hosted pages (2026-09-02).
-- The author's own material in the workshop is not part of the published project: it is not mentioned in
-  the README or here.
+- The author's own material is not part of the project: it is not tracked, and neither the README, the
+  code nor this folder mentions it (the code since 2026-10-31).
 
 ## Publishing
 
-- `publish.sh` copies the tracked files of its INCLUDE list, as they are in the working tree, into the
-  published repository's working copy (its destination); it refuses while a run is training, measures held-out
-  first, and never commits or pushes. Its checks fail a publish when a `.env` is in the destination or a
-  published file does not compile, and warn when the README names paths that do not ship. `memory/` ships, so
-  it follows memory/README.md, "Public".
-- `publish_weights.sh` pushes a weights snapshot to Hugging Face (`Volotat/mini-AGI-undertrained`);
-  undertrained snapshots may be deleted after the first pass.
-- `./measure_benchmarks.sh` (about a day of the card) re-measures the enwik9/PG19 rows; publish uses its
-  last results.
+- One public repository (since 2026-10-31): what is tracked is what a push carries, and `memory/` is
+  tracked, so it follows memory/README.md, "Public". Until then `publish.sh` copied a filtered subset of
+  the workshop here (decisions.md, Publishing).
+- Before a push, `./release.sh` refreshes what the README reports: held-out measured on the weights as they
+  are (so it refuses while the run trains), the scaling chart, the architecture figure, the auto regions.
+  Then it checks that every tracked `.py` compiles, that no `.env` is tracked and that the README's links
+  lead somewhere; `./release.sh --check` runs the checks alone, at any time. It never commits or pushes.
+- `publish_weights.sh` pushes a weights snapshot to Hugging Face (`Volotat/mini-AGI-undertrained`) from a
+  clone of it beside the repository's folder (or wherever `DEST` says), with the run stopped; README.md then
+  carries the snapshot's date, to commit. Undertrained snapshots may be deleted after the first pass.
+- `./measure_benchmarks.sh` (about a day of the card) re-measures the enwik9/PG19 rows and refreshes the
+  README; `./release.sh` uses its last results.

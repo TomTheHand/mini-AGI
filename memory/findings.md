@@ -16,7 +16,7 @@ history.md. Kept as found. Section by section:
 - 7: growth is five brakes now (ROOM, USED, EARNING, FITS, HONEST; config.yaml `growth:`), every 2M
   characters, a newborn at a small gate (`growth.birth_gate` 0.001) recombined from its parents.
 - 8 and 9 hold as history.
-`python3 -m experiments <name>` runs in the workshop repository only; `experiments/` is not published.
+`python3 -m experiments <name>` runs one of `experiments/` (tracked since 2026-10-31; last changed 2026-09-21).
 
 
 Results that changed what the project does, with the numbers behind them.

@@ -16,7 +16,7 @@ lists every session with its time, step, characters and experts.
 - **Run 1**, 2026-09-03 .. 09-16: 72 sessions, 609M characters by its counter (step 714,530), 112 experts of today's
   size at the end. Every restart re-read the same text from the beginning (the lane generator was seeded without the
   characters read; fixed on 09-14), so only about 66M of those characters were distinct text, and a power
-  law fitted it with R2 0.56 against 0.99 for run 2. Archived in `runs/archive/run-1` (workshop only); left out of
+  law fitted it with R2 0.56 against 0.99 for run 2. Archived in `runs/archive/run-1` (not tracked); left out of
   every fit, graph and table.
 - **Run 2, "the run"**: started 2026-09-16 from a fresh model (64 experts, corpus 7,874M characters) and never
   started over. Everything in this folder is about it unless it says otherwise.
@@ -57,10 +57,11 @@ lists every session with its time, step, characters and experts.
 | 2,800.9 | 86 | 10-23 | one code path for the controller wherever the model learns (training unchanged) | |
 | 3,194.4 | 87 | 10-27 | Muon for every weight matrix; one learning rate for every expert, the newborn rate removed | E35 |
 | 3,321.4 | 88 | 10-28 | the largest attention logit logged at every check | E40 |
+| 3,492.6 | 89 | 10-29 | the controller's floor x0.001 (x0.01 before); the scale printed to three figures | |
 
 The author's `pool.balance`, lowered by hand after the balance term came in at 0.003, as the working copy showed
 it: 0.001 later on 10-02, 2.5e-4 by 10-07, 6.5e-5 by 10-09, 3.5e-5 by 10-17, 1.5e-5 by 10-21, 1e-5 by 10-23
-(unchanged on 10-29). The run logs none of these values, so which session ran with which is known only to these
+(unchanged on 10-31). The run logs none of these values, so which session ran with which is known only to these
 bounds.
 
 Not dated here: rebuilds of the self-knowledge lane other than 10-08 (made by hand, with no run training), and the
@@ -70,9 +71,8 @@ benchmark sweeps (on copies; they change nothing in the run).
 
 The scale at a session's first check (table below): x1 for the first ~250M characters; x0.5 at ~545M; x0.27 at
 606M; x0.11 at 980M; x0.056 from 1.45B to 1.6B; up to x0.067 at 1,746M under the upward probe; x0.052 at 1.87B;
-x0.032 at 2.33B; x0.019 at 2.80B; x0.014 at 3.19B; x0.012 at 3.48B (10-29). Its floor (`minagi/plasticity.py`
-`FLOOR`) was x0.05 until 1,665.4M, then x0.01. Committed and not yet run: x0.001 (10-29),
-from the run's next session; give it a row above when that session starts.
+x0.032 at 2.33B; x0.019 at 2.80B; x0.014 at 3.19B; x0.0121 at 3.49B (10-29); x0.0109 at 3.63B (10-31). Its floor
+(`minagi/plasticity.py` `FLOOR`) was x0.05 until 1,665.4M, x0.01 until 3,492.6M, and x0.001 since.
 
 ## Sessions
 
@@ -169,3 +169,5 @@ speed are from the same check. "-" is a session that stopped before its first ch
 | 86 | 10-23 | 1,368,001 | 2,800.9 | 397 | 0.5884 | x0.019 | 1,910 |
 | 87 | 10-27 | 1,560,143 | 3,194.4 | 397 | 0.5777 | x0.014 | 1,442 |
 | 88 | 10-28 | 1,622,136 | 3,321.4 | 397 | 0.5730 | x0.014 | 1,830 |
+| 89 | 10-29 | 1,705,727 | 3,492.6 | 397 | 0.5696 | x0.0121 | 1,867 |
+| 90 | 10-30 | 1,756,345 | 3,596.2 | 397 | 0.5693 | x0.0112 | 1,874 |

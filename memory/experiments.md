@@ -2,7 +2,7 @@
 
 Registry of tests, probes and A/Bs: setup, numbers, verdict. Oldest first. "held-out" is nats/char on
 `data/val` unless said; lower is better; "arm - control" negative is better. Raw results live in `runs/`
-(gitignored, workshop only) where a path is given. Before re-running anything here, read its verdict; the
+(not tracked, so only on the machine that made them) where a path is given. Before re-running anything here, read its verdict; the
 noise rules are in conventions.md "Measuring and reporting".
 
 ## Measurement instruments

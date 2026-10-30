@@ -1,7 +1,8 @@
 # history
 
 Chronological record of the project, oldest first. Each entry: what changed, why, measured result. The full
-message of a commit is in `changes.jsonl`, found by its date and subject. Numbers are as measured at the time;
+message of a workshop commit (until 2026-10-31) is in `changes.jsonl`, found by its date and subject; later
+ones are in git. Numbers are as measured at the time;
 a later entry supersedes an earlier one. Session boundaries are from the working
 transcripts of the author's agent sessions (2026-09-18 onward); before that the commits are the only record.
 
@@ -92,7 +93,7 @@ Names used throughout:
 - 09-16: **the run begins** from a fresh model (64 experts, corpus 7,874M chars), the graphs first cleared of
   the previous run's special cases. That previous run (2026-09-03..09-16, 609M chars by its counter, 112
   experts at the end) had re-read the same text after every restart until 09-14, so only ~66M of it was
-  distinct; it is archived (`runs/archive/run-1`, workshop only) and left out of every fit (timeline.md).
+  distinct; it is archived (`runs/archive/run-1`, not tracked) and left out of every fit (timeline.md).
 - one window to watch the run in (the dashboard, `tools/plot_dashboard.py`).
 - a sample re-picked its experts from one character every 64 characters (fixed later by the
   selection rewrites).
@@ -394,8 +395,32 @@ remove the newborn rate, newborn gate as a share of parents', and Muon (Liu et a
   lines from train.py, and the commit log no longer hides its commits. It stays silent without its two
   settings; the README does not mention it (conventions.md, The model as it runs). Its test now uses a `.env`
   of its own, so it passes with or without the author's.
-- 10-29: memory/ and the commit log lose every commit hash (this repository's git is not published) and every
+- 10-29: memory/ and the commit log lose every commit hash (the workshop's git is not published) and every
   trace of the author's wording; a hash a commit message cites becomes the subject of the commit it names.
 - 10-29: the README's Layout lists governor.py, heldout.py, lanes.py and muon.py; it and `minagi/store.py` now
   say what `read` saves (its latest state) and that nothing rolls back on its own; "Adam moments" became the
   optimiser's. The self-knowledge answers name the optimiser from config.yaml (Muon), not Adam.
+
+## 2026-10-29 .. 10-31 - one public repository
+
+- 10-29: `./release.sh` takes over publish.sh's refresh and checks without copying anything: it refuses while
+  a run trains, measures held-out, redraws the scaling chart and the architecture figure, refreshes the
+  README's auto regions, then checks that every tracked `.py` compiles, that no `.env` is tracked and that
+  the README's links lead somewhere. It never commits or pushes.
+- 10-29: session 89 starts with the controller's floor at x0.001 (3,492.6M chars); the scale reads x0.0121 at
+  its first check and x0.0109 on 10-31.
+- 10-31: **one public repository.** publish.sh is retired, and with it the commit-log generator it ran:
+  changes.jsonl is frozen as the workshop's log. The workshop's tools, tests, benchmarks and experiments are
+  tracked from now on; its git history stays behind. The tests that read publish.sh hold release.sh to the
+  same things (it redraws the architecture figure, runs none of the day-long measurements), and everything
+  measure_benchmarks.sh runs and imports must be tracked.
+- 10-31: the code no longer names the author's own material or writes into it. publish_weights.sh looks for
+  the Hugging Face clone beside the repository's folder (`DEST` overrides) instead of at one machine's path.
+- 10-31: ten inspection tools defaulted to `weights_rows/`, a directory the run left months ago; they default
+  to `weights/`. Five that read `weights/` opened it writable (animate_routing, plot_routing, expert_grid,
+  latent_flow, depth_proposal), so paging could write expert files back under the run; all open it
+  read-only now.
+- 10-31: memory/ for one repository: hashes of this repository's own commits on `main` may be cited, the
+  workshop's never; the conventions on commits, the README and publishing follow release.sh.
+- 10-31: agents no longer commit: the author examines every change and makes every commit. An agent hands
+  over finished work uncommitted, with a proposed commit for each group of changes (conventions.md, Commits).

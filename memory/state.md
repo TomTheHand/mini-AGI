@@ -1,6 +1,6 @@
 # state
 
-Snapshot as of 2026-10-29, at step 1,699,345. Everything here goes stale; refresh it when picking the project up
+Snapshot as of 2026-10-31, at step 1,772,472. Everything here goes stale; refresh it when picking the project up
 (`weights/manifest.json`, the tail of `runs/samples.txt`, `python3 -m minagi.store weights`, the README's
 auto regions). timeline.md has the run's history session by session.
 
@@ -8,20 +8,20 @@ auto regions). timeline.md has the run's history session by session.
 
 - Live: `python3 train.py read data/train --save --weights-dir weights --sample-every 10 --sample-log
   runs/samples.txt`, started by the author (agents never start or stop it). The run began 2026-09-16 from a fresh
-  model (run 2; timeline.md); 88 sessions so far; this one started 2026-10-28 at step 1,622,136 (3,321.4M chars).
-- Latest check: step 1,699,345, 3,479.5M of 8,037M chars (43.29%), 397 experts, context 4,096 of 4,096,
-  reading 1,769 char/s, writing 26.7 char/s, train loss 0.5241, held-out 0.5714 +/-0.0236 (level -0.0111),
-  grad norm 2.64 (clip 1, so every step is clipped), largest attention logit 17.88 (recur.0), lr 3.67e-06
-  (base 3e-4 x0.0122, the controller's scale), repeats 26% of 8-grams greedy.
-- Per subject: arithmetic 0.610, chat 0.472, chat_hermes 0.767, chess 0.379, code 0.476, reasoning 0.534,
-  stories 0.450, wikipedia 0.884. Lowest held-out of any check so far: 0.5708 (step 1,681,377, 3,442.7M chars).
+  model (run 2; timeline.md); 90 sessions so far; this one started 2026-10-30 at step 1,756,345 (3,596.2M chars).
+- Latest check (2026-10-31): step 1,772,472, 3,629.3M of 8,037M chars (45.16%), 397 experts, context 4,096 of
+  4,096, reading 1,796 char/s, writing 23.5 char/s, train loss 0.5396, held-out 0.5689 +/-0.0234 (level -0.0119),
+  grad norm 2.81 (clip 1, so every step is clipped), largest attention logit 18.12 (recur.0), lr 3.28e-06
+  (base 3e-4 x0.0109, the controller's scale), repeats 23% of 8-grams greedy.
+- Per subject: arithmetic 0.610, chat 0.472, chat_hermes 0.762, chess 0.377, code 0.475, reasoning 0.528,
+  stories 0.448, wikipedia 0.879. Lowest held-out of any check so far: 0.5683 (step 1,755,293, 3,594.1M chars).
 - `weights/` is the run's latest state, not its best: `read` saves at every check (the manifest's `val` is that
   check's held-out), every 5 minutes and when it stops (`val` null). There is no automatic fallback; older states
   exist only as the author's backups (`weights_*_bkp/`). Saving only on improvement, and `--revert-factor`, belong
   to `train.py stream`; the README and `minagi/store.py` `best_val` say so since 2026-10-29.
 - Optimiser: Muon since 3,194.4M chars (the session of 2026-10-27); AdamW before.
-- Pace on the wall clock ~134M chars/day lately (3,321.4M -> 3,479.5M in 28.4 hours); the first pass ends after
-  ~4,560M more, about five weeks at that pace (early December 2026), if nothing changes.
+- Pace on the wall clock ~127M chars/day lately, stops included (3,321.4M -> 3,629.3M in 58.1 hours); the first
+  pass ends after ~4,410M more, about five weeks at that pace (early December 2026), if nothing changes.
 
 ## The model as configured (config.yaml working copy)
 
@@ -83,10 +83,9 @@ the share of its text seen.
 
 - First pass: keep reading; the author publishes final weights after it. Undertrained snapshot on
   Hugging Face from 12 Oct 2026.
-- The controller's floor is x0.001 since 2026-10-29 (at the author's request; it was x0.01), and the
-  log prints the scale to three figures (x0.00951, not x0.010). It reaches the run at its next start; until then
-  the running session stops at x0.01, which at the last day's pace (~9% a day, two "deteriorating" readings) it
-  reaches around 2026-10-31. Scale x0.0122 on 10-29. On a plateau the rate drifts to the floor, so the floor sets
+- The controller's floor is x0.001 (the author's request, 2026-10-29; it was x0.01), in force since session 89
+  (2026-10-29, 3,492.6M), and the log prints the scale to three figures (x0.00951, not x0.010). Scale x0.0121
+  at that session's first check, x0.0109 on 10-31. On a plateau the rate drifts to the floor, so the floor sets
   the plateau rate (decisions.md). Whether lower actually helps was not measured at these rates: E30 and E29
   are the evidence (short, at x0.03-0.06); a paired test of x0.012 against x0.004 and x0.0012 on copies would
   say, when the card is free.
@@ -115,6 +114,9 @@ the share of its text seen.
 - ARC scores: only on data/eval copies; ARC Prize 2026 runs Kaggle offline tracks (check deadlines before
   relying on them).
 - Proposed, not run: the learning rate under Muon (x0.04 vs x0.014 over 30M chars, on a copy).
+- GitHub: 8 open issues and 11 open pull requests on 2026-10-31, not yet triaged. Issue #33 reports that the
+  experts a forward admits are chosen from the whole forward's text, so a character's score can depend on
+  characters after it and published scores may be slightly optimistic; the size is unmeasured.
 - Deferred by the author: pruning ~150 experts; chat_hermes dedup; bigger steps; training on the
   RX 6800 XT.
 - If grad-norm spikes recur: skip steps far above the recent mean, or confirm a passage's loss on a copy
@@ -129,18 +131,19 @@ the share of its text seen.
 
 ## The working tree
 
-- The author's hand edits (README prose, some config.yaml values, the odd test or table header) stay
-  uncommitted until the author commits them; agents never stage them. What the running program writes
-  (runs/samples.txt, weights/manifest.json, generated images, the README's auto regions) stays out of code
-  commits (conventions.md, Commits).
-- Not published, workshop only: most of `tools/`, `tests/` (70 test scripts), `benchmarks/` (exact-match
-  arithmetic, chess Elo, code; last changed 2026-09-20 and not part of any current measurement), `experiments/`
-  (last changed 2026-09-21), `runs/` apart from `runs/samples.txt`.
+- Everything uncommitted waits for the author, who commits it after review: agents' finished work and the
+  author's hand edits (README prose, some config.yaml values, the odd test, table header or deletion) alike.
+  Agents never stage or commit (conventions.md, Commits). What the running program writes (runs/samples.txt,
+  weights/manifest.json, generated figures, the README's auto regions) goes in commits of its own.
+- Tracked since the workshop's files moved here (2026-10-31): `tools/` (43 scripts), `tests/` (70 test
+  scripts), `benchmarks/` (exact-match arithmetic, chess Elo, code; last changed 2026-09-20 and not part of any
+  current measurement) and `experiments/` (last changed 2026-09-21); `replication/` was public already. Never
+  tracked: `data/`, the weights' files, `.env`; of `runs/`, only `samples.txt`.
 
 ## The machine
 
 - One RTX 3070 Laptop GPU, 8 GB, which the run keeps busy; system RAM is shared with the run (its RSS is
   ~12 GB at a 288-expert RAM tier). The AMD measurements were made on an RX 6800 XT, 16 GB.
-- The published repository is a separate git repository that publish.sh writes into and never commits to
-  or pushes (that is the author's). This repository is the workshop: it has no remote and agents never
-  push.
+- This repository is public (github.com/volotat/mini-AGI) and, since 2026-10-31, the only one; the run reads
+  and writes `data/`, `weights/` and `runs/` inside its folder. The author commits and pushes. The
+  weights' snapshots are on Hugging Face (`Volotat/mini-AGI-undertrained`, publish_weights.sh).

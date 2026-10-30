@@ -11,15 +11,14 @@ the two collapsible blocks from the sample log and the progress graph, and
 the parameter count from the weights themselves.
 
 Everything between a pair of markers is replaced; everything else in the
-README is left exactly as written. The markers stay in the published copy,
-which costs nothing - they are HTML comments - and means the next refresh
-can find its own regions in a tree that has been edited by hand.
+README is left exactly as written. The markers stay in the README, which
+costs nothing - they are HTML comments - and means the next refresh can
+find its own regions in a file that has been edited by hand.
 
     <!-- auto:NAME -->   ...generated...   <!-- /auto:NAME -->
 
-Run by publish.sh before it copies, so what ships is current by
-construction. Lives in tools/ and is not published: the public tree gets
-the result, not the machinery.
+Run by release.sh before a push, and by measure_benchmarks.sh after it
+measures, so what is pushed is current by construction.
 """
 import json
 import os

@@ -6,7 +6,7 @@ current: the adaptation trace is the decoder's loop guard (`decoding.adapt_stren
 `decoding.adapt_decay` 0.88; the `adapted` samples in runs/samples.txt, against `raw`); chat learns once
 per finished exchange (route C's verdict), at the run's own rate since 2026-10-19 (minagi/governor.py). Superseded: the machinery of section 5 (noted in place). The order of work in section
 6 was not acted on: no commit measures `contrastive_generate`, a floor on the rate of genuine choices,
-depth perturbation or expert rotation. The `runs/*comparison.txt` files it cites stay in the workshop.
+depth perturbation or expert rotation. The `runs/*comparison.txt` files it cites are not tracked (of `runs/`, git keeps only samples.txt).
 
 
 How the model is currently stopped from repeating itself, why that works,

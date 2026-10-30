@@ -117,8 +117,9 @@ and say what is new (conventions.md). E-numbers point into experiments.md.
 - SETTLED: self-knowledge is a lane holding the model's own source and docs, without README
   samples or fenced sample logs; `memory/` excluded (2026-10-28).
 - DEFERRED: dedup of chat_hermes held-out answers found verbatim in train (E37, ~9%).
-- SETTLED: corpora build everything from public sources; weights are created on the first run; nothing is
-  rescued from the workshop (`tools/`) for the published copy.
+- SETTLED: corpora build everything from public sources; weights are created on the first run. Until
+  2026-10-31 the published copy also stood apart from the workshop's `tools/`; since then everything is one
+  repository (Publishing).
 
 ## Measurement and reporting
 
@@ -147,15 +148,21 @@ and say what is new (conventions.md). E-numbers point into experiments.md.
   green (the model's squares, published scores whose training data is known, e.g. Llama-3.2-1B at 36 TB),
   plus per-subject exponents. A model without a published BPB on the same set is left off, never converted
   (09-18).
-- SETTLED: long measurements (`./measure_benchmarks.sh`, ~a day of the card) are separate from publish;
-  publish measures held-out only.
+- SETTLED: long measurements (`./measure_benchmarks.sh`, ~a day of the card) are separate from the refresh
+  before a push; `./release.sh` measures held-out only.
 
 ## Publishing
 
-- SETTLED: the published repository is a filtered copy (publish.sh, INCLUDE list, tracked files only); it
-  ships `runs/samples.txt` and `memory/` (2026-10-28), and since 2026-10-29 the notifier too, which stays
-  silent without credentials (conventions.md).
-- SETTLED: weights are not published by publish.sh; undertrained snapshots go to Hugging Face
+- SETTLED (2026-10-31): one public repository; what is tracked is published. REVERSED: the filtered copy
+  (09-20 .. 10-31: publish.sh copied an INCLUDE list of tracked workshop files into this repository),
+  retired with the commit-log generator it ran; `./release.sh` keeps its refresh and checks.
+  `runs/samples.txt` and `memory/` (2026-10-28) are tracked; the notifier ships (2026-10-29) and stays
+  silent without credentials (conventions.md). The author's own material is not tracked and not named.
+- SETTLED (2026-10-31): the author examines every change and makes every commit and push; agents never
+  stage or commit. REVERSED: agents committing freely (2026-09-27 .. 10-31, in the workshop).
+- SETTLED: commit hashes in memory/ only of this repository's `main` (2026-10-31); never the workshop's,
+  whose history is not public (10-29: none at all, while the workshop's was the only history).
+- SETTLED: weights are never in git; undertrained snapshots go to Hugging Face
   (`Volotat/mini-AGI-undertrained`, publish_weights.sh) and may be deleted after the first pass. Final
   weights after the first pass.
 - SETTLED: config.yaml comments say only what each knob does, no history or comparisons; code

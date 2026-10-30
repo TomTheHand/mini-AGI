@@ -22,7 +22,7 @@ state.md, describe the model as it runs. Superseded below:
 
 
 How the model is put together, and why each part is the way it is. Numbers are
-from the current weights; a workshop script read them out of
+from the current weights; a script read them out of
 `weights/manifest.json` and the run logs so nothing here had to be kept in sync
 by hand.
 

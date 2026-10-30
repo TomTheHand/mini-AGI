@@ -20,124 +20,131 @@ The "final" weights are **not published yet**. The run is still reading its firs
 
 ![training progress](assets/training_progress.png)
 
-*Every sample round of the run to date: 3,492.6M characters over 4,187 evaluations; held-out from before the [in-flight corrections](memory/corrections.md) is drawn moved onto today's level.*
+*Every sample round of the run to date: 3,631.4M characters over 4,314 evaluations; held-out from before the [in-flight corrections](memory/corrections.md) is drawn moved onto today's level.*
 
 </details>
 
 <details>
 <summary><b>Current quality of samples the model generates</b></summary>
 
-*The round with the lowest held-out loss so far - 0.5706 nats at 3,492.6M characters. Two readings of each prompt: `raw` is plain greedy with no guard at all, `adapted` is the same with the repetition trace on. The whole history is in [runs/samples.txt](runs/samples.txt).*
+*The round with the lowest held-out loss so far - 0.5683 nats at 3,594.1M characters. Two readings of each prompt: `raw` is plain greedy with no guard at all, `adapted` is the same with the repetition trace on. The whole history is in [runs/samples.txt](runs/samples.txt).*
 
 ```
 ==============================================================================
-step 1,705,727   3492.6M of 8,037M characters (43.45%)   1851 min   397 experts
-context 4,096 characters of 4,096   reading 1,746 char/s   writing 30.5 char/s   still gaining -0.0097 deep into it
-grad norm 2.60 against a clip of 1   clipping
-train loss 0.5141   lr 3.64e-06
-held-out loss 0.5706 +/-0.0124 nats   0.8231 bits/char   perplexity 1.77   gap +0.0565
-  arithmetic 0.610   chat 0.473   chat_hermes 0.766   chess 0.377   code 0.475   reasoning 0.532   stories 0.449   wikipedia 0.882
-repeats 28% of 8-grams, greedy with no guard
+step 1,755,293   3594.1M of 8,037M characters (44.72%)   1105 min   397 experts
+context 4,096 characters of 4,096   reading 1,759 char/s   writing 24.8 char/s   still gaining -0.0148 deep into it
+grad norm 2.66 against a clip of 1   clipping
+train loss 0.5268   lr 3.36e-06   evidence t +0.94 over 65.7 (effect +0.0390)   rate x0.0112
+attention logit 18.00 at most   prelude.0 12.69   prelude.1 16.38   recur.0 18.00
+held-out loss 0.5683 +/-0.0234 nats   0.8199 bits/char   perplexity 1.77   gap +0.0415   level -0.0125
+  arithmetic 0.611   chat 0.471   chat_hermes 0.757   chess 0.377   code 0.474   reasoning 0.531   stories 0.448   wikipedia 0.877
+repeats 26% of 8-grams, greedy with no guard
 ==============================================================================
 
 --- stories ---
 prompt: 'Once upon a time, there was a little boy named Tom. One day he '
-[raw]  repeated 8-grams 2%
-went to the park with his mom. They saw a big slide and Tom wanted to go on it. His mom said yes and they went on the slide.
+[raw]  repeated 8-grams 4%
+went to the park to play. He saw a big slide and wanted to go on it. But he was too scared to go on the slide. He tried to jump on it, but i
+[adapted]  repeated 8-grams 0%
+was playing with his toys when he found a big, shiny rock. He was very happy and wanted to show it to his friend, Sam.
 
-At the park, T
-[adapted]  repeated 8-grams 2%
-was playing with his toys when he saw another boy. They were playing together and having fun.
-
-Tom wanted to play with them, but he didn't k
+But when Tom got to 
 
 --- code ---
 prompt: 'def merge_sorted(a, b):\n    '
-[raw]  repeated 8-grams 72%
+[raw]  repeated 8-grams 77%
 """
-    Merge a sorted array of sorted sorted sorted sorted sorted sorted sorted sorted sorted sorted sorted sorted sorted sorted sorted sor
-[adapted]  repeated 8-grams 16%
+    Merge a sorted array of sorted array of sorted array of sorted array of sorted array of sorted array of sorted array of sorted array
+[adapted]  repeated 8-grams 14%
 """
-    Merges along and forwards the sorted arguments.
+    Merges along and preserving the sorted arguments.
+
+    Parameters
+    ------+
+    a:
     """
-
-    a, b, c, d=b.0, d=c.0, d=d=d)
-
-    a.sort()
-    a.sort()
-    a.sort()
- 
+    a,b.sort()
+    a,b.sort()
+    a,b.s
 
 --- arithmetic ---
 prompt: 'add 4917 + 388 = '
-[raw]  repeated 8-grams 76%
+[raw]  repeated 8-grams 61%
 5305
-mod 2 % 6 = 2
-add 2 + 1 = 3
-add 2 + 1 = 3
-add 2 + 1 = 3
-add 2 + 1 = 3
-add 2 + 1 = 3
-add 2 + 1 = 3
-add 2 + 1 = 3
-add 2 + 1 = 3
-add 2 + 1
-[adapted]  repeated 8-grams 4%
+mul 1 * 1 = 1
+add 7 + 1 = 8
+add 7 + 1 = 8
+add 7 + 1 = 8
+add 7 + 1 = 8
+add 7 + 1 = 8
+add 7 + 1 = 8
+add 7 + 1 = 8
+sub 7 - 1 = 6
+add 7 + 1
+[adapted]  repeated 8-grams 0%
 5205
-mod 61974 % 32 = <think> 32*1805=6197 32*1806=6104>6197 6597-6197=0 </think> 0
-mul 2483 * 51 = <think> 2483*1=2483 2483*50=124150 2483+124150=126533 </think> 126
+mul 6194 * 73 = 45826
+mul 1097 * 34 = <think> 1097*4=4388 1097*30=32910 4388+32910=37298 </think> 37298
+mul 6451 * 70 = 451570
+mul 3289 * 64 = 20179
 
 --- chat ---
 prompt: '<user>\nWhat are you?\n</user>\n<bot>\n'
-[raw]  repeated 8-grams 0%
-mini-AGI: an expertfile that can be loaded from its own first character, with no memory of the last one except what training has put into my
-[adapted]  repeated 8-grams 0%
-mini-AGI: an expertfile that can be loaded from its own first character, with no memory of the last one except what training has put into my
+[raw]  repeated 8-grams 1%
+mini-AGI: an expert leaving the card goes back to learning the last.
+</bot>
+<user>
+Write a function that return the list of all the parts of a sequenc
+[adapted]  repeated 8-grams 2%
+mini-AGI: an expertfile that changes I have and moves when an expert goes unused first 100 million, so one that is slow to start is not cut 
 
 --- chat_hermes ---
 prompt: '<user>\nA train travels 60 km in 45 minutes. What is its speed in km/h?\n</user>\n<bot>\n'
-[raw]  repeated 8-grams 62%
-The train travels at its speed at its speed at its speed at its speed at its speed at its speed at its speed at its speed at 50 minutes.
-</bot>
-<user>
-[adapted]  repeated 8-grams 29%
+[raw]  repeated 8-grams 64%
 The train travels 60 km in 45 minutes.
-
-Here's the reasoning:
-1. The train travels 60 km in 45 minutes.
-2. Therefore, its speed in 45 minute
+The train travels 60 km in 45 minutes.
+The train travels 45 km in 45 minutes.
+The train travels 45 km
+[adapted]  repeated 8-grams 34%
+There are 100 minutes in an hour.
+Therefore, its speed in km/h is 100 minutes.
+Therefore, its speed in km/h is 100 minutes.
+### 100
+The answ
 
 --- reasoning ---
 prompt: '<user>\nWrite a Python function that returns the largest number in a list.\n</user>\n<bot>\n<think>\n'
-[raw]  repeated 8-grams 3%
-Okay, let's tackle this problem. So the question is about whether a list can be represented in a list with the largest number in a list. Hmm
-[adapted]  repeated 8-grams 0%
-Okay, let's try to figure out how to solve this problem. So, the question is: How does the largest number in a list?
+[raw]  repeated 8-grams 0%
+Okay, let's try to figure out this problem. So the question is about returning the largest number in a list. The options are A, B, C, D, E, 
+[adapted]  repeated 8-grams 4%
+Okay, let's try to figure out what's correctly provided and what's the best way.
 
-First, I need to under
+First, I need to understand what's being asked. The larges
 
 --- wikipedia ---
 prompt: '== History ==\nThe [[Roman Empire]] was '
-[raw]  repeated 8-grams 36%
-founded in [[1966]] and was the first [[Constitution]] to be a [[constitution]] of [[Constitution]] and [[Constitution]] of [[Constitution]]
-[adapted]  repeated 8-grams 25%
+[raw]  repeated 8-grams 30%
+founded in [[1933]] by [[Andrew Bernes]] and [[Andrew Bernes]] in [[1940]]. The [[Roman Empire]] was founded in [[1940]] by [[Andrew Bernes]
+[adapted]  repeated 8-grams 59%
 founded in [[1930]].
-*[[April 1]] - [[Andrew Barton]], [[Australia]]n poet, was born in [[Australia]].
-*[[April 2]] - [[Andrew Barton]], [[A
+*[[Albert I of England]] ([[1930]])
+*[[Albert I of England]] ([[1930]])
+*[[Albert I of England]] ([[1930]])
+*[[Albert I
 
 --- chess ---
 prompt: '<g>1700 1-0 1. e4 e5 2. '
-[raw]  repeated 8-grams 0%   12 legal moves, then f3
-Nf3 Nc6 3. Bc4 Nf6 4. Ng5 d5 5. exd5 Nxd5 6. Nxf7 Qh4 7. Nxh8 Bg4 8. f3 Bh5 9. Nxd5 Qxh2 10. Qe2 O-O-O 11. Nxc7 Rd8 12. Nxe5 Nd4 13. Qe4 Nxc
-[adapted]  repeated 8-grams 0%   25 legal moves, then fx
-Nf3 d6 3. Bc4 h6 4. d3 Nf6 5. O-O Be7 6. Nc3 O-O 7. h3 a6 8. Nh2 b5 9. a3 c5 10. f4 exf4 11. Bxf4 Nc6 12. Nd5 Be6 13. Nxe7+ Qxe7 14. Bxe6 fx
+[raw]  repeated 8-grams 0%   23 legal moves, then B
+Nf3 Nc6 3. Bc4 Nf6 4. Ng5 d5 5. exd5 Nxd5 6. Nxf7 Qh4 7. Nxh8 Nd4 8. O-O Be6 9. Bxd5 Bxd5 10. Ng6 Qh6 11. Nxe5 O-O-O 12. Nxd7 Rxd7 13. Nc3 B
+[adapted]  repeated 8-grams 0%   25 legal moves, none illegal
+Nf3 d6 3. Bc4 Nf6 4. d3 Be7 5. Nc3 O-O 6. h3 c6 7. Be3 d5 8. exd5 cxd5 9. Bb3 d4 10. Bd2 Nc6 11. Ne4 Bf5 12. Nxf6+ Bxf6 13. O-O Re8 14. Re1 
 
 --- self-knowledge ---
 prompt: '<user>\nhow do you decide which experts to use?\n</user>\n<bot>\n'
 [raw]  repeated 8-grams 0%
-The text votes. On the first pass of a forward every character ranks all 397 experts and asks for its top 8, each request weighted by how su
+With the router, and by the whole text: one row of numbers per expert, always on the card, so an expert on disk is scored exactly like one t
 [adapted]  repeated 8-grams 0%
-The text votes. On the first pass of a forward every character ranks all 397 experts and asks for its top 8, each request weighted by how su
+With the router, and by the whole text: one row of numbers per expert, always on the card, so an expert on disk is scored exactly like one t
 ```
 
 </details>
@@ -374,25 +381,25 @@ Held-out is read as whole blocks of 4,096 characters spread evenly over everythi
 There is a second variance underneath these figures. The same configuration run twice lands about 0.014 apart, because the expert dispatch is not deterministic on CUDA. **Treat about 0.03 as the threshold for a real difference**, not the error bar printed beside one score.
 
 <!-- auto:benchmarks -->
-**Where the model is** (3,492.6M characters read, 397 experts; held-out measured on the model as it stands, on 30 blocks of 4,096 characters spread over all of each subject):
+**Where the model is** (3,631.4M characters read, 397 experts; held-out measured on the model as it stands, on 30 blocks of 4,096 characters spread over all of each subject):
 
 | | nats/char | bits/byte |
 |---|---|---|
-| **held-out, all 8 subjects** | **0.5706** ± 0.0124 | **0.8232** |
-| train | 0.5141 | 0.7417 |
+| **held-out, all 8 subjects** | **0.5689** ± 0.0123 | **0.8207** |
+| train | 0.5446 | 0.7857 |
 
 **Held-out loss per subject:**
 
 | Subject | nats/char | bits/byte |
 |---|---|---|
 | `chess` | 0.377 | 0.544 |
-| `stories` | 0.449 | 0.648 |
-| `chat` | 0.473 | 0.682 |
-| `code` | 0.475 | 0.685 |
-| `reasoning` | 0.532 | 0.768 |
+| `stories` | 0.448 | 0.646 |
+| `chat` | 0.471 | 0.680 |
+| `code` | 0.474 | 0.684 |
+| `reasoning` | 0.529 | 0.763 |
 | `arithmetic` | 0.610 | 0.880 |
-| `chat_hermes` | 0.766 | 1.105 |
-| `wikipedia` | 0.882 | 1.272 |
+| `chat_hermes` | 0.763 | 1.101 |
+| `wikipedia` | 0.878 | 1.267 |
 <!-- /auto:benchmarks -->
 
 ### enwik9 against published models
@@ -489,16 +496,16 @@ mini-AGI's two rows are measured here:
 
 Everything purple on this chart is **bits-per-byte on the PG19 test split** - one held-out set, so it compares directly: the diamonds are this model, the hollow circles the published byte-level models in the PG19 table above. This model scores **1.995 BPB** over the whole split (100 books, 41,289,001 bytes) at a context of 4,096, against its own mixture's 0.85. PG19 is out of distribution for it: it was trained on a corpus assembled for this project and has read no Victorian novels, so much of that gap is subject matter rather than capability.
 
-The green squares are this model on **enwik9**, the set the enwik9 table above compares it with published models on: Wikipedia, which it trains on, though never on these pages. It scores **1.328 BPB** there after 2.32B characters. A square is drawn only once it stands clear of the one before it, so the 7 measured since are not drawn yet; the latest is 1.288 after 2.80B characters. The dotted line carries it on to one pass of the corpus at the rate this model's Wikipedia held-out fell at over its last billion characters (α 0.141), where it reaches **1.11** - an assumption until enwik9's own measurements are 25% apart in what the model has read; its 8 so far are 20.7% apart. The hollow green circle far to the right is Llama-3.2-1B, the only model in that table whose training data is published: 0.68 after about 36 TB - about 16,000 times what this model has read, scored on 2,048 tokens, about 8 KB, at a time. The rest are not drawn, because how much they read was never published.
+The green squares are this model on **enwik9**, the set the enwik9 table above compares it with published models on: Wikipedia, which it trains on, though never on these pages. It scores **1.328 BPB** there after 2.32B characters. A square is drawn only once it stands clear of the one before it, so the 7 measured since are not drawn yet; the latest is 1.288 after 2.80B characters. The dotted line carries it on to one pass of the corpus at the rate this model's Wikipedia held-out fell at over its last billion characters (α 0.172), where it reaches **1.07** - an assumption until enwik9's own measurements are 25% apart in what the model has read; its 8 so far are 20.7% apart. The hollow green circle far to the right is Llama-3.2-1B, the only model in that table whose training data is published: 0.68 after about 36 TB - about 16,000 times what this model has read, scored on 2,048 tokens, about 8 KB, at a time. The rest are not drawn, because how much they read was never published.
 
-The red line is the fitted power law on this model's own held-out, `L ∝ D^-0.186` with R² 0.96 over every point past the warmup - between Kaplan's 0.095 and Chinchilla's 0.28, and it has held for more than a decade of data. How steep it looks depends on where the fit starts, and the band on the chart spans that range.
+The red line is the fitted power law on this model's own held-out, `L ∝ D^-0.185` with R² 0.96 over every point past the warmup - between Kaplan's 0.095 and Chinchilla's 0.28, and it has held for more than a decade of data. How steep it looks depends on where the fit starts, and the band on the chart spans that range.
 
-Read straight off that trend, on this model's own mixture. It has read 3.49B characters so far, in about 34 days of running. The days below assume the pace of the last 31 hours of it: 1,542 characters a second on the wall clock, held-out checks and rounds of samples included, because the reading waits for them.
+Read straight off that trend, on this model's own mixture. It has read 3.63B characters so far, in about 35 days of running. The days below assume the pace of the last 7 hours of it: 1,500 characters a second on the wall clock, held-out checks and rounds of samples included, because the reading waits for them.
 
-| held-out | total data read | further reading | days from here at ~1,542 char/s |
+| held-out | total data read | further reading | days from here at ~1,500 char/s |
 |---|---|---|---|
-| 0.80 BPB | 4.07B | +0.58B | ~4 |
-| **0.70 BPB** | 8.04B | +4.54B | **~34** |
+| 0.80 BPB | 4.17B | +0.54B | ~4 |
+| **0.71 BPB** | 8.04B | +4.41B | **~34** |
 
 The first one is days of reading on one laptop GPU, and it sits inside a single pass of the 8.04B-character corpus.
 
@@ -666,7 +673,7 @@ Byte level - vocabulary 265: the 256 byte values plus 9 structural markers (`<th
 | paging | 32 experts resident on the card; the rest live on disk |
 
 <!-- auto:params -->
-The parameter count moves, because the pool grows and prunes itself while training. `python3 -m minagi.store weights` prints what it is now. At step 1,705,727:
+The parameter count moves, because the pool grows and prunes itself while training. `python3 -m minagi.store weights` prints what it is now. At step 1,773,530:
 
 ```
 core        8.27M  embeddings, attention, norms, adapter, halting head
@@ -682,6 +689,12 @@ total    1257.3M
 ## AI usage
 
 This project was assisted by "Claude Opus" 5 and 5.5 models. The model did implemented most of code of this project, verified and debugged it when it was necessary. The model was searching for published papers related to the problems that the project were trying to solve, build tests and experiments, and help with brainstorming the complex problems that arose along the way. The animations, graphs and other media you see here are all done by Claude as well form the real data traces. While I myself provided main ideas, steering, intuition, rejections when thing went in a wrong direction, code monitoring and verification, as well as decisions and strong opinions of how everything should be wired together and work in principle. Documentation was written in tandem.  
+
+## Contributions
+
+Everyone is welcome to contribute to this project in whatever way suits them, with or without AI. I only ask that you show you care about what you contribute enough by writing the PR description yourself first, in your own words, and only then add AI-written technical details if they are needed. I want to see your intent and what you are trying to achieve. As the maintainer, I reserve the right to decline a contribution, including when I cannot understand what you are trying to do or I do not think the contribution fits the project. Obviously, ill intended PRs are going to be refused as well. For anything large, please open a discussion first, so we can agree on the direction before you put the work in. Big PRs without a clear justifications for a large changes are going to be refused as well. 
+
+You are always welcome to fork the project, and that may even be the better way to adapt it to your own needs. I keep an eye on active forks, and when one has an idea worth borrowing, this project may adopt it, with credit, even without a direct merge, creating some sort of soft cross-pollination.
 
 ## Acknowledgments
 

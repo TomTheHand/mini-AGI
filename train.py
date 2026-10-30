@@ -108,6 +108,21 @@ def _resync_opt(opt, model, args):
                              "lr": base, "base_lr": base})
 
 
+def _auto_device():
+    """
+    The device to use when --device is not given: CUDA (or ROCm, which torch
+    also calls cuda) where there is one, else Apple Silicon's GPU (MPS), else
+    the CPU. An MPS forward computes in fp32 - minagi/precision.py turns
+    autocast on only for CUDA, ROCm, XPU and a CPU with bf16 arithmetic.
+    """
+    if torch.cuda.is_available():
+        return "cuda"
+    mps = getattr(torch.backends, "mps", None)
+    if mps is not None and mps.is_available():
+        return "mps"
+    return "cpu"
+
+
 def cmd_stream(args):
     """
     Train the way the model runs: batch 1, a KV cache, one chunk at a time.
@@ -230,7 +245,7 @@ def cmd_stream(args):
     # model bug and was not. Appended a line at a time, so an interrupted run
     # keeps everything up to the interruption.
     hist_path = os.path.join(args.out, "history.jsonl")
-    hist = open(hist_path, "a", buffering=1)
+    hist = open(hist_path, "a", buffering=1, encoding="utf-8")
 
     def record(kind, step=None, **kw):
         hist.write(json.dumps({"kind": kind, "step": step, **kw}) + "\n")
@@ -1041,7 +1056,8 @@ def cmd_read(args):
         # Append. A resumed run continues the same model, so wiping the file
         # would throw away the only record of how it got here; the banner is
         # what separates one session from the next.
-        with open(args.sample_log, "a") as f:
+        with open(args.sample_log, "a", encoding="utf-8",
+                  errors="replace") as f:
             f.write(f"\n\n{'#' * 78}\n")
             f.write(f"# session started {time.strftime('%Y-%m-%d %H:%M')}  "
                     f"at step {step:,}, {base_chars/1e6:.1f}M of "
@@ -1183,7 +1199,7 @@ def cmd_read(args):
                    "last_seen": t.get("last_seen"), "uid": t.get("uid"),
                    "trial": getattr(model.pool, "trial", 0)}
             os.makedirs(os.path.dirname(args.history) or ".", exist_ok=True)
-            with open(args.history, "a") as f:
+            with open(args.history, "a", encoding="utf-8") as f:
                 f.write(json.dumps(row, separators=(",", ":")) + "\n")
         except Exception as e:                  # telemetry must never stop a run
             print(f"    (history not written: {e})", flush=True)
@@ -1213,7 +1229,7 @@ def cmd_read(args):
     stop = False
     swapped = 0
     recent = collections.deque(maxlen=400)     # the training loss lately
-    loss_log = (open(args.loss_log, "a", buffering=1)
+    loss_log = (open(args.loss_log, "a", buffering=1, encoding="utf-8")
                 if getattr(args, "loss_log", None) else None)
     last_gap = None                            # held-out minus train, when known
     # How much information has been read, as against how many characters were
@@ -1902,7 +1918,7 @@ def _dropped_note(model):
 # `out` is where the graphs go and `tools` where their plotters are - runs/
 # and this repository's tools/ unless a test says otherwise, so a test never
 # draws over a run's graphs or touches the plotters a running run uses
-_PLOTS = {"proc": None, "on": True, "since": None, "log": None,
+_PLOTS = {"procs": [], "on": True, "since": None, "log": None,
           "weights": None, "out": None, "tools": None}
 
 
@@ -1910,8 +1926,7 @@ def refresh_plots():
     """Redraw the graphs from the log just written. Never raises, never waits."""
     if not _PLOTS["on"]:
         return
-    p = _PLOTS["proc"]
-    if p is not None and p.poll() is None:
+    if any(p.poll() is None for p in _PLOTS["procs"]):
         return                          # the last one has not finished
     import subprocess
     here = os.path.dirname(os.path.abspath(__file__))
@@ -1945,13 +1960,19 @@ def refresh_plots():
         if _PLOTS["since"] is not None:
             c += ["--last", str(_PLOTS["since"])]
         cmds.append(c)
+    # Each plotter is started as itself, with an argument list: no shell, so
+    # nothing to quote and no `bash` to find (on Windows that name can be WSL's,
+    # which cannot run a D:/ path). They write different files, so they draw
+    # side by side; every child is kept, so the next refresh waits for all of
+    # them, including any started before a later one failed to start.
+    _PLOTS["procs"] = []
     try:
-        script = " && ".join(" ".join(f'"{x}"' for x in c) for c in cmds)
-        _PLOTS["proc"] = subprocess.Popen(
-            ["bash", "-c", script], cwd=here,
-            stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
+        for c in cmds:
+            _PLOTS["procs"].append(subprocess.Popen(
+                c, cwd=here,
+                stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL))
     except OSError:
-        _PLOTS["on"] = False            # no python, no bash - stop trying
+        _PLOTS["on"] = False            # no python to run them - stop trying
 
 
 def write_samples(path, step, chars, minutes, samples, val=None, se=None,
@@ -1959,7 +1980,7 @@ def write_samples(path, step, chars, minutes, samples, val=None, se=None,
                   corpus=None, context=None, ceiling=None, gain=None,
                   rate=None, gnorm=None, clip=None, plast=None,
                   write_rate=None, level=None, logits=None):
-    with open(path, "a") as f:
+    with open(path, "a", encoding="utf-8", errors="replace") as f:
         f.write(f"\n{'=' * 78}\n")
         # How much has been read, against how much there is. A bare count of
         # characters read says nothing on its own - the same 4M is most of a
@@ -2258,7 +2279,7 @@ def main():
     ap = argparse.ArgumentParser(
         description="train mini-AGI: read files continually, or stream a "
                     "packed corpus. Batch 1, cached, chunked, either way")
-    ap.add_argument("--device", default="cuda" if torch.cuda.is_available() else "cpu")
+    ap.add_argument("--device", default=_auto_device())
     sub = ap.add_subparsers(dest="cmd", required=True)
 
     rd = sub.add_parser("read",
