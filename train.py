@@ -108,6 +108,21 @@ def _resync_opt(opt, model, args):
                              "lr": base, "base_lr": base})
 
 
+def _auto_device():
+    """
+    The device to use when --device is not given: CUDA (or ROCm, which torch
+    also calls cuda) where there is one, else Apple Silicon's GPU (MPS), else
+    the CPU. An MPS forward computes in fp32 - minagi/precision.py turns
+    autocast on only for CUDA, ROCm, XPU and a CPU with bf16 arithmetic.
+    """
+    if torch.cuda.is_available():
+        return "cuda"
+    mps = getattr(torch.backends, "mps", None)
+    if mps is not None and mps.is_available():
+        return "mps"
+    return "cpu"
+
+
 def cmd_stream(args):
     """
     Train the way the model runs: batch 1, a KV cache, one chunk at a time.
@@ -1041,7 +1056,8 @@ def cmd_read(args):
         # Append. A resumed run continues the same model, so wiping the file
         # would throw away the only record of how it got here; the banner is
         # what separates one session from the next.
-        with open(args.sample_log, "a", encoding="utf-8", errors="replace") as f:
+        with open(args.sample_log, "a", encoding="utf-8",
+                  errors="replace") as f:
             f.write(f"\n\n{'#' * 78}\n")
             f.write(f"# session started {time.strftime('%Y-%m-%d %H:%M')}  "
                     f"at step {step:,}, {base_chars/1e6:.1f}M of "
@@ -1425,6 +1441,17 @@ def cmd_read(args):
                         moved_lr = gov.govern(v_, se_)
                         if moved_lr:
                             print(f"    {moved_lr}", flush=True)
+                        # REMOVING THIS: delete these five lines and
+                        # minagi/notify.py. Nothing else refers to either, and
+                        # the import is guarded so the run does not notice.
+                        if v_ < best_val:
+                            prev_best, best_val = best_val, v_
+                            try:
+                                from minagi import notify
+                                notify.best(v_, base_chars + seen,
+                                            pool.n_experts(), prev_best)
+                            except Exception:
+                                pass
                     # WRITING SPEED: the characters the samples wrote over the
                     # time spent writing them. Every reading writes exactly
                     # sample_chars.
@@ -1888,7 +1915,9 @@ def _dropped_note(model):
             f"({dropped:,} of {routed:,})")
 
 
-# Keep direct Windows-safe plot children and upstream's isolated output hooks.
+# `out` is where the graphs go and `tools` where their plotters are - runs/
+# and this repository's tools/ unless a test says otherwise, so a test never
+# draws over a run's graphs or touches the plotters a running run uses
 _PLOTS = {"procs": [], "on": True, "since": None, "log": None,
           "weights": None, "out": None, "tools": None}
 
@@ -1931,18 +1960,19 @@ def refresh_plots():
         if _PLOTS["since"] is not None:
             c += ["--last", str(_PLOTS["since"])]
         cmds.append(c)
+    # Each plotter is started as itself, with an argument list: no shell, so
+    # nothing to quote and no `bash` to find (on Windows that name can be WSL's,
+    # which cannot run a D:/ path). They write different files, so they draw
+    # side by side; every child is kept, so the next refresh waits for all of
+    # them, including any started before a later one failed to start.
+    _PLOTS["procs"] = []
     try:
-        # Spawned directly, no shell. A `bash -c` chain here dies on Windows:
-        # CreateProcess may resolve `bash` to WSL's bash.exe, which cannot
-        # execute D:\ paths - every refresh failed silently (stderr to null).
-        # (Local fix, 2026-10-09, this machine.)
-        _PLOTS["procs"] = []
         for c in cmds:
             _PLOTS["procs"].append(subprocess.Popen(
-                c, cwd=here, stdout=subprocess.DEVNULL,
-                stderr=subprocess.DEVNULL))
+                c, cwd=here,
+                stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL))
     except OSError:
-        _PLOTS["on"] = False            # no python - stop trying
+        _PLOTS["on"] = False            # no python to run them - stop trying
 
 
 def write_samples(path, step, chars, minutes, samples, val=None, se=None,
@@ -1950,7 +1980,6 @@ def write_samples(path, step, chars, minutes, samples, val=None, se=None,
                   corpus=None, context=None, ceiling=None, gain=None,
                   rate=None, gnorm=None, clip=None, plast=None,
                   write_rate=None, level=None, logits=None):
-    # Samples contain arbitrary decoded bytes; retain Windows-safe UTF-8 logs.
     with open(path, "a", encoding="utf-8", errors="replace") as f:
         f.write(f"\n{'=' * 78}\n")
         # How much has been read, against how much there is. A bare count of
@@ -2015,7 +2044,7 @@ def write_samples(path, step, chars, minutes, samples, val=None, se=None,
                 f.write(f"   evidence t {plast.get('t', 0):+.2f}"
                         f" over {plast.get('n', 0)}"
                         f" (effect {plast.get('e', 0):+.4f})"
-                        f"   rate x{plast.get('scale', 1):.3f}")
+                        f"   rate x{Plasticity.shown(plast.get('scale', 1))}")
             f.write("\n")
         if logits:
             # The largest score softmax was taken of while the check read its
@@ -2250,7 +2279,7 @@ def main():
     ap = argparse.ArgumentParser(
         description="train mini-AGI: read files continually, or stream a "
                     "packed corpus. Batch 1, cached, chunked, either way")
-    ap.add_argument("--device", default="cuda" if torch.cuda.is_available() else "cpu")
+    ap.add_argument("--device", default=_auto_device())
     sub = ap.add_subparsers(dest="cmd", required=True)
 
     rd = sub.add_parser("read",

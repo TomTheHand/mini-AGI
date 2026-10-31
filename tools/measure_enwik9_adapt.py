@@ -36,8 +36,8 @@ weights. On the card it needs the card to itself, so it will not run beside a
 training run.
 
 NOTHING IS MEASURED TWICE: weights already measured this way, on at least
-as many pieces, are not measured again (--force does), so publish.sh can run
-it every time.
+as many pieces, are not measured again (--force does), so
+./measure_benchmarks.sh can run it every time.
 
 --natural READS AS THE MODEL READS. The pieces above are cut out of their
 pages and each read cold. --natural reads whole pages instead - framed as

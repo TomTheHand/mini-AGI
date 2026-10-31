@@ -107,8 +107,10 @@ _GPU_INFO = {}
 
 
 def _gpu_info(device=None):
-    """(properties, is it AMD) for the GPU `device` names; None without one."""
-    if _device_type(device) != "cuda":
+    """(properties, is it AMD) for the CUDA or ROCm GPU `device` names; None
+    without one, and for an Intel XPU, which the CUDA queries below do not
+    describe - asking them would describe whatever other GPU the machine has."""
+    if _device_type(device) == "xpu":
         return None
     try:
         idx = getattr(device, "index", None)
@@ -135,15 +137,16 @@ def gpu_bf16_native(device=None):
     """
     Whether this GPU multiplies bfloat16 in hardware: NVIDIA from Ampere
     (compute capability 8) on, AMD from RDNA3 (gfx11, gfx12) and the CDNA
-    accelerators (gfx908, gfx90a, gfx94x, gfx95x), Intel GPUs (XPU) from
-    Xe-HPG on. Not RDNA1 or 2, not Vega, not NVIDIA before Ampere.
-    MINAGI_GPU_BF16=1 or =0 overrides the detection.
+    accelerators (gfx908, gfx90a, gfx94x, gfx95x). Not RDNA1 or 2, not Vega,
+    not NVIDIA before Ampere. Intel XPUs (Arc) compute bf16 in their matrix
+    engines; torch.xpu.is_bf16_supported() can say otherwise on a card that
+    does, so it is not asked. MINAGI_GPU_BF16=1 or =0 overrides the detection.
     """
     force = os.environ.get("MINAGI_GPU_BF16")
     if force is not None:
         return force.strip().lower() not in ("0", "", "false", "no", "off")
     if _device_type(device) == "xpu":
-        return True                  # Intel XMX computes bf16 in hardware
+        return True
     info = _gpu_info(device)
     if info is None:
         return True                  # nothing to ask: the rule as it always was
@@ -165,9 +168,10 @@ def gpu_fp32_instead(device=None):
 
 def autocast_on(device=None):
     """
-    Whether forwards on `device` compute in the configured dtype. On a GPU
-    whenever that dtype is not fp32, unless it is bf16 and the GPU has no bf16
-    arithmetic but has the memory for fp32 (gpu_fp32_instead). On the CPU only
+    Whether forwards on `device` compute in the configured dtype. On a GPU -
+    CUDA, ROCm or an Intel XPU - whenever that dtype is not fp32, unless it is
+    bf16 and the GPU has no bf16 arithmetic but has the memory for fp32
+    (gpu_fp32_instead, which never applies to an XPU). On the CPU only
     for bfloat16 and only where the CPU has it natively: there it is the GPU
     path's own precision at about twice fp32's arithmetic rate, and everywhere
     else it would be slower.

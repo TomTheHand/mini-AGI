@@ -147,7 +147,7 @@ training:
   # and nudges the rate at every check: down unless held-out is clearly
   # improving, 0.4% at most at a time - on a plateau a tenth or less in six
   # hours - and up only on clear improvement or new material. The floor
-  # (x0.01 of lr) is in plasticity.py.
+  # (x0.001 of lr) is in plasticity.py.
   chunk: 2048             # characters between steps within the window
   lr: 3.0e-4
   trunk_lr_mult: 0.1      # the trunk is shared by every domain and is where

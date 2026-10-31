@@ -3,7 +3,9 @@ data_*/
 
 # The weights directory
 weights/*
-!weights/manifest.json
+# !weights/manifest.json
+# copies of it, such as backups
+weights_*/
 
 # Run artefacts: logs, checkpoints, plots
 # (samples.txt is ours-only since 2026-10-11; the author's original log ships in
